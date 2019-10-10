@@ -29,7 +29,8 @@ class waterLevelDetection {
             int touchPad5 = 10; // digital pin 10
   public:
             void ultraSonicInitialisation(); // Function to initialise the pins
-            long waterLevelUltrasonicSensor();
+            long waterLevelUltrasonicSensor(); // Function returns the water to sensor distance in cm
+            int touchPadCount(); // Function that outputs the number of touch pads touching the water
  };
 
 /***************************************************/
@@ -58,9 +59,35 @@ long waterLevelDetection::waterLevelUltrasonicSensor() {
   digitalWrite(ultrasonicSensorTriggerPin, LOW);
   durationForPulse = pulseIn(ultasonicSensorEchoPin, HIGH);
   waterLevelDistance = durationForPulse / 29 / 2;
-//  Serial.print("Water level (CM): ");
-//  Serial.println(waterLevelDistance);
   return waterLevelDistance;
+}
+
+/**********************************************************/
+// Function to give the count of sensors touching the water
+/**********************************************************/
+int waterLevelDetection::touchPadCount() {
+  int touchpadValue1 = digitalRead(touchPad1); // Value of touchpad1
+  int touchpadValue2 = digitalRead(touchPad2); // Value of touchpad2
+  int touchpadValue3 = digitalRead(touchPad3); // Value of touchpad3
+  int touchpadValue4 = digitalRead(touchPad4); // Value of touchpad4
+  int touchpadValue5 = digitalRead(touchPad5); // Value of touchpad5
+  int LEDCounter = 0; // Count the number of LED
+  if (touchpadValue1) { // Checks if touch pad 1 is connected or not
+    LEDCounter++;
+  }
+  if (touchpadValue2) { // Checks if touch pad 2 is connected or not
+    LEDCounter++;
+  }
+  if (touchpadValue3) { // Checks if touch pad 3 is connected or not
+    LEDCounter++;
+  }
+  if (touchpadValue4) { // Checks if touch pad 4 is connected or not
+    LEDCounter++;
+  }
+  if (touchpadValue5) { // Checks if touch pad 5 is connected or not
+    LEDCounter++;
+  }
+  return LEDCounter;
 }
 
 waterLevelDetection waterLevel;
@@ -73,6 +100,10 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  
+  // Ultrasonic sensor
   long WD = waterLevel.waterLevelUltrasonicSensor();
 
+  // Touch pads (5 nos)
+  int TPC = waterlevel.touchPadCount();
 }

@@ -33,3 +33,8 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 
 1. Solenoid valve - 3
 2. Atmega328p
+
+Notes:-
+
+1. The communication between the modules is via serial communication.
+2. All the data is stored in firebase.

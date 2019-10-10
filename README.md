@@ -17,3 +17,19 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 1. Main board module.
 2. Water tank module.
 3. valve switching module.
+
+### Main board Module Components
+
+1. Raspberry Pi Zero W
+2. Relay (220V - 5V)
+
+### Water Tank Module Components
+
+1. Touch pads - 5
+2. Ultrasonic sensor - 1
+3. Atmega328p
+
+### Valve Switching Components
+
+1. Solenoid valve - 3
+2. Atmega328p

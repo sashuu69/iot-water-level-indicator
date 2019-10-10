@@ -19,7 +19,7 @@ class waterLevelDetection {
   private:
             int ultrasonicSensorTriggerPin = 4; // Ultrasonic sensor - trigger - digital pin 4
             int ultasonicSensorEchoPin = 5; // Ultrasonic sensor - echo - digital pin 5
-            long duration; // Store duration from sending a pulse to receiving it
+            long durationForPulse; // Store duration from sending a pulse to receiving it
             long waterLevelDistance; // Stores the distance between water and sensor in cm
             // 5 touch pad pins
             int touchPad1 = 6; // digital pin 6
@@ -28,7 +28,8 @@ class waterLevelDetection {
             int touchPad4 = 9; // digital pin 9
             int touchPad5 = 10; // digital pin 10
   public:
-            void ultraSonicInitialisation(); // Function to initialise the pins 
+            void ultraSonicInitialisation(); // Function to initialise the pins
+            long DetectWaterLevel();
  };
 
 /***************************************************/
@@ -46,17 +47,32 @@ void waterLevelDetection::ultraSonicInitialisation() {
   pinMode(touchPad5, INPUT);
 }
 
+/********************************************************/
+// Function to detect water level from ultrasonic sensor
+/********************************************************/
+long waterLevelUltrasonicSensor() {
+  digitalWrite(ultrasonicSensorTriggerPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ultrasonicSensorTriggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(ultrasonicSensorTriggerPin, LOW);
+  durationForPulse = pulseIn(ultasonicSensorEchoPin, HIGH);
+  waterLevelDistance = microsecondsToCentimeters(duration);
+//  Serial.print("Water level (CM): ");
+//  Serial.println(waterLevelDistance);
+  return waterLevelDistance;
+}
+
 waterLevelDetection waterLevel;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   waterLevel.ultraSonicInitialisation();
-
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(1);
+  waerLevel.waterLevelUltrasonicSensor();
 
 }

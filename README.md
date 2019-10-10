@@ -11,3 +11,9 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 3. manual remote control pump control.
 4. Automatic sprinker system according to moisure content.
 5. OLED display for showing status.
+
+## Hardware modules
+
+1. Main board module.
+2. Water tank module.
+3. valve switching module.

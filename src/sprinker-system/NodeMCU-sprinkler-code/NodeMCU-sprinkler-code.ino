@@ -29,7 +29,7 @@ class waterLevelDetection {
             int touchPad5 = 10; // digital pin 10
   public:
             void ultraSonicInitialisation(); // Function to initialise the pins
-            long DetectWaterLevel();
+            long waterLevelUltrasonicSensor();
  };
 
 /***************************************************/
@@ -50,14 +50,14 @@ void waterLevelDetection::ultraSonicInitialisation() {
 /********************************************************/
 // Function to detect water level from ultrasonic sensor
 /********************************************************/
-long waterLevelUltrasonicSensor() {
+long waterLevelDetection::waterLevelUltrasonicSensor() {
   digitalWrite(ultrasonicSensorTriggerPin, LOW);
   delayMicroseconds(2);
   digitalWrite(ultrasonicSensorTriggerPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(ultrasonicSensorTriggerPin, LOW);
   durationForPulse = pulseIn(ultasonicSensorEchoPin, HIGH);
-  waterLevelDistance = microsecondsToCentimeters(duration);
+  waterLevelDistance = durationForPulse / 29 / 2;
 //  Serial.print("Water level (CM): ");
 //  Serial.println(waterLevelDistance);
   return waterLevelDistance;
@@ -73,6 +73,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  waerLevel.waterLevelUltrasonicSensor();
+  long WD = waterLevel.waterLevelUltrasonicSensor();
 
 }

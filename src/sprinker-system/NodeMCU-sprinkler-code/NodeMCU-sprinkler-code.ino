@@ -15,7 +15,7 @@
 // Class defined to handle water Level in the tank
 /*************************************************/
 /*************************************************/
- class waterLevelDetection {
+class waterLevelDetection {
   private:
             int ultrasonicSensorTriggerPin = 4; // Ultrasonic sensor - trigger - digital pin 4
             int ultasonicSensorEchoPin = 5; // Ultrasonic sensor - echo - digital pin 5
@@ -27,14 +27,36 @@
             int touchPad3 = 8; // digital pin 8
             int touchPad4 = 9; // digital pin 9
             int touchPad5 = 10; // digital pin 10
+  public:
+            void ultraSonicInitialisation(); // Function to initialise the pins 
  };
- 
+
+/***************************************************/
+// Function to initialise the sensor pins at setup()
+/***************************************************/
+void waterLevelDetection::ultraSonicInitialisation() {
+  // Ultrasonic sensor
+  pinMode(ultrasonicSensorTriggerPin, OUTPUT);
+  pinMode(ultasonicSensorEchoPin, INPUT);
+  // Touch pads (5 nos)
+  pinMode(touchPad1, INPUT);
+  pinMode(touchPad2, INPUT);
+  pinMode(touchPad3, INPUT);
+  pinMode(touchPad4, INPUT);
+  pinMode(touchPad5, INPUT);
+}
+
+waterLevelDetection waterLevel;
+
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
+  waterLevel.ultraSonicInitialisation();
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  Serial.println(1);
 
 }

@@ -38,3 +38,17 @@ Notes:-
 
 1. The communication between the modules is via serial communication.
 2. All the data is stored in firebase.
+
+## Files and folders explained
+
+### Folders
+
+1. abstract: contains the project abstract.
+2. Diagrams: contains important figures drawn using draw.io.
+3. Zeroth-review-presentation: contains presentation done for zeroth review.
+4. first-review: contains user stories submitted in first review.
+5. src - Contains the source code.
+   1. android-app: contains the code for android app.
+   2. main-board-module: contains code for Raspberry Pi Zero W.
+   3. tank-module: contains embedded C code for Atmega328p. This micro-controller will be placed at water Tank.
+   4. valve-switching-module: conatins embedded C code for ATmega328p. This micro-controller will be placed at the main pipeline junction.

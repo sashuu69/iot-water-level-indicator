@@ -41,7 +41,41 @@ void solenoidValue::initialiseTankModule() {
 void solenoidValue::solenoidSwitchTrigger(int valveTag) {
   if (valveTag == 1) {
     digitalWrite(tankSolenoidValve, HIGH);
+    digitalWrite(sprinklerSolenoidValve, LOW);
+    digitalWrite(farmSolenoidValve, LOW);
+    Serial.print("Tank valve ON");
+    Serial.print("Sprinkler valve OFF");
+    Serial.print("Farm valve OFF");
   }
+  else if (valveTag == 2) {
+    digitalWrite(tankSolenoidValve, LOW);
+    digitalWrite(sprinklerSolenoidValve, HIGH);
+    digitalWrite(farmSolenoidValve, LOW);
+    Serial.print("Tank valve OFF");
+    Serial.print("Sprinkler valve ON");
+    Serial.print("Farm valve OFF");
+  }
+  else if (valveTag == 3) {
+    digitalWrite(tankSolenoidValve, LOW);
+    digitalWrite(sprinklerSolenoidValve, LOW);
+    digitalWrite(farmSolenoidValve, HIGH);
+    Serial.print("Tank valve OFF");
+    Serial.print("Sprinkler valve OFF");
+    Serial.print("Farm valve ON");
+  }
+  else {
+    Serial.print("Wrong valveTag value. ");
+    Serial.println(valveTag);
+  }
+}
+
+/*************************************************/
+/*************************************************/
+// Class defined to handle water Level in the tank
+/*************************************************/
+/*************************************************/
+class MosiureLevel {
+  private:
 }
 
 solenoidValue SV; // class SolenoidValve's object

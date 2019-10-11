@@ -22,7 +22,8 @@ class solenoidValue {
             int sprinklerSolenoidValve = 5;
             int farmSolenoidValve = 6;
   public:
-            void initialiseTankModule();
+            void initialiseTankModule(); // Function to initilase the solenoid pins
+            void solenoidSwitchTrigger(int); // Function to trigger the solenoid valve
 };
 
 /*******************************************/
@@ -34,10 +35,24 @@ void solenoidValue::initialiseTankModule() {
   pinMode(farmSolenoidValve, OUTPUT);
 }
 
+/**************************************/
+// Function to trigger a solenoid valve
+/**************************************/
+void solenoidValue::solenoidSwitchTrigger(int valveTag) {
+  if (valveTag == 1) {
+    digitalWrite(tankSolenoidValve, HIGH);
+  }
+}
+
+solenoidValue SV; // class SolenoidValve's object
+
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
+  SV.initialiseTankModule();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  Serial.println(1);
 }

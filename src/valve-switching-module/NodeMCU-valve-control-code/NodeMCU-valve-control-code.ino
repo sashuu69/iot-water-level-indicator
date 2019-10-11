@@ -25,6 +25,15 @@ class solenoidValue {
             void initialiseTankModule();
 };
 
+/*******************************************/
+// Function to initialize the solenoid pins 
+/*******************************************/
+void solenoidValue::initialiseTankModule() {
+  pinMode(tankSolenoidValve, OUTPUT);
+  pinMode(sprinklerSolenoidValve, OUTPUT);
+  pinMode(farmSolenoidValve, OUTPUT);
+}
+
 void setup() {
   // put your setup code here, to run once:
 }

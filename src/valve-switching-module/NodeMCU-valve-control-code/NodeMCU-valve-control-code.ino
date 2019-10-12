@@ -9,6 +9,7 @@
  * Pins used: solenoid valve 1: 4
  *            solenoid valve 2: 5
  *            solenoid valve 3: 6
+ *            Moisure sensor: A0
  */
 
 /*************************************************/
@@ -69,24 +70,48 @@ void solenoidValue::solenoidSwitchTrigger(int valveTag) {
   }
 }
 
-/*************************************************/
-/*************************************************/
-// Class defined to handle water Level in the tank
-/*************************************************/
-/*************************************************/
+/************************************************************/
+/************************************************************/
+// Class defined to handle moisure sensor present in the soil
+/************************************************************/
+/************************************************************/
 class MosiureLevel {
   private:
+            int moisureSensorPin = A0;
+            int moisurePercentage;
+  public:
+            void InitialiseMoisureSensor();
+            int MoisturePercentage();
+}
+
+/***************************************/
+// Function to initialise moisure sensor
+/***************************************/
+void MoisureLevel::InitialiseMoisureSensor() {
+  pinMode(moisureSensorPin,INPUT);
+}
+
+/*******************************************/
+// Function to get moisture level precentage
+/*******************************************/
+int MoisureLevel::MoisturePercentage() {
+  moisurePercentage = analogRead(moisureSensorPin);
+  moisurePercentage = map(moisurePercentage,550,0,0,100);
+  return moisurePercentage;
 }
 
 solenoidValue SV; // class SolenoidValve's object
+MosiureLevel ML; // class MosiureLevel's object
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   SV.initialiseTankModule();
+  ML.InitialiseMoisureSensor();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   Serial.println(1);
+  
 }

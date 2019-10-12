@@ -82,19 +82,19 @@ class MosiureLevel {
   public:
             void InitialiseMoisureSensor();
             int MoisturePercentage();
-}
+};
 
 /***************************************/
 // Function to initialise moisure sensor
 /***************************************/
-void MoisureLevel::InitialiseMoisureSensor() {
+void MosiureLevel::InitialiseMoisureSensor() {
   pinMode(moisureSensorPin,INPUT);
 }
 
 /*******************************************/
 // Function to get moisture level precentage
 /*******************************************/
-int MoisureLevel::MoisturePercentage() {
+int MosiureLevel::MoisturePercentage() {
   moisurePercentage = analogRead(moisureSensorPin);
   moisurePercentage = map(moisurePercentage,550,0,0,100);
   return moisurePercentage;
@@ -112,6 +112,10 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  int mLevel;
   Serial.println(1);
-  
+  SV.solenoidSwitchTrigger(1);
+  mLevel = ML.MoisturePercentage();
+  Serial.print("Moisure level: ");
+  Serial.print(mLevel);
 }

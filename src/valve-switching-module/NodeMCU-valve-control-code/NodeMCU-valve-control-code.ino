@@ -5,12 +5,16 @@
  * Author : Sashwat K
  * Created on : 10 Oct 2019
  * Last updated : 10 Oct 2019
- * Microcontroller: Atmega 328p
+ * Microcontroller : Atmega 328p
  * Pins used: solenoid valve 1: 4
  *            solenoid valve 2: 5
  *            solenoid valve 3: 6
  *            Moisure sensor: A0
  */
+ 
+ // Header files
+#include <Wire.h> // For serial communication
+#define SLAVE_ADDRESS 0x04 // Slave address for valve control
 
 /*************************************************/
 /*************************************************/
@@ -100,14 +104,38 @@ int MosiureLevel::MoisturePercentage() {
   return moisurePercentage;
 }
 
+/***********************************************************************************/
+/***********************************************************************************/
+// Class defined to handle communication between the contorl-board and valve control
+/***********************************************************************************/
+/***********************************************************************************/
+class serialCommunicationValveControl {
+  private:
+            char valveControlReceiveValue[10]; // To get valve number to open solenoid valves from serial communication
+            char moisureSensorSendValue[10]; // To send moisure sensor data through serial communication
+  public:
+            void serialCommunicationChannelSetup(); // Function to handle serial communication
+            void serialSendData(); // Function to send data through serial communication
+            void serialReceiveData(); // Function to receive data through serial communication
+};
+
+/*******************************************/
+// Function to get moisture level precentage
+/*******************************************/
+void serialCommunicationValve::serialCommunicationChannelSetup() {
+  Wire.begin(SLAVE_ADDRESS); // Initialising Serial communication
+}
+
 solenoidValue SV; // class SolenoidValve's object
 MosiureLevel ML; // class MosiureLevel's object
+serialCommunicationValveControl SC // class serialCommunicationValve's object
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   SV.initialiseTankModule();
   ML.InitialiseMoisureSensor();
+  SC.serialCommunicationChannelSetup();
 }
 
 void loop() {

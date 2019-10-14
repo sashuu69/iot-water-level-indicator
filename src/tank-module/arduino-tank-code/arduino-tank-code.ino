@@ -143,8 +143,11 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   // Ultrasonic sensor
-  long WD = waterLevel.waterLevelUltrasonicSensor();
+  int WD = (int) waterLevel.waterLevelUltrasonicSensor();
 
   // Touch pads (5 nos)
   int TPC = waterLevel.touchPadCount();
+
+  // Serial communicate water level
+  SC.serialSendWaterInfo(TPC,WD);
 }

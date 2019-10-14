@@ -115,20 +115,35 @@ class serialCommunicationValveControl {
             char moisureSensorSendValue[10]; // To send moisure sensor data through serial communication
   public:
             void serialCommunicationChannelSetup(); // Function to handle serial communication
-            void serialSendData(); // Function to send data through serial communication
-            void serialReceiveData(); // Function to receive data through serial communication
+            int serialSendData(); // Function to send data through serial communication
+            int serialReceiveValveData(); // Function to receive data through serial communication
 };
 
-/*******************************************/
-// Function to get moisture level precentage
-/*******************************************/
-void serialCommunicationValve::serialCommunicationChannelSetup() {
+/*********************************************/
+// Function to initialize serial communication
+/*********************************************/
+void serialCommunicationValveControl::serialCommunicationChannelSetup() {
   Wire.begin(SLAVE_ADDRESS); // Initialising Serial communication
+}
+
+/************************************************************/
+// Function to receive valve number from serial communication
+/************************************************************/
+int serialCommunicationValveControl::serialReceiveValveData() {
+  int i = 0;
+  int valveNum;
+  while (Wire.available()) { // To run in loop
+    valveControlReceiveValue[i] = Wire.read(); // Read from serial communication
+    i++;
+  }
+  valveControlReceiveValue[i] = '\0';
+  valveNum = valveControlReceiveValue - '0'; // Convert character number to digit
+  return valveNum;
 }
 
 solenoidValue SV; // class SolenoidValve's object
 MosiureLevel ML; // class MosiureLevel's object
-serialCommunicationValveControl SC // class serialCommunicationValve's object
+serialCommunicationValveControl SC; // class serialCommunicationValve's object
 
 void setup() {
   // put your setup code here, to run once:
@@ -140,10 +155,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  // Serial communication for solenoid switch
+  SV.solenoidSwitchTrigger(SC.serialReceiveValveData());
+
+    
+  // Moisure level
   int mLevel;
-  Serial.println(1);
-  SV.solenoidSwitchTrigger(1);
   mLevel = ML.MoisturePercentage();
-  Serial.print("Moisure level: ");
-  Serial.print(mLevel);
 }

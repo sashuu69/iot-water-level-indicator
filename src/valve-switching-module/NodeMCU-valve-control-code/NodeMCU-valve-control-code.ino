@@ -115,7 +115,7 @@ class serialCommunicationValveControl {
             char moisureSensorSendValue[10]; // To send moisure sensor data through serial communication
   public:
             void serialCommunicationChannelSetup(); // Function to handle serial communication
-            int serialSendData(); // Function to send data through serial communication
+            void serialSendMosiureData(int); // Function to send data through serial communication
             int serialReceiveValveData(); // Function to receive data through serial communication
 };
 
@@ -124,6 +124,15 @@ class serialCommunicationValveControl {
 /*********************************************/
 void serialCommunicationValveControl::serialCommunicationChannelSetup() {
   Wire.begin(SLAVE_ADDRESS); // Initialising Serial communication
+}
+
+
+/************************************************************/
+// Function to send moisure data through serial communication
+/************************************************************/
+void serialCommunicationValveControl::serialSendMosiureData(int valueToSnd) {
+  char conversionChar; // Convert receiving integer data to character integer
+  Wire.write(conversionChar);
 }
 
 /************************************************************/
@@ -158,9 +167,7 @@ void loop() {
 
   // Serial communication for solenoid switch
   SV.solenoidSwitchTrigger(SC.serialReceiveValveData());
-
-    
+  
   // Moisure level
-  int mLevel;
-  mLevel = ML.MoisturePercentage();
+  ML.MoisturePercentage();
 }

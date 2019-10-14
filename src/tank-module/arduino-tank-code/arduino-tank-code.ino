@@ -11,6 +11,10 @@
  *            Touch pads(5 nos):  6,7,8,9,10
  */
 
+// Header files
+#include <Wire.h> // For serial communication
+#define SLAVE_ADDRESS 0x05 // Slave address for valve control
+
 /*************************************************/
 /*************************************************/
 // Class defined to handle water Level in the tank
@@ -91,11 +95,47 @@ int waterLevelDetection::touchPadCount() {
   return LEDCounter;
 }
 
-waterLevelDetection waterLevel;
+/**************************************************************************/
+/**************************************************************************/
+// Class defined to handle communication between the contorl-board and tank.
+/**************************************************************************/
+/**************************************************************************/
+class serialCommunicationTank {
+  private:
+            char waterInfoSendValue[10]; // To send touch pad levels and ultrasonic sensor distance through serial communication
+  public:
+            void serialCommunicationChannelSetup();
+            void serialSendWaterInfo(int,int);
+};
+
+/*********************************************/
+// Function to initialize serial communication.
+/*********************************************/
+void serialCommunicationTank::serialCommunicationChannelSetup() {
+  Wire.begin(SLAVE_ADDRESS); // Initialising Serial communication
+}
+
+/*******************************************************************************/
+// Function to send touch pad count and ultrasonic sensor distance communication.
+/*******************************************************************************/
+void serialCommunicationTank::serialSendWaterInfo(int tpCount, int uSSDist) {
+//  char conversionChar[10]; // Convert to char and concatinate into *tpCount#uSSDist
+  char temp1,temp2;
+  temp1 = tpCount + '0';
+  temp2 = uSSDist+ '0';
+  Wire.write("*");
+  Wire.write(temp1);
+  Wire.write("#");
+  Wire.write(temp2);
+}
+
+waterLevelDetection waterLevel; // Class waterLevelDetection's object
+serialCommunicationTank SC; // Class serialCommunicationTank's object
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  SC.serialCommunicationChannelSetup();
   waterLevel.ultraSonicInitialisation();
 }
 
@@ -106,5 +146,5 @@ void loop() {
   long WD = waterLevel.waterLevelUltrasonicSensor();
 
   // Touch pads (5 nos)
-  int TPC = waterlevel.touchPadCount();
+  int TPC = waterLevel.touchPadCount();
 }

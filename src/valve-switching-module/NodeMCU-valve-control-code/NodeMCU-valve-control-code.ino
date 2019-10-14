@@ -132,6 +132,7 @@ void serialCommunicationValveControl::serialCommunicationChannelSetup() {
 /************************************************************/
 void serialCommunicationValveControl::serialSendMosiureData(int valueToSnd) {
   char conversionChar; // Convert receiving integer data to character integer
+  conversionChar = valueToSnd + '0'; // Convert digit to character number
   Wire.write(conversionChar);
 }
 

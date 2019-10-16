@@ -4,3 +4,9 @@
 # Created on: 10/10/2019
 # Created by: Sashwat K
 # Last updateed: 10/10/2019
+
+import serial
+
+def tankCommunication(self):
+    
+    pass

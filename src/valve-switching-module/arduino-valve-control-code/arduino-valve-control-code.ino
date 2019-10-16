@@ -13,7 +13,7 @@
  */
  
  // Header files
-#include <Wire.h> // For serial communication
+#include <Wire.h> // For i2c communication
 #define SLAVE_ADDRESS 0x04 // Slave address for valve control
 
 /*************************************************/

@@ -12,7 +12,7 @@
  *            Moisure sensor: A0
  */
  
- // Header files
+// Header files
 #include <Wire.h> // For i2c communication
 #define SLAVE_ADDRESS 0x04 // Slave address for valve control
 
@@ -48,28 +48,28 @@ void solenoidValue::solenoidSwitchTrigger(int valveTag) {
     digitalWrite(tankSolenoidValve, HIGH);
     digitalWrite(sprinklerSolenoidValve, LOW);
     digitalWrite(farmSolenoidValve, LOW);
-    Serial.print("Tank valve ON");
-    Serial.print("Sprinkler valve OFF");
-    Serial.print("Farm valve OFF");
+    Serial.print("Tank valve ON ");
+    Serial.print("Sprinkler valve OFF ");
+    Serial.println("Farm valve OFF ");
   }
   else if (valveTag == 2) {
     digitalWrite(tankSolenoidValve, LOW);
     digitalWrite(sprinklerSolenoidValve, HIGH);
     digitalWrite(farmSolenoidValve, LOW);
-    Serial.print("Tank valve OFF");
-    Serial.print("Sprinkler valve ON");
-    Serial.print("Farm valve OFF");
+    Serial.print("Tank valve OFF ");
+    Serial.print("Sprinkler valve ON ");
+    Serial.println("Farm valve OFF ");
   }
   else if (valveTag == 3) {
     digitalWrite(tankSolenoidValve, LOW);
     digitalWrite(sprinklerSolenoidValve, LOW);
     digitalWrite(farmSolenoidValve, HIGH);
-    Serial.print("Tank valve OFF");
-    Serial.print("Sprinkler valve OFF");
-    Serial.print("Farm valve ON");
+    Serial.print("Tank valve OFF ");
+    Serial.print("Sprinkler valve OFF ");
+    Serial.println("Farm valve ON ");
   }
   else {
-    Serial.print("Wrong valveTag value. ");
+    Serial.print("Wrong valveTag value: ");
     Serial.println(valveTag);
   }
 }
@@ -134,6 +134,7 @@ void serialCommunicationValveControl::serialSendMosiureData(int valueToSnd) {
   char conversionChar; // Convert receiving integer data to character integer
   conversionChar = valueToSnd + '0'; // Convert digit to character number
   Wire.write(conversionChar);
+  Serial.println("Sending through I2C");
 }
 
 /************************************************************/
@@ -145,7 +146,9 @@ int serialCommunicationValveControl::serialReceiveValveData() {
   while (Wire.available()) { // To run in loop
     valveControlReceiveValue[i] = Wire.read(); // Read from serial communication
     i++;
+    Serial.print(".");
   }
+  Serial.println("Getting from I2C..");
   valveControlReceiveValue[i] = '\0';
   valveNum = valveControlReceiveValue - '0'; // Convert character number to digit
   return valveNum;
@@ -158,6 +161,7 @@ serialCommunicationValveControl SC; // class serialCommunicationValve's object
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  Serial.println("Arduino Valve Control Code:-");
   SV.initialiseTankModule();
   ML.InitialiseMoisureSensor();
   SC.serialCommunicationChannelSetup();
@@ -165,11 +169,14 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  int MPer;
+  
   // Serial communication for solenoid switch
   SV.solenoidSwitchTrigger(SC.serialReceiveValveData());
   
   // Moisure level
-  MPer = ML.MoisturePercentage();
+  int MPer = ML.MoisturePercentage();
+  Serial.print("Moisure Level: ");Serial.print(MPer);Serial.println(" %");
   SC.serialSendMosiureData(MPer);
+  Serial.println("--------------------------------");
+//  delay(1000);
 }

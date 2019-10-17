@@ -154,5 +154,8 @@ void loop() {
 
   // Serial communicate water level
   SC.serialSendWaterInfo(TPC,WD);
-  delay(100);
+
+  Serial.println("----------------------------");
+  
+//  delay(1000);
 }

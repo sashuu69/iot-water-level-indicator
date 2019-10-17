@@ -12,7 +12,7 @@
  */
 
 // Header files
-#include <Wire.h> // For serial communication
+#include <Wire.h> // For I2C communication
 #define SLAVE_ADDRESS 0x05 // Slave address for valve control
 
 /*************************************************/
@@ -109,10 +109,10 @@ class serialCommunicationTank {
 };
 
 /*********************************************/
-// Function to initialize serial communication.
+// Function to initialize I2C communication.
 /*********************************************/
 void serialCommunicationTank::serialCommunicationChannelSetup() {
-  Wire.begin(SLAVE_ADDRESS); // Initialising Serial communication
+  Wire.begin(SLAVE_ADDRESS); // Initialising I2C communication
 }
 
 /*******************************************************************************/
@@ -152,7 +152,7 @@ void loop() {
   int TPC = waterLevel.touchPadCount();
   Serial.print("Touch pads: ");Serial.println(TPC);
 
-  // Serial communicate water level
+  // I2C communicate water level
   SC.serialSendWaterInfo(TPC,WD);
 
   Serial.println("----------------------------");

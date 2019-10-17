@@ -13,7 +13,7 @@
  */
  
 // Header files
-#include <Wire.h> // For i2c communication
+#include <Wire.h> // For I2C communication
 #define SLAVE_ADDRESS 0x04 // Slave address for valve control
 
 /*************************************************/
@@ -111,24 +111,24 @@ int MosiureLevel::MoisturePercentage() {
 /***********************************************************************************/
 class serialCommunicationValveControl {
   private:
-            char valveControlReceiveValue[10]; // To get valve number to open solenoid valves from serial communication
-            char moisureSensorSendValue[10]; // To send moisure sensor data through serial communication
+            char valveControlReceiveValue[10]; // To get valve number to open solenoid valves from I2C communication
+            char moisureSensorSendValue[10]; // To send moisure sensor data through I2C communication
   public:
-            void serialCommunicationChannelSetup(); // Function to handle serial communication
-            void serialSendMosiureData(int); // Function to send data through serial communication
-            int serialReceiveValveData(); // Function to receive data through serial communication
+            void serialCommunicationChannelSetup(); // Function to handle I2C communication
+            void serialSendMosiureData(int); // Function to send data through I2C communication
+            int serialReceiveValveData(); // Function to receive data through I2C communication
 };
 
 /*********************************************/
-// Function to initialize serial communication
+// Function to initialize I2C communication
 /*********************************************/
 void serialCommunicationValveControl::serialCommunicationChannelSetup() {
-  Wire.begin(SLAVE_ADDRESS); // Initialising Serial communication
+  Wire.begin(SLAVE_ADDRESS); // Initialising I2C communication
 }
 
 
 /************************************************************/
-// Function to send moisure data through serial communication
+// Function to send moisure data through I2C communication
 /************************************************************/
 void serialCommunicationValveControl::serialSendMosiureData(int valueToSnd) {
   char conversionChar; // Convert receiving integer data to character integer
@@ -138,13 +138,13 @@ void serialCommunicationValveControl::serialSendMosiureData(int valueToSnd) {
 }
 
 /************************************************************/
-// Function to receive valve number from serial communication
+// Function to receive valve number from I2C communication
 /************************************************************/
 int serialCommunicationValveControl::serialReceiveValveData() {
   int i = 0;
   int valveNum;
   while (Wire.available()) { // To run in loop
-    valveControlReceiveValue[i] = Wire.read(); // Read from serial communication
+    valveControlReceiveValue[i] = Wire.read(); // Read from I2C communication
     i++;
     Serial.print(".");
   }

@@ -26,5 +26,5 @@ while i < 3:  # Run forever
     sleep(1)  # Sleep for 1 second
     GPIO.output(33, GPIO.LOW)  # Turn off
     sleep(1)  # Sleep for 1 second
-    i++
+    i += 1
 print("LED blinking complete)

@@ -36,7 +36,7 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 
 Notes:-
 
-1. The communication between the modules is via serial communication.
+1. The communication between the modules is via I2C communication.
 2. All the data is stored in firebase.
 
 ## Files and folders explained
@@ -52,3 +52,4 @@ Notes:-
    2. main-board-module: contains code for Raspberry Pi Zero W.
    3. tank-module: contains embedded C code for Atmega328p. This micro-controller will be placed at water Tank.
    4. valve-switching-module: conatins embedded C code for ATmega328p. This micro-controller will be placed at the main pipeline junction.
+6. diagnostics: code to test each sensors used in the project.

@@ -17,7 +17,7 @@ GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(29, GPIO.OUT, initial=GPIO.LOW)  # Red LED
 GPIO.setup(33, GPIO.OUT, initial=GPIO.LOW)  # Green LED
 i = 0
-while i < 3:  # Run forever
+while i < 3:  # Run 3 times
     GPIO.output(29, GPIO.HIGH)  # Turn on
     sleep(1)  # Sleep for 1 second
     GPIO.output(29, GPIO.LOW)  # Turn off

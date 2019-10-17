@@ -4,7 +4,7 @@
  * File name: ultrasonicSensor.ino
  * Author : Sashwat K
  * Created on : 10 Oct 2019
- * Last updated : 10 Oct 2019
+ * Last updated : 17 Oct 2019
  * Microcontroller: Atmega 328p
  * Pins used: Ultrasonic sensor:  Trigger pin - 4
  *                                Echo pin - 5

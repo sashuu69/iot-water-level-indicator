@@ -8,7 +8,7 @@
  * Microcontroller: Atmega 328p
  * Pins used: Ultrasonic sensor:  Trigger pin - 4
  *                                echo pin - 5
- *            Touch pads(5 nos):  6,7,8,9,10
+ *            Touch pads(5 nos):  A0,A1,A2,A3,A4
  */
 
 // Header files

@@ -3,19 +3,18 @@
  * Project repository link : https://github.com/sashuu6/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator
  * File name: NodeMCU-tank-code.ino
  * Author : Sashwat K
- * Created on : 10 Oct 2019
- * Last updated : 10 Oct 2019
+ * Created on : 17 Oct 2019
+ * Last updated : 17 Oct 2019
  * Microcontroller: Atmega 328p
- * Pins used: Ultrasonic sensor:  Trigger pin - 4
- *                                echo pin - 5
- *            Touch pads(5 nos):  6,7,8,9,10
+ * Pins used: Touch pads(5 nos):  A0,A1,A2,A3,A4
+ * Purpose: Diagnose touch pads
  */
 
-int touchPad1 = A0; // digital pin 6
-int touchPad2 = A1; // digital pin 7
-int touchPad3 = A2; // digital pin 8
-int touchPad4 = A3; // digital pin 9
-int touchPad5 = A4; // digital pin 10
+int touchPad1 = A0; // analog pin 0
+int touchPad2 = A1; // analog pin 1
+int touchPad3 = A2; // analog pin 2
+int touchPad4 = A3; // analog pin 3
+int touchPad5 = A4; // analog pin 4
 
 void setup() {
   // put your setup code here, to run once:

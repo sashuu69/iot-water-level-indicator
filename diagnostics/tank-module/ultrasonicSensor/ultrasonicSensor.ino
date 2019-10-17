@@ -8,6 +8,7 @@
  * Microcontroller: Atmega 328p
  * Pins used: Ultrasonic sensor:  Trigger pin - 4
  *                                Echo pin - 5
+  * Purpose: diagnose ultrasonic sensor
  */
 
 int ultrasonicSensorTriggerPin = 4; // Ultrasonic sensor - trigger - digital pin 4

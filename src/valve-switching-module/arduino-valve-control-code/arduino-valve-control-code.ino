@@ -165,10 +165,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  int MPer;
   // Serial communication for solenoid switch
   SV.solenoidSwitchTrigger(SC.serialReceiveValveData());
   
   // Moisure level
-  ML.MoisturePercentage();
+  MPer = ML.MoisturePercentage();
+  SC.serialSendMosiureData(MPer);
 }

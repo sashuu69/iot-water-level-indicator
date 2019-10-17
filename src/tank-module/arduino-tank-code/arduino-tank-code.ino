@@ -27,11 +27,11 @@ class waterLevelDetection {
             long durationForPulse; // Store duration from sending a pulse to receiving it
             long waterLevelDistance; // Stores the distance between water and sensor in cm
             // 5 touch pad pins
-            int touchPad1 = 6; // digital pin 6
-            int touchPad2 = 7; // digital pin 7
-            int touchPad3 = 8; // digital pin 8
-            int touchPad4 = 9; // digital pin 9
-            int touchPad5 = 10; // digital pin 10
+            int touchPad1 = A0; // analog pin 0
+            int touchPad2 = A1; // analog pin 1
+            int touchPad3 = A2; // analog pin 2
+            int touchPad4 = A3; // analog pin 3
+            int touchPad5 = A4; // analog pin 4
   public:
             void ultraSonicInitialisation(); // Function to initialise the pins
             long waterLevelUltrasonicSensor(); // Function returns the water to sensor distance in cm
@@ -71,25 +71,25 @@ long waterLevelDetection::waterLevelUltrasonicSensor() {
 // Function to give the count of sensors touching the water
 /**********************************************************/
 int waterLevelDetection::touchPadCount() {
-  int touchpadValue1 = digitalRead(touchPad1); // Value of touchpad1
-  int touchpadValue2 = digitalRead(touchPad2); // Value of touchpad2
-  int touchpadValue3 = digitalRead(touchPad3); // Value of touchpad3
-  int touchpadValue4 = digitalRead(touchPad4); // Value of touchpad4
-  int touchpadValue5 = digitalRead(touchPad5); // Value of touchpad5
+  int touchpadValue1 = analogRead(touchPad1); // Value of touchpad1
+  int touchpadValue2 = analogRead(touchPad2); // Value of touchpad2
+  int touchpadValue3 = analogRead(touchPad3); // Value of touchpad3
+  int touchpadValue4 = analogRead(touchPad4); // Value of touchpad4
+  int touchpadValue5 = analogRead(touchPad5); // Value of touchpad5
   int LEDCounter = 0; // Count the number of LED
-  if (touchpadValue1) { // Checks if touch pad 1 is connected or not
+  if (touchpadValue1 >= 1020) { // Checks if touch pad 1 is connected or not
     LEDCounter++;
   }
-  if (touchpadValue2) { // Checks if touch pad 2 is connected or not
+  if (touchpadValue2 >= 1020) { // Checks if touch pad 2 is connected or not
     LEDCounter++;
   }
-  if (touchpadValue3) { // Checks if touch pad 3 is connected or not
+  if (touchpadValue3 >= 1020) { // Checks if touch pad 3 is connected or not
     LEDCounter++;
   }
-  if (touchpadValue4) { // Checks if touch pad 4 is connected or not
+  if (touchpadValue4 >= 1020) { // Checks if touch pad 4 is connected or not
     LEDCounter++;
   }
-  if (touchpadValue5) { // Checks if touch pad 5 is connected or not
+  if (touchpadValue5 >= 1020) { // Checks if touch pad 5 is connected or not
     LEDCounter++;
   }
   return LEDCounter;
@@ -127,6 +127,7 @@ void serialCommunicationTank::serialSendWaterInfo(int tpCount, int uSSDist) {
   Wire.write(temp1);
   Wire.write("#");
   Wire.write(temp2);
+  Serial.println("I2C Sending..");
 }
 
 waterLevelDetection waterLevel; // Class waterLevelDetection's object
@@ -135,6 +136,7 @@ serialCommunicationTank SC; // Class serialCommunicationTank's object
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  Serial.println("Arduino Tank Code:-");
   SC.serialCommunicationChannelSetup();
   waterLevel.ultraSonicInitialisation();
 }
@@ -143,11 +145,14 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   // Ultrasonic sensor
-  int WD = (int) waterLevel.waterLevelUltrasonicSensor();
+  int WD = waterLevel.waterLevelUltrasonicSensor();
+  Serial.print("Ultrasonic Sensor value: ");Serial.println(WD);
 
   // Touch pads (5 nos)
   int TPC = waterLevel.touchPadCount();
+  Serial.print("Touch pads: ");Serial.println(TPC);
 
   // Serial communicate water level
   SC.serialSendWaterInfo(TPC,WD);
+  delay(100);
 }

@@ -69,6 +69,9 @@ void solenoidValue::solenoidSwitchTrigger(int valveTag) {
     Serial.println("Farm valve ON ");
   }
   else {
+    digitalWrite(tankSolenoidValve, LOW);
+    digitalWrite(sprinklerSolenoidValve, LOW);
+    digitalWrite(farmSolenoidValve, LOW);
     Serial.print("Wrong valveTag value: ");
     Serial.println(valveTag);
   }
@@ -104,79 +107,37 @@ int MosiureLevel::MoisturePercentage() {
   return moisurePercentage;
 }
 
-/***********************************************************************************/
-/***********************************************************************************/
-// Class defined to handle communication between the contorl-board and valve control
-/***********************************************************************************/
-/***********************************************************************************/
-class serialCommunicationValveControl {
-  private:
-            char valveControlReceiveValue[10]; // To get valve number to open solenoid valves from I2C communication
-            char moisureSensorSendValue[10]; // To send moisure sensor data through I2C communication
-  public:
-            void serialCommunicationChannelSetup(); // Function to handle I2C communication
-            void serialSendMosiureData(int); // Function to send data through I2C communication
-            int serialReceiveValveData(); // Function to receive data through I2C communication
-};
-
-/*********************************************/
-// Function to initialize I2C communication
-/*********************************************/
-void serialCommunicationValveControl::serialCommunicationChannelSetup() {
-  Wire.begin(SLAVE_ADDRESS); // Initialising I2C communication
-}
-
-
-/************************************************************/
-// Function to send moisure data through I2C communication
-/************************************************************/
-void serialCommunicationValveControl::serialSendMosiureData(int valueToSnd) {
-  char conversionChar; // Convert receiving integer data to character integer
-  conversionChar = valueToSnd + '0'; // Convert digit to character number
-  Wire.write(conversionChar);
-  Serial.println("Sending through I2C");
-}
-
-/************************************************************/
-// Function to receive valve number from I2C communication
-/************************************************************/
-int serialCommunicationValveControl::serialReceiveValveData() {
-  int i = 0;
-  int valveNum;
-  while (Wire.available()) { // To run in loop
-    valveControlReceiveValue[i] = Wire.read(); // Read from I2C communication
-    i++;
-    Serial.print(".");
-  }
-  Serial.println("Getting from I2C..");
-  valveControlReceiveValue[i] = '\0';
-  valveNum = valveControlReceiveValue - '0'; // Convert character number to digit
-  return valveNum;
-}
-
 solenoidValue SV; // class SolenoidValve's object
 MosiureLevel ML; // class MosiureLevel's object
-serialCommunicationValveControl SC; // class serialCommunicationValve's object
+
+int MPer;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  Wire.begin(SLAVE_ADDRESS);
   Serial.println("Arduino Valve Control Code:-");
   SV.initialiseTankModule();
   ML.InitialiseMoisureSensor();
-  SC.serialCommunicationChannelSetup();
+  Wire.onRequest(sendValue);
+  Wire.onReceive(receiveEvent);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   
-  // Serial communication for solenoid switch
-  SV.solenoidSwitchTrigger(SC.serialReceiveValveData());
-  
   // Moisure level
-  int MPer = ML.MoisturePercentage();
+  MPer = ML.MoisturePercentage();
   Serial.print("Moisure Level: ");Serial.print(MPer);Serial.println(" %");
-  SC.serialSendMosiureData(MPer);
   Serial.println("--------------------------------");
 //  delay(1000);
+}
+
+void sendValue() {
+    Wire.write(MPer);
+}
+
+void receiveEvent() {
+  int lastRequest = Wire.read();
+  SV.solenoidSwitchTrigger(lastRequest);
 }

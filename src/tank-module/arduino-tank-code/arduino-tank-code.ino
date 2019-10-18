@@ -95,67 +95,48 @@ int waterLevelDetection::touchPadCount() {
   return LEDCounter;
 }
 
-/**************************************************************************/
-/**************************************************************************/
-// Class defined to handle communication between the contorl-board and tank.
-/**************************************************************************/
-/**************************************************************************/
-class serialCommunicationTank {
-  private:
-            char waterInfoSendValue[10]; // To send touch pad levels and ultrasonic sensor distance through serial communication
-  public:
-            void serialCommunicationChannelSetup();
-            void serialSendWaterInfo(int,int);
-};
-
-/*********************************************/
-// Function to initialize I2C communication.
-/*********************************************/
-void serialCommunicationTank::serialCommunicationChannelSetup() {
-  Wire.begin(SLAVE_ADDRESS); // Initialising I2C communication
-}
-
-/*******************************************************************************/
-// Function to send touch pad count and ultrasonic sensor distance communication.
-/*******************************************************************************/
-void serialCommunicationTank::serialSendWaterInfo(int tpCount, int uSSDist) {
-//  char conversionChar[10]; // Convert to char and concatinate into *tpCount#uSSDist
-  char temp1,temp2;
-  temp1 = tpCount + '0';
-  temp2 = uSSDist+ '0';
-  Wire.write("*");
-  Wire.write(temp1);
-  Wire.write("#");
-  Wire.write(temp2);
-  Serial.println("I2C Sending..");
-}
-
 waterLevelDetection waterLevel; // Class waterLevelDetection's object
-serialCommunicationTank SC; // Class serialCommunicationTank's object
+
+int lastRequest,valueToSend,WD,TPC;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  Wire.begin(SLAVE_ADDRESS);
   Serial.println("Arduino Tank Code:-");
-  SC.serialCommunicationChannelSetup();
   waterLevel.ultraSonicInitialisation();
+  Wire.onRequest(sendValue);
+  Wire.onReceive(receiveEvent);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   
   // Ultrasonic sensor
-  int WD = waterLevel.waterLevelUltrasonicSensor();
+  WD = waterLevel.waterLevelUltrasonicSensor();
   Serial.print("Ultrasonic Sensor value: ");Serial.println(WD);
 
   // Touch pads (5 nos)
-  int TPC = waterLevel.touchPadCount();
+  TPC = waterLevel.touchPadCount();
   Serial.print("Touch pads: ");Serial.println(TPC);
 
-  // I2C communicate water level
-  SC.serialSendWaterInfo(TPC,WD);
-
   Serial.println("----------------------------");
-  
 //  delay(1000);
+}
+
+void sendValue() {
+    Wire.write(valueToSend);
+}
+
+void receiveEvent() {
+  int lastRequest = Wire.read(); 
+  if(lastRequest==111)
+  {
+    valueToSend=TPC;
+  }
+  else if(lastRequest==222)
+  {
+    valueToSend=WD;
+  }// receive byte as an integer
+  Serial.println(lastRequest);   
 }

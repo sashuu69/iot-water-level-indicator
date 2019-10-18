@@ -13,5 +13,5 @@ import time
 
 bus = smbus.SMBus(1)
 address = 0x05
-number = bus.read_byte(address)
+number = read_byte(address)
 print(number)

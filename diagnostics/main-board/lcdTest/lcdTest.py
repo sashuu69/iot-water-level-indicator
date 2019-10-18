@@ -9,9 +9,9 @@
  * Purpose: Checking I2C LCD
 """
 
-import I2C_LCD_driver
+import RPi_I2C_driver
 from time import *
 
-mylcd = I2C_LCD_driver.lcd()
+mylcd = RPi_I2C_driver.lcd()
 
 mylcd.lcd_display_string("Sashwat's Lab", 1)

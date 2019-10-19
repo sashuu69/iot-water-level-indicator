@@ -73,12 +73,22 @@ The diagnostics include:-
    2. Moisure sensor
    3. Solenoid valve
 
-## System process settings.
+## System process settings
 
-    To make the python code run at boot as background. Follow the following steps:-
-    1. Edit rc.local as adminstrator.
-        `sudo nano /etc/rc.local`
-    2. Add the python program to run at boot as background process along with astrik(&) symbol.
-        `sudo python3 /home/pi/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator/diagnostics/main-board/internetStatus &`
-    3. Save the rc.local file.
-    4. Reboot
+To make the python code run at boot as background. Follow the following steps:-
+
+1. Edit rc.local as adminstrator.
+
+   `sudo nano /etc/rc.local`
+
+2. Add the python program to run at boot as background process along with astrik(&) symbol.
+
+   `sudo python3 /home/pi/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator/diagnostics/main-board/internetStatus &`
+
+3. Save the rc.local file.
+4. Reboot
+
+## Contributors
+
+1. [Sashwat K](https://www.sashwat.in/)
+2. [Vijitha V Nair](https://github.com/vijimalu)

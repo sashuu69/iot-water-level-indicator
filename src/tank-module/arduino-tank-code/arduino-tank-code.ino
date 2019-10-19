@@ -13,7 +13,7 @@
 
 // Header files
 #include <Wire.h> // For I2C communication
-#define SLAVE_ADDRESS 0x05 // Slave address for valve control
+#define SLAVE_ADDRESS 0x05 // Slave address for valve control arduino uno
 
 /*************************************************/
 /*************************************************/

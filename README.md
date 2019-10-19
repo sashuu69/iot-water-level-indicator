@@ -53,3 +53,32 @@ Notes:-
    3. tank-module: contains embedded C code for Atmega328p. This micro-controller will be placed at water Tank.
    4. valve-switching-module: conatins embedded C code for ATmega328p. This micro-controller will be placed at the main pipeline junction.
 6. diagnostics: code to test each sensors used in the project.
+
+### Diagnostics
+
+The diagnostics include:-
+
+1. Main board
+   1. I2C communication
+   2. Internet status
+   3. LCD display
+   4. LED control
+   5. Relay control
+2. Tank control
+   1. I2C communication
+   2. Touch pads
+   3. Ultrasonic sensor
+3. Valve control
+   1. I2C communication
+   2. Moisure sensor
+   3. Solenoid valve
+
+## System process settings.
+
+    To make the python code run at boot as background. Follow the following steps:-
+    1. Edit rc.local as adminstrator.
+        `sudo nano /etc/rc.local`
+    2. Add the python program to run at boot as background process along with astrik(&) symbol.
+        `sudo python3 /home/pi/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator/diagnostics/main-board/internetStatus &`
+    3. Save the rc.local file.
+    4. Reboot

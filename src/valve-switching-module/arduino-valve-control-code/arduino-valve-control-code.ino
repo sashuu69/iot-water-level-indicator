@@ -135,9 +135,11 @@ void loop() {
 
 void sendValue() {
     Wire.write(MPer);
+    Serial.println("Sending mosiure percentage through I2C");
 }
 
 void receiveEvent() {
   int lastRequest = Wire.read();
+  Serial.println("Reading data  from I2C.");
   SV.solenoidSwitchTrigger(lastRequest);
 }

@@ -8,3 +8,13 @@
  * Microcontroller: Raspberry Pi Zero W
  * Purpose: The main controller
 """
+
+import RPi_I2C_driver
+from time import *
+import smbus
+
+bus = smbus.SMBus(1)
+tankModuleAdress = 0x05
+valveModuleAddress = 0x04
+
+bus.write_byte_data(valveModuleAddress, 1, 1)

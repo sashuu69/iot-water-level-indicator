@@ -17,4 +17,14 @@ bus = smbus.SMBus(1)
 tankModuleAdress = 0x05
 valveModuleAddress = 0x04
 
-bus.write_byte_data(valveModuleAddress, 1, 1)
+
+def i2cWriteFunction(address, valve):
+    try:
+        bus.write_byte_data(address, 1, valve)
+        return True
+    except:
+        pass
+    return False
+
+
+i2cWriteFunction(valveModuleAddress, 2)

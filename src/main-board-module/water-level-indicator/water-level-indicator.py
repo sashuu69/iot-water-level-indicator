@@ -49,7 +49,7 @@ def i2cReceiveCommand(address, value):
             val = int(decimalValue)
             return decimalValue
         except ValueError:
-            pass
+            return 0
         return decimalValue
     except:
         pass

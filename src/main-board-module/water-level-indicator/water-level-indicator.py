@@ -63,7 +63,7 @@ def lecBootScreen():
     systemLCD.lcd_display_string_pos("Water", 1, 5)
     sleep(0.5)
     systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Level", 1, 5)
+    systemLCD.lcd_display_string_pos("Level", 2, 5)
     sleep(0.5)
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string_pos("Indicator", 1, 5)
@@ -72,7 +72,8 @@ def lecBootScreen():
     systemLCD.lcd_display_string_pos("By,", 1, 5)
     sleep(0.5)
     systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Sashwat K & Vijitha V Nair", 1, 0)
+    systemLCD.lcd_display_string_pos("Sashwat K &", 1, 0)
+systemLCD.lcd_display_string_pos("Vijitha V Nair", 2, 0)
     sleep(0.5)
     systemLCD.lcd_clear()
 

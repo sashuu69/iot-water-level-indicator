@@ -79,24 +79,27 @@ def lecBootScreen():
     systemLCD.lcd_clear()
 
 
-def mainLCDConsole():
-    str_pad = " " * 16  # for spacing
+def mainLCDConsole(waterLevel, relayS):
     my_long_string = "This is a string that needs to scroll"
-    my_long_string = str_pad + my_long_string
-
-    for i in range(0, len(my_long_string)):
+    for i in range(0, 9):
         addDateTime = "Time: " + datetime.now().strftime("%H:%M:%S")
+        waterPercentage = "Water Level: " + waterLevel + " %"
+        if relayS == 0:
+            relayStat = "Pump: OFF"
+        else:
+            relayStat = "Pump: ON"
+
         systemLCD.lcd_display_string(addDateTime, 1)
-        lcd_text = my_long_string[i:(i+16)]
-        systemLCD.lcd_display_string(lcd_text, 2)
-        sleep(1)
-        systemLCD.lcd_display_string(str_pad, 2)
-    # Main function
+        if i < 3:
+            systemLCD.lcd_display_string(waterPercentage, 1)
+        elif i > 3 and i < 6:
+            systemLCD.lcd_display_string(relayStat, 1)
 
 
+# Main function
 def main():
     # lecBootScreen()
-    mainLCDConsole()
+    mainLCDConsole(5, 1)
 
 
 # 1st execution

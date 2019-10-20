@@ -141,7 +141,7 @@ def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(tankStat, 2)
-        sleep(1)
+        sleep(0.5)
 
 
 # Main function
@@ -156,7 +156,7 @@ def main():
             farm = 0  # for displaying farm valve stat in LCD
             garden = 0  # for displaying garden valve stat in LCD
             valveWorking = 0  # Check if any valve is working or not
-            tpCnt = 1  # i2cReceiveCommand(tankModuleAdress, 111)
+            tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
             print(tpCntPer)

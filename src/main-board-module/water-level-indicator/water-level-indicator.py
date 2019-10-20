@@ -45,11 +45,6 @@ def i2cReceiveCommand(address, value):
             receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
         fValue = bashValue.read().strip().decode()
         decimalValue = int(fValue, 16)
-        try:
-            val = int(decimalValue)
-            return decimalValue
-        except ValueError:
-            return 0
         return decimalValue
     except:
         pass
@@ -116,8 +111,8 @@ def mainLCDConsole(waterLevel, relayS):
 
 # Main function
 def main():
-    ledBootScreen()
     print("Program started")
+    ledBootScreen()
     while True:
         try:
             print("------------")

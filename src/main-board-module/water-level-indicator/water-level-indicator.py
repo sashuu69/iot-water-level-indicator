@@ -158,7 +158,7 @@ def main():
             garden = 0  # for displaying garden valve stat in LCD
             valveWorking = 0  # Check if any valve is working or not
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
-            tpCntPer = int(tpCnt * 100 / 4)
+            tpCntPer = tpCnt * 100 / 4
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
             if tpCntPer == 0:
                 valveControlSig(1)

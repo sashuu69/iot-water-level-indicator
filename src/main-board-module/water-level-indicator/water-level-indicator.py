@@ -164,19 +164,21 @@ def main():
                 relayControl(1)
                 relayTrig = 1
                 tank = 1
+                # display all details in LCD
+                mainLCDConsole(getWaterLevelPercentage,
+                               relayTrig, garden, farm, tank)
             elif tpCntPer == 100 and ultrasnc < 10:
                 valveControlSig(0)
                 valveWorking = 0
                 relayControl(0)
                 relayTrig = 0
                 tank = 0
+                # display all details in LCD
+                mainLCDConsole(getWaterLevelPercentage,
+                               relayTrig, garden, farm, tank)
             # farmTime = datetime.now().strftime("%H:%M:%S")
             # if valveWorking == 1:
             #     if farmTime == '17:40:00':
-
-            # display all details in LCD
-            mainLCDConsole(getWaterLevelPercentage,
-                           relayTrig, garden, farm, tank)
         except:
             pass
 

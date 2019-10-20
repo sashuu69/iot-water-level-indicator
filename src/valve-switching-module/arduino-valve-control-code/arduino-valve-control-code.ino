@@ -130,7 +130,7 @@ void loop() {
   MPer = ML.MoisturePercentage();
   Serial.print("Moisure Level: ");Serial.print(MPer);Serial.println(" %");
   Serial.println("--------------------------------");
-//  delay(1000);
+  delay(1000);
 }
 
 void sendValue() {

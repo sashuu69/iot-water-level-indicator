@@ -74,16 +74,16 @@ int waterLevelDetection::touchPadCount() {
   int touchpadValue3 = analogRead(touchPad3); // Value of touchpad3
   int touchpadValue4 = analogRead(touchPad4); // Value of touchpad4
   int LEDCounter = 0; // Count the number of LED
-  if (touchpadValue1 >= 1020) { // Checks if touch pad 1 is connected or not
+  if (touchpadValue1 >= 50) { // Checks if touch pad 1 is connected or not
     LEDCounter++;
   }
-  if (touchpadValue2 >= 1020) { // Checks if touch pad 2 is connected or not
+  if (touchpadValue2 >= 50) { // Checks if touch pad 2 is connected or not
     LEDCounter++;
   }
-  if (touchpadValue3 >= 1020) { // Checks if touch pad 3 is connected or not
+  if (touchpadValue3 >= 50) { // Checks if touch pad 3 is connected or not
     LEDCounter++;
   }
-  if (touchpadValue4 >= 1020) { // Checks if touch pad 4 is connected or not
+  if (touchpadValue4 >= 50) { // Checks if touch pad 4 is connected or not
     LEDCounter++;
   }
   return LEDCounter;
@@ -115,7 +115,7 @@ void loop() {
   Serial.print("Touch pads: ");Serial.println(TPC);
 
   Serial.println("----------------------------");
-//  delay(1000);
+  delay(1000);
 }
 
 void sendValue() {

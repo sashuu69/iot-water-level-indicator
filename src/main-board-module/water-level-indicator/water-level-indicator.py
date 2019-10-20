@@ -162,18 +162,19 @@ def main():
             farm = 0  # for displaying farm valve stat in LCD
             garden = 0  # for displaying garden valve stat in LCD
             valveWorking = 0  # Check if any valve is working or not
-            if getWaterLevelPercentage == 0:
-                valveControlSig(1)
-                valveWorking = 1
-                relayControl(1)
-                relayTrig = 1
-                tank = 1
-            elif getWaterLevelPercentage == 100 and getUltrasonicValue < 10:
-                valveControlSig(0)
-                valveWorking = 0
-                relayControl(0)
-                relayTrig = 0
-                tank = 0
+            print(getWaterLevelPercentage)
+            # if getWaterLevelPercentage == 0:
+            #     valveControlSig(1)
+            #     valveWorking = 1
+            #     relayControl(1)
+            #     relayTrig = 1
+            #     tank = 1
+            # elif getWaterLevelPercentage == 100 and getUltrasonicValue < 10:
+            #     valveControlSig(0)
+            #     valveWorking = 0
+            #     relayControl(0)
+            #     relayTrig = 0
+            #     tank = 0
 
             # display all details in LCD
             mainLCDConsole(getWaterLevelPercentage,

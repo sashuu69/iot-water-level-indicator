@@ -79,14 +79,13 @@ def lecBootScreen():
     systemLCD.lcd_clear()
 
 
-def mainLCDConsole():
+def mainLCDConsole(addDateTime):
     str_pad = " " * 16  # for spacing
-    headingText = datetime.now().strftime("%d/%m %H:%M:%S")
-    systemLCD.lcd_display_string(headingText, 1)
     my_long_string = "This is a string that needs to scroll"
     my_long_string = str_pad + my_long_string
 
     for i in range(0, len(my_long_string)):
+        systemLCD.lcd_display_string(addDateTime, 1)
         lcd_text = my_long_string[i:(i+16)]
         systemLCD.lcd_display_string(lcd_text, 2)
         sleep(0.1)
@@ -96,7 +95,8 @@ def mainLCDConsole():
 
 def main():
     # lecBootScreen()
-    mainLCDConsole()
+    headingText = datetime.now().strftime("%H:%M:%S")
+    mainLCDConsole(headingText)
 
 
 # 1st execution

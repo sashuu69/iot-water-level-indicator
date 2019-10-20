@@ -40,6 +40,7 @@ def i2cReceiveCommand(address, value):
     try:
         sendBashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
         os.system(sendBashCommand)
+        delay(0.2)
         receiveBashCommand = 'i2cget -y 1 ' + str(address)
         bashValue = subprocess.Popen(
             receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
@@ -178,7 +179,7 @@ def main():
             print("Farm valve: " + str(garden))
             print("tank valve: " + str(tank))
             print("Any valve open? " + str(valveWorking))
-            mainLCDConsole(tpCntPer, 0, 0, 0, 0)
+            # mainLCDConsole(tpCntPer, 0, 0, 0, 0)
         except (KeyboardInterrupt, SystemExit):
             pass
 

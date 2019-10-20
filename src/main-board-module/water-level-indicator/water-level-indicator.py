@@ -18,7 +18,7 @@ valveModuleAddress = 0x04
 
 
 def i2cRunCommand(address, value):
-    bashCommand = 'i2cset -y 1 ' + address + ' ' + value
+    bashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
     os.system(bashCommand)
     pass
 

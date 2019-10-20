@@ -178,8 +178,7 @@ def main():
             print("Farm valve: " + str(garden))
             print("tank valve: " + str(tank))
             print("Any valve open? " + str(valveWorking))
-            mainLCDConsole(tpCntPer,
-                           0, 0, 0, 0)
+            mainLCDConsole(tpCntPer, 0, 0, 0, 0)
         except (KeyboardInterrupt, SystemExit):
             pass
 

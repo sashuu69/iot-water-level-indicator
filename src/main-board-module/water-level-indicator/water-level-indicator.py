@@ -45,6 +45,11 @@ def i2cReceiveCommand(address, value):
             receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
         fValue = bashValue.read().strip().decode()
         decimalValue = int(fValue, 16)
+        try:
+            val = int(decimalValue)
+            return decimalValue
+        except ValueError:
+            pass
         return decimalValue
     except:
         pass

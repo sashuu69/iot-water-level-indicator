@@ -85,9 +85,9 @@ def mainLCDConsole():
 
     for i in range(0, len(my_long_string)):
         lcd_text = my_long_string[i:(i+16)]
-        systemLCD.lcd_display_string(lcd_text, 1)
-        sleep(0.4)
-        systemLCD.lcd_display_string(str_pad, 1)
+        systemLCD.lcd_display_string(lcd_text, 2)
+        sleep(0.1)
+        systemLCD.lcd_display_string(str_pad, 2)
     # Main function
 
 

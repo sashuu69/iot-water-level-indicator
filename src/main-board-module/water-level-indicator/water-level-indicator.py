@@ -95,53 +95,18 @@ def valveControlSig(valuev):
 
 
 # Function to show the main console
-def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
-    for i in range(0, 6):
-        addDateTime = "Time: " + datetime.now().strftime("%H:%M:%S")  # get time
-        waterPercentage = "Water Level: " + \
-            str(waterLevel) + " %"  # get water level
-        # Relay status
-        if relayS == 0:
-            relayStat = "Pump: OFF"
-        else:
-            relayStat = "Pump: ON"
-        # Garden sprinkler valve status
-        if gardenS == 0:
-            gardenStat = "Gardn valve: OFF"
-        else:
-            gardenStat = "Gardn valve: ON"
-        # Farm sprinkler valve status
-        if farmS == 0:
-            farmStat = "Farm valve: OFF"
-        else:
-            farmStat = "Farm valve: ON"
-        # tank valve status
-        if tankS == 0:
-            tankStat = "Tank valve: OFF"
-        else:
-            tankStat = "Tank valve: ON"
+def mainLCDConsole(waterLevel, relayS):
+    waterPercentage = "Water Level: " + \
+        str(waterLevel) + " %"  # get water level
+    # Relay status
+    if relayS == 0:
+        relayStat = "Pump: OFF"
+    else:
+        relayStat = "Pump: ON"
 
-        if i < 1:
-            systemLCD.lcd_clear()
-            systemLCD.lcd_display_string(addDateTime, 1)
-            systemLCD.lcd_display_string(waterPercentage, 2)
-        if i >= 2 and i < 3:
-            systemLCD.lcd_clear()
-            systemLCD.lcd_display_string(addDateTime, 1)
-            systemLCD.lcd_display_string(relayStat, 2)
-        if i >= 3 and i < 4:
-            systemLCD.lcd_clear()
-            systemLCD.lcd_display_string(addDateTime, 1)
-            systemLCD.lcd_display_string(gardenStat, 2)
-        if i >= 4 and i < 5:
-            systemLCD.lcd_clear()
-            systemLCD.lcd_display_string(addDateTime, 1)
-            systemLCD.lcd_display_string(farmStat, 2)
-        if i >= 5 and i < 6:
-            systemLCD.lcd_clear()
-            systemLCD.lcd_display_string(addDateTime, 1)
-            systemLCD.lcd_display_string(tankStat, 2)
-        sleep(0.2)
+    systemLCD.lcd_clear()
+    systemLCD.lcd_display_string(waterPercentage, 1)
+    systemLCD.lcd_display_string(relayS, 2)
 
 
 # Main function
@@ -171,7 +136,7 @@ def main():
                 relayControl(0)
                 relayTrig = 0
                 tank = 0
-            mainLCDConsole(tpCntPer, relayTrig, garden, farm, tank)
+            mainLCDConsole(tpCntPer, relayTrig)
             print("Water tank touch pad: " + str(tpCntPer))
             print("Water ultrasonic sensor: " + str(ultrasnc))
             print("Pump status: " + str(relayTrig))

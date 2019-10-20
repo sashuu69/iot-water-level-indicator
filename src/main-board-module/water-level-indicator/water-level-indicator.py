@@ -79,14 +79,31 @@ def lecBootScreen():
     systemLCD.lcd_clear()
 
 
-def mainLCDConsole(waterLevel, relayS):
-    for i in range(0, 9):
-        addDateTime = "Time: " + datetime.now().strftime("%H:%M:%S")
-        waterPercentage = "Water Level: " + str(waterLevel) + " %"
+def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
+    for i in range(0, 15):
+        addDateTime = "Time: " + datetime.now().strftime("%H:%M:%S")  # get time
+        waterPercentage = "Water Level: " + \
+            str(waterLevel) + " %"  # get water level
+        # Relay status
         if relayS == 0:
             relayStat = "Pump: OFF"
         else:
             relayStat = "Pump: ON"
+        # Garden sprinkler valve status
+        if gardenS == 0:
+            gardenStat = "Garden sprinkler: OFF"
+        else:
+            gardenStat = "Garden sprinkler: ON"
+        # Farm sprinkler valve status
+        if farmS == 0:
+            farmStat = "Farm sprinkler: OFF"
+        else:
+            farmStat = "Farm sprinkler: ON"
+        # tank valve status
+        if tankS == 0:
+            tankStat = "Tank valve: OFF"
+        else:
+            tankStat = "valve: ON"
 
         if i < 3:
             systemLCD.lcd_clear()
@@ -96,13 +113,25 @@ def mainLCDConsole(waterLevel, relayS):
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(relayStat, 2)
+        if i >= 6 and i < 9:
+            systemLCD.lcd_clear()
+            systemLCD.lcd_display_string(addDateTime, 1)
+            systemLCD.lcd_display_string(gardenStat, 2)
+        if i >= 9 and i < 12:
+            systemLCD.lcd_clear()
+            systemLCD.lcd_display_string(addDateTime, 1)
+            systemLCD.lcd_display_string(farmStat, 2)
+        if i >= 12 and i < 15:
+            systemLCD.lcd_clear()
+            systemLCD.lcd_display_string(addDateTime, 1)
+            systemLCD.lcd_display_string(tankStat, 2)
         sleep(1)
 
 
 # Main function
 def main():
     # lecBootScreen()
-    mainLCDConsole(5, 1)
+    mainLCDConsole(5, 1, 0, 1, 1)
 
 
 # 1st execution

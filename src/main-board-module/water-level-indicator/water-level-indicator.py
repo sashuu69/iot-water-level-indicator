@@ -89,7 +89,7 @@ def getUltrasonicValue():
 
 def valveControlSig(valuev):
     try:
-        i2cReceiveCommand(address, valuev)
+        i2cReceiveCommand(valveModuleAddress, valuev)
     except:
         pass
 
@@ -158,16 +158,15 @@ def main():
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
             if tpCntPer == 0:
-                # valveControlSig(1)
+                valveControlSig(1)
                 valveWorking = 1
-                # relayControl(1)
+                relayControl(1)
                 relayTrig = 1
                 tank = 1
             elif tpCntPer == 100 and ultrasnc < 10:
-                print("yoo")
-                # valveControlSig(0)
+                valveControlSig(0)
                 valveWorking = 0
-                # relayControl(0)
+                relayControl(0)
                 relayTrig = 0
                 tank = 0
 

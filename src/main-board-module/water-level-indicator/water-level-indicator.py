@@ -10,10 +10,14 @@
 """
 
 import RPi_I2C_driver  # LCD driver
+import RPi.GPIO as GPIO  # Import Raspberry Pi GPIO library
 import os  # for running bash commands
 import subprocess  # For returning bash commands
-from time import *  # for getting realtime
+from time import sleep  # for getting realtime
 
+GPIO.setwarnings(False)  # Ignore warning for now
+GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
+GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW)  # Relay pin initialisation
 tankModuleAdress = 0x05  # Arduino tank module address
 valveModuleAddress = 0x04  # Arduino valve cmodule address
 
@@ -44,6 +48,16 @@ def i2cReceiveCommand(address, value):
         pass
 
 
+def relayControl(statuss):
+    try:
+        GPIO.output(7, GPIO.HIGH) if statuss == 1 else GPIO.output(7, GPIO.LOW)
+    except:
+        pass
+
+
 i2cSendCommand(valveModuleAddress, 3)
 finalResult = i2cReceiveCommand(tankModuleAdress, 222)
 print(finalResult)
+relayControl(1)
+sleep(1)
+relayControl(0)

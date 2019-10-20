@@ -28,15 +28,13 @@ def i2cSendCommand(address, value):
 
 
 def i2cReceiveCommand(address, value):
-    try:
-        sendBashCommand = 'i2cset -y 1' + str(address) + ' ' + str(value)
-        os.system(sendBashCommand)
-        receiveBashCommand = 'i2cget -y 1' + str(address)
-        result = os.system(receiveBashCommand)
-        return result
-    except:
-        pass
+	sendBashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
+	os.system(sendBashCommand)
+	receiveBashCommand = 'i2cget -y 1 ' + str(address)
+	result = os.system(receiveBashCommand)
+	return result
 
 
 i2cSendCommand(valveModuleAddress, 2)
-print(i2cReceiveCommand(tankModuleAdress, 222))
+finalResult = i2cReceiveCommand(tankModuleAdress, 111)
+print(finalResult)

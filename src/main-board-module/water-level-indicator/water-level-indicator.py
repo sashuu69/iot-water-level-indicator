@@ -106,7 +106,7 @@ def mainLCDConsole(waterLevel, relayS):
 
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string(waterPercentage, 1)
-    systemLCD.lcd_display_string(relayS, 2)
+    systemLCD.lcd_display_string(relayStat, 2)
 
 
 # Main function

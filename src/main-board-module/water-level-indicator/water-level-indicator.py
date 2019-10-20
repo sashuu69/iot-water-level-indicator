@@ -34,8 +34,9 @@ def i2cReceiveCommand(address, value):
 		os.system(sendBashCommand)
 		receiveBashCommand = 'i2cget -y 1 ' + str(address)
 		bashValue =  subprocess.Popen(receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
-		fValue =  bashValue.read()
-		return fValue.strip().decode()
+		fValue =  bashValue.read().strip().decode()
+		decimalValue = int(fValue,16)
+		return decimalValue
 	except:
 		pass
 

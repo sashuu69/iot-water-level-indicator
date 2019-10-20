@@ -91,19 +91,19 @@ def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
             relayStat = "Pump: ON"
         # Garden sprinkler valve status
         if gardenS == 0:
-            gardenStat = "Garden sprinkler: OFF"
+            gardenStat = "Gardn valve: OFF"
         else:
-            gardenStat = "Garden sprinkler: ON"
+            gardenStat = "Gardn valve: ON"
         # Farm sprinkler valve status
         if farmS == 0:
-            farmStat = "Farm sprinkler: OFF"
+            farmStat = "Farm valve: OFF"
         else:
-            farmStat = "Farm sprinkler: ON"
+            farmStat = "Farm valve: ON"
         # tank valve status
         if tankS == 0:
             tankStat = "Tank valve: OFF"
         else:
-            tankStat = "valve: ON"
+            tankStat = "Tank valve: ON"
 
         if i < 3:
             systemLCD.lcd_clear()

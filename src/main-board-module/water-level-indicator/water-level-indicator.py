@@ -157,25 +157,26 @@ def main():
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
-            # if tpCntPer == 0:
-            #     valveControlSig(1)
-            #     valveWorking = 1
-            #     relayControl(1)
-            #     relayTrig = 1
-            #     tank = 1
-            # elif tpCntPer == 100 and ultrasnc < 10:
-            #     valveControlSig(0)
-            #     valveWorking = 0
-            #     relayControl(0)
-            #     relayTrig = 0
-            #     tank = 0
 
-            farmTime = datetime.now().strftime("%H:%M:%S")
-            if farmTime == '17:40:00':
-                print("correct time")
+            if tpCntPer == 0:
+                valveControlSig(1)
+                valveWorking = 1
+                relayControl(1)
+                relayTrig = 1
+                tank = 1
+            elif tpCntPer == 100 and ultrasnc < 10:
+                valveControlSig(0)
+                valveWorking = 0
+                relayControl(0)
+                relayTrig = 0
+                tank = 0
+            # farmTime = datetime.now().strftime("%H:%M:%S")
+            # if valveWorking == 1:
+            #     if farmTime == '17:40:00':
+
             # display all details in LCD
-            # mainLCDConsole(getWaterLevelPercentage,
-            #                relayTrig, garden, farm, tank)
+            mainLCDConsole(getWaterLevelPercentage,
+                           relayTrig, garden, farm, tank)
         except:
             pass
 
@@ -183,9 +184,3 @@ def main():
 # 1st execution
 if __name__ == '__main__':
     main()
-#i2cSendCommand(valveModuleAddress, 3)
-#finalResult = i2cReceiveCommand(tankModuleAdress, 222)
-# print(finalResult)
-# relayControl(1)
-# sleep(1)
-# relayControl(0)

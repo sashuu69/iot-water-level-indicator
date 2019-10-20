@@ -73,7 +73,7 @@ def lecBootScreen():
     sleep(0.5)
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string_pos("Sashwat K &", 1, 0)
-systemLCD.lcd_display_string_pos("Vijitha V Nair", 2, 0)
+    systemLCD.lcd_display_string_pos("Vijitha V Nair", 2, 0)
     sleep(0.5)
     systemLCD.lcd_clear()
 

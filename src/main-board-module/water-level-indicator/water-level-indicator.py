@@ -78,7 +78,14 @@ def lecBootScreen():
     systemLCD.lcd_clear()
 
 
-lecBootScreen()
+# Main function
+def main():
+    lecBootScreen()
+
+
+# 1st execution
+if __name__ == '__main__':
+    main()
 #i2cSendCommand(valveModuleAddress, 3)
 #finalResult = i2cReceiveCommand(tankModuleAdress, 222)
 # print(finalResult)

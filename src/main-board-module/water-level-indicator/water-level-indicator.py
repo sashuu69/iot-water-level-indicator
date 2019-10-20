@@ -154,11 +154,12 @@ def main():
             farm = 0  # for displaying farm valve stat in LCD
             garden = 0  # for displaying garden valve stat in LCD
             valveWorking = 0  # Check if any valve is working or not
-            tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
+            tpCnt = 1 #i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
-            mainLCDConsole(getWaterLevelPercentage,
-                           relayTrig, garden, farm, tank)
+            print(tpCntPer)
+            mainLCDConsole(tpCntPer,
+                           0, 0, 0, 0)
             if tpCntPer == 0:
                 valveControlSig(1)
                 valveWorking = 1

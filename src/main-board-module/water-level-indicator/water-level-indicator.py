@@ -172,13 +172,13 @@ def main():
                 relayControl(0)
                 relayTrig = 0
                 tank = 0
-            print("Water tank touch pad: " + str(tpCntPer))
-            print("Water ultrasonic sensor: " + str(ultrasnc))
-            print("Pump status: " + str(relayTrig))
-            print("Garden valve: " + str(farm))
-            print("Farm valve: " + str(garden))
-            print("tank valve: " + str(tank))
-            print("Any valve open? " + str(valveWorking))
+            print("Water tank touch pad: "), print(tpCntPer)
+            # print("Water ultrasonic sensor: " + str(ultrasnc))
+            # print("Pump status: " + str(relayTrig))
+            # print("Garden valve: " + str(farm))
+            # print("Farm valve: " + str(garden))
+            # print("tank valve: " + str(tank))
+            # print("Any valve open? " + str(valveWorking))
             # mainLCDConsole(tpCntPer, 0, 0, 0, 0)
         except (KeyboardInterrupt, SystemExit):
             pass

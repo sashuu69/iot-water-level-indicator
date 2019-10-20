@@ -156,19 +156,20 @@ def main():
             valveWorking = 0  # Check if any valve is working or not
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
-            print(tpCntPer)
-            # if tpCnt == 0:
-            #     valveControlSig(1)
-            #     valveWorking = 1
-            #     relayControl(1)
-            #     relayTrig = 1
-            #     tank = 1
-            # elif getWaterLevelPercentage == 100 and getUltrasonicValue < 10:
-            #     valveControlSig(0)
-            #     valveWorking = 0
-            #     relayControl(0)
-            #     relayTrig = 0
-            #     tank = 0
+            ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
+            if tpCntPer == 0:
+                # valveControlSig(1)
+                valveWorking = 1
+                # relayControl(1)
+                relayTrig = 1
+                tank = 1
+            elif tpCntPer == 100 and ultrasnc < 10:
+                print("yoo")
+                # valveControlSig(0)
+                valveWorking = 0
+                # relayControl(0)
+                relayTrig = 0
+                tank = 0
 
             # display all details in LCD
             # mainLCDConsole(getWaterLevelPercentage,

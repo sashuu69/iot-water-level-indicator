@@ -4,7 +4,7 @@
  * File name: water-level-indicator.py
  * Author : Sashwat K
  * Created on : 10 Oct 2019
- * Last updated : 18 Oct 2019
+ * Last updated : 20 Oct 2019
  * Microcontroller: Raspberry Pi Zero W
  * Purpose: The main controller
 """
@@ -15,6 +15,7 @@ import os  # for running bash commands
 import subprocess  # For returning bash commands
 from time import sleep  # for getting realtime
 
+systemLCD = RPi_I2C_driver.lcd()  # initialse LCD driver
 GPIO.setwarnings(False)  # Ignore warning for now
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW)  # Relay pin initialisation
@@ -48,6 +49,7 @@ def i2cReceiveCommand(address, value):
         pass
 
 
+# Function to control relay
 def relayControl(statuss):
     try:
         GPIO.output(7, GPIO.HIGH) if statuss == 1 else GPIO.output(7, GPIO.LOW)
@@ -55,6 +57,15 @@ def relayControl(statuss):
         pass
 
 
+# Fucntion for LCD boot scren
+def lecBootScreen():
+    systemLCD.lcd_clear()
+    systemLCD.lcd_display_string("Water Level Indicator", 1)
+    sleep(3)
+    systemLCD.lcd_clear()
+
+
+lecBootScreen()
 i2cSendCommand(valveModuleAddress, 3)
 finalResult = i2cReceiveCommand(tankModuleAdress, 222)
 print(finalResult)

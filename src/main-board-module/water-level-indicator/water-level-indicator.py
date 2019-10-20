@@ -83,7 +83,7 @@ def mainLCDConsole(waterLevel, relayS):
     my_long_string = "This is a string that needs to scroll"
     for i in range(0, 9):
         addDateTime = "Time: " + datetime.now().strftime("%H:%M:%S")
-        waterPercentage = "Water Level: " + waterLevel + " %"
+        waterPercentage = "Water Level: " + str(waterLevel) + " %"
         if relayS == 0:
             relayStat = "Pump: OFF"
         else:
@@ -91,9 +91,9 @@ def mainLCDConsole(waterLevel, relayS):
 
         systemLCD.lcd_display_string(addDateTime, 1)
         if i < 3:
-            systemLCD.lcd_display_string(waterPercentage, 1)
+            systemLCD.lcd_display_string(waterPercentage, 2)
         elif i > 3 and i < 6:
-            systemLCD.lcd_display_string(relayStat, 1)
+            systemLCD.lcd_display_string(relayStat, 2)
 
 
 # Main function

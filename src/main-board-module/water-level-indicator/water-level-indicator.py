@@ -40,7 +40,6 @@ def i2cReceiveCommand(address, value):
     try:
         sendBashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
         os.system(sendBashCommand)
-        delay(0.2)
         receiveBashCommand = 'i2cget -y 1 ' + str(address)
         bashValue = subprocess.Popen(
             receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
@@ -142,7 +141,7 @@ def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(tankStat, 2)
-        sleep(0.3)
+        sleep(0.1)
 
 
 # Main function
@@ -158,8 +157,7 @@ def main():
             garden = 0  # for displaying garden valve stat in LCD
             valveWorking = 0  # Check if any valve is working or not
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
-            print(tpCnt)
-            tpCntPer = 1  # tpCnt * 100 / 4
+            tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
             if tpCntPer == 0:
                 valveControlSig(1)
@@ -173,14 +171,15 @@ def main():
                 relayControl(0)
                 relayTrig = 0
                 tank = 0
-            print("Water tank touch pad: "), print(tpCntPer)
-            # print("Water ultrasonic sensor: " + str(ultrasnc))
-            # print("Pump status: " + str(relayTrig))
-            # print("Garden valve: " + str(farm))
-            # print("Farm valve: " + str(garden))
-            # print("tank valve: " + str(tank))
-            # print("Any valve open? " + str(valveWorking))
-            # mainLCDConsole(tpCntPer, 0, 0, 0, 0)
+            print("Water tank touch pad: " + str(tpCntPer))
+            print("Water ultrasonic sensor: " + str(ultrasnc))
+            print("Pump status: " + str(relayTrig))
+            print("Garden valve: " + str(farm))
+            print("Farm valve: " + str(garden))
+            print("tank valve: " + str(tank))
+            print("Any valve open? " + str(valveWorking))
+            mainLCDConsole(tpCntPer, 0, 0, 0, 0)
+            sleep(1)
         except (KeyboardInterrupt, SystemExit):
             pass
 

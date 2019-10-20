@@ -11,6 +11,7 @@
 
 import RPi_I2C_driver
 import os
+import subprocess
 from time import *
 
 tankModuleAdress = 0x05
@@ -28,16 +29,16 @@ def i2cSendCommand(address, value):
 
 
 def i2cReceiveCommand(address, value):
-    try:
-        sendBashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
-        os.system(sendBashCommand)
-        receiveBashCommand = 'i2cget -y 1 ' + str(address)
-        result = subprocess.check_output([receiveBashCommand])
-        return result
-    except:
-        pass
-
+	try:
+		sendBashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
+		os.system(sendBashCommand)
+		receiveBashCommand = 'i2cget -y 1 ' + str(address)
+		bashValue =  subprocess.Popen(receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
+		fValue =  bashValue.read()
+		return fValue.strip().decode()
+	except:
+		pass
 
 i2cSendCommand(valveModuleAddress, 2)
-finalResult = i2cReceiveCommand(tankModuleAdress, 111)
+finalResult = i2cReceiveCommand(tankModuleAdress, 222)
 print(finalResult)

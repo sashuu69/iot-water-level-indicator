@@ -155,7 +155,7 @@ def main():
             garden = 0  # for displaying garden valve stat in LCD
             valveWorking = 0  # Check if any valve is working or not
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
-            tpCntPer = tpCnt * 100 / 4
+            tpCntPer = int(tpCnt * 100 / 4)
             print(tpCntPer)
             # if tpCnt == 0:
             #     valveControlSig(1)

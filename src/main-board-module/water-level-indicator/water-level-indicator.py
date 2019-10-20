@@ -14,6 +14,7 @@ import RPi.GPIO as GPIO  # Import Raspberry Pi GPIO library
 import os  # for running bash commands
 import subprocess  # For returning bash commands
 from time import sleep  # for getting realtime
+from datetime import datetime  # for date and time
 
 systemLCD = RPi_I2C_driver.lcd()  # initialse LCD driver
 GPIO.setwarnings(False)  # Ignore warning for now
@@ -79,7 +80,9 @@ def lecBootScreen():
 
 
 def mainLCDConsole():
-    str_pad = " " * 16
+    str_pad = " " * 16  # for spacing
+    headingText = datetime.now()
+    systemLCD.lcd_display_string(headingText, 1)
     my_long_string = "This is a string that needs to scroll"
     my_long_string = str_pad + my_long_string
 

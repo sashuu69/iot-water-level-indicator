@@ -141,7 +141,7 @@ def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(tankStat, 2)
-        sleep(0.5)
+        sleep(0.3)
 
 
 # Main function
@@ -159,27 +159,27 @@ def main():
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
-            print(tpCntPer)
-            mainLCDConsole(tpCntPer,
-                           0, 0, 0, 0)
             if tpCntPer == 0:
                 valveControlSig(1)
                 valveWorking = 1
                 relayControl(1)
                 relayTrig = 1
                 tank = 1
-                # display all details in LCD
-
-            elif tpCntPer == 100 and ultrasnc < 10:
+            if tpCntPer == 100 and ultrasnc < 10:
                 valveControlSig(0)
                 valveWorking = 0
                 relayControl(0)
                 relayTrig = 0
                 tank = 0
-                # display all details in LCD
-            # farmTime = datetime.now().strftime("%H:%M:%S")
-            # if valveWorking == 1:
-            #     if farmTime == '17:40:00':
+            print("Water tank touch pad: " + tpCntPer)
+            print("Water ultrasonic sensor: " + ultrasnc)
+            print("Pump status: " + relayTrig)
+            print("Garden valve: " + farm)
+            print("Farm valve: " + garden)
+            print("tank valve: " + tank)
+            print("Any valve open? " + valveWorking)
+            mainLCDConsole(tpCntPer,
+                           0, 0, 0, 0)
         except (KeyboardInterrupt, SystemExit):
             pass
 

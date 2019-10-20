@@ -89,7 +89,7 @@ def mainLCDConsole():
         systemLCD.lcd_display_string(addDateTime, 1)
         lcd_text = my_long_string[i:(i+16)]
         systemLCD.lcd_display_string(lcd_text, 2)
-		sleep(1)
+        sleep(1)
         systemLCD.lcd_display_string(str_pad, 2)
     # Main function
 

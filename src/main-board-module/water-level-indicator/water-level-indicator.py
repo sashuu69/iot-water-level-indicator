@@ -147,8 +147,10 @@ def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
 # Main function
 def main():
     ledBootScreen()
+    print("Program started")
     while True:
         try:
+            print("------------")
             relayTrig = 0  # for displaying relay stat in LCD
             tank = 0  # for displaying tank valve stat in LCD
             farm = 0  # for displaying farm valve stat in LCD

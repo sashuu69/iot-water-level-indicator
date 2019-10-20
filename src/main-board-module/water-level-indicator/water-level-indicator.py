@@ -92,7 +92,7 @@ def mainLCDConsole(waterLevel, relayS):
         if i < 3:
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(waterPercentage, 2)
-        elif i > 3 and i < 6:
+        if i > 3 and i < 6:
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(relayStat, 2)
         sleep(1)

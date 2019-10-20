@@ -82,7 +82,7 @@ def ledBootScreen():
 def getWaterLevelPercentage():
     try:
         tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
-        return tpCnt * 100 / 5
+        return int(tpCnt * 100 / 5)
     except:
         pass
 

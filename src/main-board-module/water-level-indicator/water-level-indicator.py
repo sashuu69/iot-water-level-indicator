@@ -89,12 +89,21 @@ def getUltrasonicValue():
 
 def valveControlSig(valuev):
     try:
-        i2cReceiveCommand(valveModuleAddress, valuev)
+        i2cSendCommand(valveModuleAddress, valuev)
     except:
         pass
 
 
+def getMoisurePer(address):
+    receiveBashCommand = 'i2cget -y 1 ' + str(address)
+    bashValue = subprocess.Popen(
+        receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
+    fValue = bashValue.read().strip().decode()
+    decimalValue = int(fValue, 16)
+    return decimalValue
 # Function to show the main console
+
+
 def mainLCDConsole(waterLevel, relayS):
     waterPercentage = "Water Level: " + \
         str(waterLevel) + " %"  # get water level
@@ -124,6 +133,7 @@ def main():
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
+            moisPer = getMoisurePer(valveModuleAddress)
             if tpCntPer == 0:
                 valveControlSig(1)
                 valveWorking = 1
@@ -140,6 +150,7 @@ def main():
             print("Water tank touch pad: " + str(tpCntPer))
             print("Water ultrasonic sensor: " + str(ultrasnc))
             print("Pump status: " + str(relayTrig))
+            print("Moisure percentage: " + str(moisPer))
             print("Garden valve: " + str(farm))
             print("Farm valve: " + str(garden))
             print("tank valve: " + str(tank))

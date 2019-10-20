@@ -79,14 +79,6 @@ def ledBootScreen():
     systemLCD.lcd_clear()
 
 
-def getWaterLevelPercentage():
-    try:
-        tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
-        return int(tpCnt * 100 / 5)
-    except:
-        pass
-
-
 def getUltrasonicValue():
     try:
         ultdis = i2cReceiveCommand(tankModuleAdress, 222)
@@ -157,12 +149,13 @@ def main():
     ledBootScreen()
     while True:
         try:
-            relayTrig = 0  # for displaying relay stat in LCD
-            tank = 0  # for displaying tank valve stat in LCD
-            farm = 0  # for displaying farm valve stat in LCD
-            garden = 0  # for displaying garden valve stat in LCD
-            valveWorking = 0  # Check if any valve is working or not
-            print(getWaterLevelPercentage)
+            # relayTrig = 0  # for displaying relay stat in LCD
+            # tank = 0  # for displaying tank valve stat in LCD
+            # farm = 0  # for displaying farm valve stat in LCD
+            # garden = 0  # for displaying garden valve stat in LCD
+            # valveWorking = 0  # Check if any valve is working or not
+            tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
+            print(tpCnt)
             # if getWaterLevelPercentage == 0:
             #     valveControlSig(1)
             #     valveWorking = 1
@@ -177,8 +170,8 @@ def main():
             #     tank = 0
 
             # display all details in LCD
-            mainLCDConsole(getWaterLevelPercentage,
-                           relayTrig, garden, farm, tank)
+            # mainLCDConsole(getWaterLevelPercentage,
+            #                relayTrig, garden, farm, tank)
         except:
             pass
 

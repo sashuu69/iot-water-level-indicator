@@ -16,7 +16,11 @@ from time import *
 tankModuleAdress = 0x05
 valveModuleAddress = 0x04
 
-cmd = 'i2cset -y 1 0x04 3'
 
-t = os.system(cmd)
-print(t)
+def i2cRunCommand(address, value):
+    bashCommand = 'i2cset -y 1 ' + address + ' ' + value
+    os.system(bashCommand)
+    pass
+
+
+i2cRunCommand(valveModuleAddress, 1)

@@ -96,7 +96,7 @@ def valveControlSig(valuev):
 
 # Function to show the main console
 def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
-    for i in range(0, 10):
+    for i in range(0, 6):
         addDateTime = "Time: " + datetime.now().strftime("%H:%M:%S")  # get time
         waterPercentage = "Water Level: " + \
             str(waterLevel) + " %"  # get water level
@@ -121,23 +121,23 @@ def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
         else:
             tankStat = "Tank valve: ON"
 
-        if i < 2:
+        if i < 1:
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(waterPercentage, 2)
-        if i >= 2 and i < 4:
+        if i >= 2 and i < 3:
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(relayStat, 2)
-        if i >= 4 and i < 6:
+        if i >= 3 and i < 4:
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(gardenStat, 2)
-        if i >= 6 and i < 8:
+        if i >= 4 and i < 5:
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(farmStat, 2)
-        if i >= 8 and i < 10:
+        if i >= 5 and i < 6:
             systemLCD.lcd_clear()
             systemLCD.lcd_display_string(addDateTime, 1)
             systemLCD.lcd_display_string(tankStat, 2)
@@ -179,7 +179,7 @@ def main():
             print("Farm valve: " + str(garden))
             print("tank valve: " + str(tank))
             print("Any valve open? " + str(valveWorking))
-            sleep(0.5)
+            sleep(0.1)
         except (KeyboardInterrupt, SystemExit):
             pass
 

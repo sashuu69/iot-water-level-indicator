@@ -60,15 +60,15 @@ def relayControl(statuss):
 # Fucntion for LCD boot scren
 def lecBootScreen():
     systemLCD.lcd_clear()
-    systemLCD.lcd_display_string("Water Level Indicator", 1)
-    sleep(3)
+    systemLCD.lcd_display_string_pos("Water", 1, 5)
+    sleep(1)
     systemLCD.lcd_clear()
 
 
 lecBootScreen()
-i2cSendCommand(valveModuleAddress, 3)
-finalResult = i2cReceiveCommand(tankModuleAdress, 222)
-print(finalResult)
-relayControl(1)
-sleep(1)
-relayControl(0)
+#i2cSendCommand(valveModuleAddress, 3)
+#finalResult = i2cReceiveCommand(tankModuleAdress, 222)
+#print(finalResult)
+#relayControl(1)
+#sleep(1)
+#relayControl(0)

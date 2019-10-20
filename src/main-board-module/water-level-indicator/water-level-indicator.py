@@ -10,21 +10,13 @@
 """
 
 import RPi_I2C_driver
+import os
 from time import *
-import smbus
 
-bus = smbus.SMBus(1)
 tankModuleAdress = 0x05
 valveModuleAddress = 0x04
 
+cmd = 'i2cset -y 1 0x04 3'
 
-def i2cWriteFunction(address, valve):
-    try:
-        bus.write_byte_data(address, 1, valve)
-        return True
-    except:
-        pass
-    return False
-
-
-i2cWriteFunction(valveModuleAddress, 2)
+t = os.system(cmd)
+print(t)

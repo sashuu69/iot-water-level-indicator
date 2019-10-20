@@ -149,14 +149,15 @@ def main():
     ledBootScreen()
     while True:
         try:
-            # relayTrig = 0  # for displaying relay stat in LCD
-            # tank = 0  # for displaying tank valve stat in LCD
-            # farm = 0  # for displaying farm valve stat in LCD
-            # garden = 0  # for displaying garden valve stat in LCD
-            # valveWorking = 0  # Check if any valve is working or not
+            relayTrig = 0  # for displaying relay stat in LCD
+            tank = 0  # for displaying tank valve stat in LCD
+            farm = 0  # for displaying farm valve stat in LCD
+            garden = 0  # for displaying garden valve stat in LCD
+            valveWorking = 0  # Check if any valve is working or not
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
-            print(tpCnt)
-            # if getWaterLevelPercentage == 0:
+            tpCntPer = tpCnt * 100 / 4
+            print(tpCntPer)
+            # if tpCnt == 0:
             #     valveControlSig(1)
             #     valveWorking = 1
             #     relayControl(1)

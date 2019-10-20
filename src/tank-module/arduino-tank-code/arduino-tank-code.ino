@@ -8,7 +8,7 @@
  * Microcontroller: Atmega 328p
  * Pins used: Ultrasonic sensor:  Trigger pin - 4
  *                                echo pin - 5
- *            Touch pads(5 nos):  A0,A1,A2,A3,A4
+ *            Touch pads(5 nos):  A0,A1,A2,A3
  */
 
 // Header files
@@ -31,7 +31,6 @@ class waterLevelDetection {
             int touchPad2 = A1; // analog pin 1
             int touchPad3 = A2; // analog pin 2
             int touchPad4 = A3; // analog pin 3
-            int touchPad5 = A4; // analog pin 4
   public:
             void ultraSonicInitialisation(); // Function to initialise the pins
             long waterLevelUltrasonicSensor(); // Function returns the water to sensor distance in cm
@@ -50,7 +49,6 @@ void waterLevelDetection::ultraSonicInitialisation() {
   pinMode(touchPad2, INPUT);
   pinMode(touchPad3, INPUT);
   pinMode(touchPad4, INPUT);
-  pinMode(touchPad5, INPUT);
 }
 
 /********************************************************/
@@ -75,7 +73,6 @@ int waterLevelDetection::touchPadCount() {
   int touchpadValue2 = analogRead(touchPad2); // Value of touchpad2
   int touchpadValue3 = analogRead(touchPad3); // Value of touchpad3
   int touchpadValue4 = analogRead(touchPad4); // Value of touchpad4
-  int touchpadValue5 = analogRead(touchPad5); // Value of touchpad5
   int LEDCounter = 0; // Count the number of LED
   if (touchpadValue1 >= 1020) { // Checks if touch pad 1 is connected or not
     LEDCounter++;
@@ -87,9 +84,6 @@ int waterLevelDetection::touchPadCount() {
     LEDCounter++;
   }
   if (touchpadValue4 >= 1020) { // Checks if touch pad 4 is connected or not
-    LEDCounter++;
-  }
-  if (touchpadValue5 >= 1020) { // Checks if touch pad 5 is connected or not
     LEDCounter++;
   }
   return LEDCounter;

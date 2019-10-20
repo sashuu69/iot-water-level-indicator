@@ -59,7 +59,7 @@ def relayControl(statuss):
 
 
 # Fucntion for LCD boot scren
-def lecBootScreen():
+def ledBootScreen():
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string_pos("Water", 1, 5)
     sleep(0.8)
@@ -79,6 +79,30 @@ def lecBootScreen():
     systemLCD.lcd_clear()
 
 
+def getWaterLevelPercentage():
+    try:
+        tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
+        return tpCnt * 100 / 5
+    except:
+        pass
+
+
+def getUltrasonicValue():
+    try:
+        ultdis = i2cReceiveCommand(tankModuleAdress, 222)
+        return ultdis
+    except:
+        pass
+
+
+def valveControlSig(valuev):
+    try:
+        i2cReceiveCommand(address, valuev)
+    except:
+        pass
+
+
+# Function to show the main console
 def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
     for i in range(0, 15):
         addDateTime = "Time: " + datetime.now().strftime("%H:%M:%S")  # get time
@@ -130,8 +154,32 @@ def mainLCDConsole(waterLevel, relayS, gardenS, farmS, tankS):
 
 # Main function
 def main():
-    # lecBootScreen()
-    mainLCDConsole(5, 1, 0, 1, 1)
+    ledBootScreen()
+    while True:
+        try:
+            relayTrig = 0  # for displaying relay stat in LCD
+            tank = 0  # for displaying tank valve stat in LCD
+            farm = 0  # for displaying farm valve stat in LCD
+            garden = 0  # for displaying garden valve stat in LCD
+            valveWorking = 0  # Check if any valve is working or not
+            if getWaterLevelPercentage == 0:
+                valveControlSig(1)
+                valveWorking = 1
+                relayControl(1)
+                relayTrig = 1
+                tank = 1
+            elif getWaterLevelPercentage == 100 and getUltrasonicValue < 10:
+                valveControlSig(0)
+                valveWorking = 0
+                relayControl(0)
+                relayTrig = 0
+                tank = 0
+
+            # display all details in LCD
+            mainLCDConsole(getWaterLevelPercentage,
+                           relayTrig, garden, farm, tank)
+        except:
+            pass
 
 
 # 1st execution

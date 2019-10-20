@@ -17,10 +17,26 @@ tankModuleAdress = 0x05
 valveModuleAddress = 0x04
 
 
-def i2cRunCommand(address, value):
-    bashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
-    os.system(bashCommand)
-    pass
+def i2cSendCommand(address, value):
+    try:
+        bashCommand = 'i2cset -y 1 ' + str(address) + ' ' + str(value)
+        os.system(bashCommand)
+        return True
+    except:
+        pass
+    return False
 
 
-i2cRunCommand(valveModuleAddress, 1)
+def i2cReceiveCommand(address, value):
+    try:
+        sendBashCommand = 'i2cset -y 1' + str(address) + ' ' + str(value)
+        os.system(sendBashCommand)
+        receiveBashCommand = 'i2cget -y 1' + str(address)
+        result = os.system(receiveBashCommand)
+        return result
+    except:
+        pass
+
+
+i2cSendCommand(valveModuleAddress, 2)
+print(i2cReceiveCommand(tankModuleAdress, 222))

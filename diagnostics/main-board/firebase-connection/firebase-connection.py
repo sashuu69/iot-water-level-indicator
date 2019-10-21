@@ -6,3 +6,7 @@ config = {
     "databaseURL": "https://miniproject-iot-water.firebaseio.com",
     "storageBucket": "miniproject-iot-water.appspot.com"
 }
+
+firebase = Firebase(config)
+
+print(firebase)

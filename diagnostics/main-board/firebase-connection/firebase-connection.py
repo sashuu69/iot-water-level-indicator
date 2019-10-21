@@ -1,4 +1,4 @@
-from firebase import Firebase
+from pyrebase
 
 config = {
     "apiKey": "AIzaSyB7lLBSm2O9p0y4ZuH5umbr0OMikKDJ0bs",
@@ -7,6 +7,7 @@ config = {
     "storageBucket": "miniproject-iot-water.appspot.com"
 }
 
-firebase = Firebase(config)
+firebase = pyrebase.initialize_app(config)
 
-print(firebase)
+archer = {"name": "Sterling Archer", "agency": "Figgis Agency"}
+db.child("agents").push(archer, user['idToken'])

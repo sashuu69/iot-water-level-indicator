@@ -58,7 +58,7 @@ def relayControl(statuss):
         pass
 
 
-# Fucntion for LCD boot scren
+# Fucntion for LCD boot screen
 def ledBootScreen():
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string_pos("Water", 1, 5)
@@ -79,6 +79,7 @@ def ledBootScreen():
     systemLCD.lcd_clear()
 
 
+# Fucntion to get ultrasonic sensor
 def getUltrasonicValue():
     try:
         ultdis = i2cReceiveCommand(tankModuleAdress, 222)
@@ -87,6 +88,7 @@ def getUltrasonicValue():
         pass
 
 
+# Fucntion to send valve number
 def valveControlSig(valuev):
     try:
         i2cSendCommand(valveModuleAddress, valuev)
@@ -94,6 +96,7 @@ def valveControlSig(valuev):
         pass
 
 
+# Fucntion to send valve number
 def getMoisurePer(address):
     receiveBashCommand = 'i2cget -y 1 ' + str(address)
     bashValue = subprocess.Popen(
@@ -101,9 +104,9 @@ def getMoisurePer(address):
     fValue = bashValue.read().strip().decode()
     decimalValue = int(fValue, 16)
     return decimalValue
+
+
 # Function to show the main console
-
-
 def mainLCDConsole(waterLevel, relayS):
     waterPercentage = "Water Level: " + \
         str(waterLevel) + " %"  # get water level

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/viji/Development/MiniProject-IOT-based-Water-Level-Indicator/src/android-app/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
+            "outputFile": "/home/viji/Development/MyApplication2/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
             "map": [
                 {
                     "source": "/home/viji/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d6b214e619234fb1bba6b9c17cbf3483/res/values-hu/values-hu.xml",

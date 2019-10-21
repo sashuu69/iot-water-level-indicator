@@ -23,6 +23,16 @@ GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW)  # Relay pin initialisation
 tankModuleAdress = 0x05  # Arduino tank module address
 valveModuleAddress = 0x04  # Arduino valve cmodule address
 
+config = {
+    "apiKey": "AIzaSyB7lLBSm2O9p0y4ZuH5umbr0OMikKDJ0bs",
+    "authDomain": "miniproject-iot-water.firebaseapp.com",
+    "databaseURL": "https://miniproject-iot-water.firebaseio.com",
+    "projectId": "miniproject-iot-water",
+    "storageBucket": "miniproject-iot-water.appspot.com",
+    "messagingSenderId": "16478189753",
+    "appId": "1:16478189753:web:2a45757ab000c146e50368"
+}
+
 
 # Function to send values through I2C from Pi to arduino using bash
 def i2cSendCommand(address, value):
@@ -58,7 +68,7 @@ def relayControl(statuss):
         pass
 
 
-# Fucntion for LCD boot screen
+# Function for LCD boot screen
 def ledBootScreen():
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string_pos("Water", 1, 5)
@@ -79,7 +89,7 @@ def ledBootScreen():
     systemLCD.lcd_clear()
 
 
-# Fucntion to get ultrasonic sensor
+# Function to get ultrasonic sensor
 def getUltrasonicValue():
     try:
         ultdis = i2cReceiveCommand(tankModuleAdress, 222)
@@ -88,7 +98,7 @@ def getUltrasonicValue():
         pass
 
 
-# Fucntion to send valve number
+# Function to send valve number
 def valveControlSig(valuev):
     try:
         i2cSendCommand(valveModuleAddress, valuev)
@@ -96,7 +106,7 @@ def valveControlSig(valuev):
         pass
 
 
-# Fucntion to send valve number
+# Function to send valve number
 def getMoisurePer(address):
     receiveBashCommand = 'i2cget -y 1 ' + str(address)
     bashValue = subprocess.Popen(

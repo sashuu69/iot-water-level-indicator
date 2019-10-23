@@ -4,7 +4,7 @@
 
 The IOT based Water Level Indicator is the mini project under MCA course. The user can get water level through mobile app and web interface.
 
-![Project protoype](./Diagrams/prototype.jpg =250x250)
+![Project protoype](./Diagrams/prototype.jpg)
 
 ## Features
 
@@ -42,13 +42,17 @@ Notes:-
 1. The communication between the modules is via I2C communication.
 2. All the data is stored in firebase.
 
+## Project Design
+
+![Project Design](./Diagrams/fritzing-project-design_bb.png)
+
 ## Libraries
 
 ### tank Module
 
 1. wire.h - for I2C communication
 
-### valve Module
+### valve Modulex
 
 1. wire.h - for I2C communication
 

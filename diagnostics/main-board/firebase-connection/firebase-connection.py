@@ -16,7 +16,8 @@ db.child("sensor-values").update(
      "moisure-percentage": "50",
      "garden-valve": "false",
      "tank-valve": "false",
-     "any-valve-open": "false"}
+     "any-valve-open": "false",
+     "farm-valve": "false"}
 )
 
 # To create and update log table
@@ -31,5 +32,5 @@ db.child("users").update(
 )
 
 # TO get values from table
-mosireValue = db.child("sensor-values").child("moisure-percentage").get()
-print(mosireValue.val())
+mosireValue = db.child("sensor-values").child("moisure-percentage").get().val()
+print(mosireValue)

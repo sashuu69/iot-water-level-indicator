@@ -133,29 +133,38 @@ def mainLCDConsole(waterLevel, relayS):
 
 
 # Function to send values to firebase
-def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPer):
+def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPer, farm):
     databaseObject.child("sensor-values").update(
         {"water-tank-percentage": tpCntPer,
          "pump-status": relayTrig,
          "moisure-percentage": moisPer,
          "garden-valve": garden,
          "tank-valve": tank,
+         "farm-valve": farm,
          "any-valve-open": valveWorking}
     )
 
 
 # Main function
 def main():
-    print("Program started")
+    print("###############################################")
+    print("Water Level Indicator main code initialisation.")
+    print("###############################################")
     ledBootScreen()
     while True:
         try:
-            print("------------")
-            relayTrig = 0  # for displaying relay stat in LCD
-            tank = 0  # for displaying tank valve stat in LCD
-            farm = 0  # for displaying farm valve stat in LCD
-            garden = 0  # for displaying garden valve stat in LCD
-            valveWorking = 0  # Check if any valve is working or not
+            print("---------------------------------------")
+            # Initalisation of values from firebase
+            relayTrig = int(databaseObject.child(
+                "sensor-values").child("pump-status").get().val())
+            tank = int(databaseObject.child(
+                "sensor-values").child("tank-valve").get().val())
+            farm = int(databaseObject.child(
+                "sensor-values").child("tank-valve").get().val())
+            garden = int(databaseObject.child(
+                "sensor-values").child("garden-valve").get().val())
+            valveWorking = int(databaseObject.child(
+                "sensor-values").child("any-valve-open").get().val())
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
@@ -174,7 +183,7 @@ def main():
                 tank = 0
             mainLCDConsole(tpCntPer, relayTrig)
             sendValuesToFirebase(valveWorking, garden,
-                                 moisPer, relayTrig, tank, tpCntPer)
+                                 moisPer, relayTrig, tank, tpCntPer, farm)
             print("Water tank touch pad percentage: " + str(tpCntPer))
             print("Water ultrasonic sensor: " + str(ultrasnc))
             print("Pump status: " + str(relayTrig))

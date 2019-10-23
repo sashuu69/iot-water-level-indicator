@@ -69,12 +69,16 @@ Notes:-
 7. pyrebase - for firebase connectivity
 8. socket - for working with web requests
 
+## Firebase Database Design
+
+![Firebase Design](./Diagrams/firebase.png)
+
 ## Files and folders explained
 
 ### Folders
 
 1. abstract: contains the project abstract.
-2. Diagrams: contains important figures drawn using draw.io.
+2. Diagrams: contains important figures drawn using draw.io, fritzing designs and exports and firebase design.
 3. Zeroth-review-presentation: contains presentation done for zeroth review.
 4. first-review: contains user stories submitted in first review.
 5. src - Contains the source code.

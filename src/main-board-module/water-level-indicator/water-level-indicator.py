@@ -7,6 +7,7 @@
  * Last updated : 20 Oct 2019
  * Microcontroller: Raspberry Pi Zero W
  * Purpose: The main controller
+ * Pins used: Relay - 7
 """
 
 import RPi_I2C_driver  # LCD driver

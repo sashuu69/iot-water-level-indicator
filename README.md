@@ -22,6 +22,7 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 
 1. Raspberry Pi Zero W
 2. Relay (220V - 5V)
+3. LEDs (Red & green)
 
 ### Water Tank Module Components
 
@@ -38,6 +39,27 @@ Notes:-
 
 1. The communication between the modules is via I2C communication.
 2. All the data is stored in firebase.
+
+## Libraries
+
+### tank Module
+
+1. wire.h - for I2C communication
+
+### valve Module
+
+1. wire.h - for I2C communication
+
+### Main Module
+
+1. RPi_I2C_driver library (included with code) - for LCD
+2. RPi.GPIO library - for GPIO
+3. os - for running bash commands
+4. subprocess - for getting values from bash commands
+5. time - for sleep related functions
+6. datetime - for detecting current date and time
+7. pyrebase - for firebase connectivity
+8. socket - for working with web requests
 
 ## Files and folders explained
 
@@ -81,7 +103,7 @@ To make the python code run at boot as background. Follow the following steps:-
 
    `sudo nano /etc/rc.local`
 
-2. Add the python program to run at boot as background process along with astrik(&) symbol.
+2. Add internetStatus.py python program to run at boot as background process along with astrik(&) symbol.
 
    `sudo python3 /home/pi/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator/diagnostics/main-board/internetStatus &`
 

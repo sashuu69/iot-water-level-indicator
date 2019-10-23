@@ -156,15 +156,15 @@ def main():
         try:
             print("---------------------------------------")
             # Initalisation of values from firebase
-            relayTrig = int(databaseObject.child(
+            relayTrig = bool(databaseObject.child(
                 "sensor-values").child("pump-status").get().val())
-            tank = int(databaseObject.child(
+            tank = bool(databaseObject.child(
                 "sensor-values").child("tank-valve").get().val())
-            farm = int(databaseObject.child(
-                "sensor-values").child("tank-valve").get().val())
-            garden = int(databaseObject.child(
+            farm = bool(databaseObject.child(
+                "sensor-values").child("farm-valve").get().val())
+            garden = bool(databaseObject.child(
                 "sensor-values").child("garden-valve").get().val())
-            valveWorking = int(databaseObject.child(
+            valveWorking = bool(databaseObject.child(
                 "sensor-values").child("any-valve-open").get().val())
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
@@ -172,16 +172,16 @@ def main():
             moisPer = getMoisurePer(valveModuleAddress)
             if tpCntPer == 0:
                 valveControlSig(1)
-                valveWorking = 1
+                valveWorking = True
                 relayControl(1)
-                relayTrig = 1
-                tank = 1
+                relayTrig = True
+                tank = True
             if tpCntPer == 100 and ultrasnc < 10:
                 valveControlSig(0)
-                valveWorking = 0
+                valveWorking = False
                 relayControl(0)
-                relayTrig = 0
-                tank = 0
+                relayTrig = False
+                tank = False
             mainLCDConsole(tpCntPer, relayTrig)
             sendValuesToFirebase(valveWorking, garden,
                                  moisPer, relayTrig, tank, tpCntPer, farm)

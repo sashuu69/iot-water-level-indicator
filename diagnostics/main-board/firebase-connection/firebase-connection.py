@@ -5,6 +5,7 @@ config = {  # configuration for connection
     "databaseURL": "https://miniproject-iot-water.firebaseio.com",
     "storageBucket": "miniproject-iot-water.appspot.com",
 }
+
 firebase = pyrebase.initialize_app(config)  # firebase connection object
 db = firebase.database()  # firebase database initialisation
 

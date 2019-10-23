@@ -15,6 +15,7 @@ import os  # for running bash commands
 import subprocess  # For returning bash commands
 from time import sleep  # for getting realtime
 from datetime import datetime  # for date and time
+import pyrebase  # python library for firebase
 
 systemLCD = RPi_I2C_driver.lcd()  # initialse LCD driver
 GPIO.setwarnings(False)  # Ignore warning for now
@@ -22,16 +23,16 @@ GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW)  # Relay pin initialisation
 tankModuleAdress = 0x05  # Arduino tank module address
 valveModuleAddress = 0x04  # Arduino valve cmodule address
-
-config = {
+# configuration for connection
+configurationForFirebase = {
     "apiKey": "AIzaSyB7lLBSm2O9p0y4ZuH5umbr0OMikKDJ0bs",
     "authDomain": "miniproject-iot-water.firebaseapp.com",
     "databaseURL": "https://miniproject-iot-water.firebaseio.com",
-    "projectId": "miniproject-iot-water",
     "storageBucket": "miniproject-iot-water.appspot.com",
-    "messagingSenderId": "16478189753",
-    "appId": "1:16478189753:web:2a45757ab000c146e50368"
 }
+firebaseObject = pyrebase.initialize_app(
+    configurationForFirebase)  # firebase connection object
+databaseObject = firebaseObject.database()  # firebase database initialisation
 
 
 # Function to send values through I2C from Pi to arduino using bash
@@ -131,6 +132,18 @@ def mainLCDConsole(waterLevel, relayS):
     systemLCD.lcd_display_string(relayStat, 2)
 
 
+# Function to send values to firebase
+def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPer):
+    databaseObject.child("sensor-values").update(
+        {"water-tank-percentage": tpCntPer,
+         "pump-status": relayTrig,
+         "moisure-percentage": moisPer,
+         "garden-valve": garden,
+         "tank-valve": tank,
+         "any-valve-open": valveWorking}
+    )
+
+
 # Main function
 def main():
     print("Program started")
@@ -160,12 +173,14 @@ def main():
                 relayTrig = 0
                 tank = 0
             mainLCDConsole(tpCntPer, relayTrig)
-            print("Water tank touch pad: " + str(tpCntPer))
+            sendValuesToFirebase(valveWorking, garden,
+                                 moisPer, relayTrig, tank, tpCntPer)
+            print("Water tank touch pad percentage: " + str(tpCntPer))
             print("Water ultrasonic sensor: " + str(ultrasnc))
             print("Pump status: " + str(relayTrig))
             print("Moisure percentage: " + str(moisPer))
-            print("Garden valve: " + str(farm))
-            print("Farm valve: " + str(garden))
+            print("Garden valve: " + str(garden))
+            print("Farm valve: " + str(farm))
             print("tank valve: " + str(tank))
             print("Any valve open? " + str(valveWorking))
             sleep(2)

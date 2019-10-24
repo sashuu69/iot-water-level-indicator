@@ -171,8 +171,10 @@ def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPe
 # Main function
 def main():
     print("###############################################")
-    print("Water Level Indicator main code initialisation.")
+    print("#-----Water Level Indicator main code---------#")
     print("###############################################")
+    print("Project by Sashwat K and Vijitha V Nair")
+    print("Initialising....")
     ledBootScreen()  # bootscreen for LCD
     while True:
         try:

@@ -72,24 +72,27 @@ def relayControl(statuss):
 
 # Function for LCD boot screen
 def ledBootScreen():
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Water", 1, 5)
-    sleep(0.8)
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Level", 2, 5)
-    sleep(0.8)
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Indicator", 1, 4)
-    sleep(0.8)
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("By,", 1, 5)
-    sleep(0.5)
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Sashwat K &", 1, 0)
-    systemLCD.lcd_display_string_pos("Vijitha V Nair", 2, 0)
-    sleep(1)
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Loading...", 1, 3)
+    try:
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string_pos("Water", 1, 5)
+        sleep(0.8)
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string_pos("Level", 2, 5)
+        sleep(0.8)
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string_pos("Indicator", 1, 4)
+        sleep(0.8)
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string_pos("By,", 1, 5)
+        sleep(0.5)
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string_pos("Sashwat K &", 1, 0)
+        systemLCD.lcd_display_string_pos("Vijitha V Nair", 2, 0)
+        sleep(1)
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string_pos("Loading...", 1, 3)
+    except:
+        pass
 
 
 # Function to get ultrasonic sensor
@@ -111,47 +114,58 @@ def valveControlSig(valuev):
 
 # Function to send valve number
 def getMoisurePer(address):
-    receiveBashCommand = 'i2cget -y 1 ' + str(address)
-    bashValue = subprocess.Popen(
-        receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
-    fValue = bashValue.read().strip().decode()
-    decimalValue = int(fValue, 16)
-    return decimalValue
+    try:
+        receiveBashCommand = 'i2cget -y 1 ' + str(address)
+        bashValue = subprocess.Popen(
+            receiveBashCommand, shell=True, stdout=subprocess.PIPE).stdout
+        fValue = bashValue.read().strip().decode()
+        decimalValue = int(fValue, 16)
+        return decimalValue
+    except:
+        pass
 
 
 # Function to show the main console
 def mainLCDConsole(waterLevel, relayS):
-    waterPercentage = "Water Level: " + \
-        str(waterLevel) + " %"  # get water level
-    # Relay status
-    if relayS == 0:
-        relayStat = "Pump: OFF"
-    else:
-        relayStat = "Pump: ON"
-
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string(waterPercentage, 1)
-    systemLCD.lcd_display_string(relayStat, 2)
+    try:
+        waterPercentage = "Water Level: " + \
+            str(waterLevel) + " %"  # get water level
+        # Relay status
+        if relayS == 0:
+            relayStat = "Pump: OFF"
+        else:
+            relayStat = "Pump: ON"
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string(waterPercentage, 1)
+        systemLCD.lcd_display_string(relayStat, 2)
+    except:
+        pass
 
 
 # Function to handle exit screen
 def exitConsole():
-    systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Program", 1, 4)
-    systemLCD.lcd_display_string_pos("Closed", 2, 4)
+    try:
+        systemLCD.lcd_clear()
+        systemLCD.lcd_display_string_pos("Program", 1, 4)
+        systemLCD.lcd_display_string_pos("Closed", 2, 4)
+    except:
+        pass
 
 
 # Function to send values to firebase
 def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPer, farm):
-    databaseObject.child("sensor-values").update(
-        {"water-tank-percentage": tpCntPer,
-         "pump-status": relayTrig,
-         "moisure-percentage": moisPer,
-         "garden-valve": garden,
-         "tank-valve": tank,
-         "farm-valve": farm,
-         "any-valve-open": valveWorking}
-    )
+    try:
+        databaseObject.child("sensor-values").update(
+            {"water-tank-percentage": tpCntPer,
+             "pump-status": relayTrig,
+             "moisure-percentage": moisPer,
+             "garden-valve": garden,
+             "tank-valve": tank,
+             "farm-valve": farm,
+             "any-valve-open": valveWorking}
+        )
+    except:
+        pass
 
 
 # Main function

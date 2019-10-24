@@ -208,6 +208,8 @@ def main():
             mainLCDConsole(tpCntPer, relayTrig)
             sendValuesToFirebase(valveWorking, garden,
                                  moisPer, relayTrig, tank, tpCntPer, farm)
+
+            print("Time: " + str(current_time))
             print("Water tank touch pad percentage: " + str(tpCntPer))
             print("Water ultrasonic sensor: " + str(ultrasnc))
             print("Pump status: " + str(relayTrig))
@@ -216,7 +218,7 @@ def main():
             print("Farm valve: " + str(farm))
             print("tank valve: " + str(tank))
             print("Any valve open? " + str(valveWorking))
-            sleep(1)
+            sleep(0.5)
         except (KeyboardInterrupt, SystemExit):
             exit()
             pass

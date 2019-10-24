@@ -137,8 +137,8 @@ def mainLCDConsole(waterLevel, relayS):
 # Function to handle exit screen
 def exitConsole():
     systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Program", 1, 3)
-    systemLCD.lcd_display_string_pos("Closed", 2, 3)
+    systemLCD.lcd_display_string_pos("Program", 1, 4)
+    systemLCD.lcd_display_string_pos("Closed", 2, 5)
 
 
 # Function to send values to firebase

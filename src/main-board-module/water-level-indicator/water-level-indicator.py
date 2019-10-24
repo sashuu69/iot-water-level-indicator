@@ -251,8 +251,8 @@ def main():
                     postponeEnd = datetime.strptime(
                         timeForIrrigationOFF, "%H:%M") + timedelta(minutes=10)
                     databaseObject.child("sensor-values").update(
-                        {"farm-irrigation-time-on": postponeStart,
-                         "farm-irrigation-time-off": postponeEnd}
+                        {"farm-irrigation-time-on": postponeStart.strftime("%H:%M"),
+                         "farm-irrigation-time-off": postponeEnd.strftime("%H:%M")}
                     )
             elif current_time == timeForIrrigationOFF:
                 valveControlSig(0)  # Close valve farm

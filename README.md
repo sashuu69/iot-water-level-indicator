@@ -77,10 +77,10 @@ Notes:-
 
 ### Folders
 
-1. abstract: contains the project abstract.
-2. Diagrams: contains important figures drawn using draw.io, fritzing designs and exports and firebase design.
-3. Zeroth-review-presentation: contains presentation done for zeroth review.
-4. first-review: contains user stories submitted in first review.
+1. documentation/abstract: contains the project abstract.
+2. documentation/Diagrams: contains important figures drawn using draw.io, fritzing designs and exports and firebase design.
+3. project-reviews/Zeroth-review-presentation: contains presentation done for zeroth review.
+4. project-reviews/first-review: contains user stories submitted in first review.
 5. src - Contains the source code.
    1. android-app: contains the code for android app.
    2. main-board-module: contains code for Raspberry Pi Zero W.

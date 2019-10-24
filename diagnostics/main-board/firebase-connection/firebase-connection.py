@@ -12,17 +12,17 @@ firebase = pyrebase.initialize_app(config)  # firebase connection object
 db = firebase.database()  # firebase database initialisation
 
 # To create and update sensor-values table
-# db.child("sensor-values").update(
-#     {"water-tank-percentage": "70",
-#      "pump-status": "false",
-#      "moisure-percentage": "50",
-#      "garden-valve": "false",
-#      "tank-valve": "false",
-#      "any-valve-open": "false",
-#      "farm-valve": "false",
-#      "farm-irrigation-time-on": "11:00:00",
-#      "farm-irrigation-time-off": "11:15:00"}
-# )
+db.child("sensor-values").update(
+    {"water-tank-percentage": "70",
+     "pump-status": "false",
+     "moisure-percentage": "50",
+     "garden-valve": "false",
+     "tank-valve": "false",
+     "any-valve-open": "false",
+     "farm-valve": "false",
+     "farm-irrigation-time-on": "11:00:00",
+     "farm-irrigation-time-off": "11:15:00"}
+)
 
 # To create and update log table
 db.child("log").child("2019/10/13").child("10:15").update(
@@ -31,24 +31,23 @@ db.child("log").child("2019/10/13").child("10:15").update(
 db.child("log").child("2019/10/13").child("10:30").update(
     {"action": "Pump off"}
 )
+
 # To create and update users table
-# db.child("users").update(
-#     {"username": "vijitha",
-#      "password": "password"}
-# )
+db.child("users").update(
+    {"username": "vijitha",
+     "password": "password"}
+)
 
 # TO get values from table
-# timeForIrrigation = db.child(
-#     "sensor-values").child("farm-irrigation-time").get().val()
+timeForIrrigation = db.child(
+    "sensor-values").child("farm-irrigation-time").get().val()
 
-# while True:
-#     # timeForIrrigation = db.child(
-#     #     "sensor-values").child("farm-irrigation-time-on").get().val()
-#     now = datetime.now()
-#     current_time = str(now.strftime("%H:%M:%S"))
-#     current_time2 = current_time
-#     current_time2.replace("geeks", "Geeks")
-#     print(current_time)
-#     # if current_time == timeForIrrigation:
-#     #     print("Hello")
-#     sleep(1)
+while True:
+    timeForIrrigation = db.child(
+        "sensor-values").child("farm-irrigation-time-on").get().val()
+    now = datetime.now()
+    current_time = str(now.strftime("%H:%M:%S"))
+    print(current_time)
+    # if current_time == timeForIrrigation:
+    #     print("Hello")
+    sleep(1)

@@ -40,7 +40,7 @@ timeForIrrigation = db.child(
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
-if current_time == timeForIrrigation:
-    print("Hello")
-
-print(current_time)
+while True:
+    print(current_time)
+    if current_time == timeForIrrigation:
+        print("Hello")

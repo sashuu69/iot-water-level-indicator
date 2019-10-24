@@ -25,11 +25,12 @@ db = firebase.database()  # firebase database initialisation
 # )
 
 # To create and update log table
-db.child("log").child("2019/10/13").update(
-    {"Timestamp": "11:55",
-     "action": "Pump on"}
+db.child("log").child("2019/10/13").child("10:15").update(
+    {"action": "Pump on"}
 )
-
+db.child("log").child("2019/10/13").child("10:30").update(
+    {"action": "Pump off"}
+)
 # To create and update users table
 # db.child("users").update(
 #     {"username": "vijitha",

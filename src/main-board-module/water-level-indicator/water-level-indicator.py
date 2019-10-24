@@ -15,7 +15,7 @@ import RPi.GPIO as GPIO  # Import Raspberry Pi GPIO library
 import os  # for running bash commands
 import subprocess  # For returning bash commands
 from time import sleep  # for getting realtime
-from datetime import datetime  # for date and time
+from datetime import datetime, timedelta  # for date and time
 import pyrebase  # python library for firebase
 
 systemLCD = RPi_I2C_driver.lcd()  # initialse LCD driver
@@ -239,17 +239,31 @@ def main():
 
             # For farm
             if current_time == timeForIrrigationON:
-                valveControlSig(3)  # Open valve farm
-                relayControl(1)
-                valveWorking = True
-                relayTrig = True
-                farm = True
+                if valveWorking == False:
+                    valveControlSig(3)  # Open valve farm
+                    relayControl(1)
+                    valveWorking = True
+                    relayTrig = True
+                    farm = True
+                else:
+                    postponeStart = datetime.strptime(
+                        timeForIrrigationON, "%H:%M") + timedelta(minutes=10)
+                    postponeEnd = datetime.strptime(
+                        timeForIrrigationOFF, "%H:%M") + timedelta(minutes=10)
+                    databaseObject.child("sensor-values").update(
+                        {"farm-irrigation-time-on": postponeStart,
+                         "farm-irrigation-time-off": postponeEnd}
+                    )
             elif current_time == timeForIrrigationOFF:
                 valveControlSig(0)  # Close valve farm
                 relayControl(0)
                 valveWorking = False
                 relayTrig = False
                 farm = False
+                databaseObject.child("sensor-values").update(
+                    {"farm-irrigation-time-on": "11:00",
+                     "farm-irrigation-time-off": "11:15"}
+                )
 
             mainLCDConsole(tpCntPer, relayTrig)
             sendValuesToFirebase(valveWorking, garden,

@@ -1,4 +1,5 @@
 import pyrebase  # python library for firebase
+import time
 config = {  # configuration for connection
     "apiKey": "AIzaSyB7lLBSm2O9p0y4ZuH5umbr0OMikKDJ0bs",
     "authDomain": "miniproject-iot-water.firebaseapp.com",
@@ -33,5 +34,9 @@ db.child("users").update(
 )
 
 # TO get values from table
-mosireValue = db.child("sensor-values").child("moisure-percentage").get().val()
-print(mosireValue)
+timeForIrrigation = db.child(
+    "sensor-values").child("farm-irrigation-time").get().val()
+
+seconds = time.time()
+
+print(seconds)

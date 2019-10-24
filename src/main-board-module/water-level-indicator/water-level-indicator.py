@@ -138,7 +138,7 @@ def mainLCDConsole(waterLevel, relayS):
 def exitConsole():
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string_pos("Program", 1, 4)
-    systemLCD.lcd_display_string_pos("Closed", 2, 5)
+    systemLCD.lcd_display_string_pos("Closed", 2, 4)
 
 
 # Function to send values to firebase

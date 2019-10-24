@@ -245,10 +245,10 @@ def main():
             sleep(1)
         except (KeyboardInterrupt, SystemExit):
             print("\nClosing program..")
+            exitConsole()
             sendValuesToFirebase(False, False,
                                  0, False, False, 0, False)
             exit()
-            pass
 
 
 # 1st execution

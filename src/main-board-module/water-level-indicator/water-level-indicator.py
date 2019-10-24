@@ -192,6 +192,18 @@ def main():
                 tank = False
 
             # For sprinkler system
+            if moisPer > 30:
+                valveControlSig(2)
+                valveWorking = True
+                relayControl(1)
+                relayTrig = True
+                garden = True
+            else:
+                valveControlSig(0)
+                valveWorking = False
+                relayControl(0)
+                relayTrig = False
+                garden = False
 
             # For farm
             if current_time == timeForIrrigationON:

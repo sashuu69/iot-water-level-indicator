@@ -217,13 +217,13 @@ def main():
 
             # For sprinkler system
             if moisPer < 30:
-                valveControlSig(2)
+                valveControlSig(2)  # Open valve garden
                 valveWorking = True
                 relayControl(1)
                 relayTrig = True
                 garden = True
             else:
-                valveControlSig(0)
+                valveControlSig(0)  # Close valve garden
                 valveWorking = False
                 relayControl(0)
                 relayTrig = False
@@ -231,14 +231,14 @@ def main():
 
             # For farm
             if current_time == timeForIrrigationON:
+                valveControlSig(3)  # Open valve farm
                 relayControl(1)
-                valveControlSig(3)
                 valveWorking = True
                 relayTrig = True
                 farm = True
             elif current_time == timeForIrrigationOFF:
+                valveControlSig(0)  # Close valve farm
                 relayControl(0)
-                valveControlSig(0)
                 valveWorking = False
                 relayTrig = False
                 farm = False
@@ -262,6 +262,8 @@ def main():
             sleep(1)
         except (KeyboardInterrupt, SystemExit):
             print("\nClosing program..")
+            valveControlSig(0)  # Set valve as OFF
+            relayControl(0)  # Turn off pump
             exitConsole()
             sendValuesToFirebase(False, False,
                                  0, False, False, 0, False)

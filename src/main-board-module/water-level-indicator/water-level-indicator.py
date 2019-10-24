@@ -206,11 +206,12 @@ def main():
 
             # For water tank
             if tpCntPer == 0:
-                valveControlSig(1)  # Open valve tank
-                valveWorking = True  # Valve engaged flag
-                relayControl(1)  # Turn ON pump
-                relayTrig = True  # Pump status flag
-                tank = True  # tank valve flag
+                if valveWorking == False:
+                    valveControlSig(1)  # Open valve tank
+                    valveWorking = True  # Valve engaged flag
+                    relayControl(1)  # Turn ON pump
+                    relayTrig = True  # Pump status flag
+                    tank = True  # tank valve flag
             elif tpCntPer == 100 and ultrasnc < 10:
                 valveControlSig(0)  # Close valve tank
                 valveWorking = False  # Valve disengaged flag

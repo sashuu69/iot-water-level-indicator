@@ -89,7 +89,7 @@ def ledBootScreen():
     systemLCD.lcd_display_string_pos("Vijitha V Nair", 2, 0)
     sleep(1)
     systemLCD.lcd_clear()
-    systemLCD.lcd_display_string_pos("Loading...", 1, 5)
+    systemLCD.lcd_display_string_pos("Loading...", 1, 3)
 
 
 # Function to get ultrasonic sensor
@@ -132,6 +132,13 @@ def mainLCDConsole(waterLevel, relayS):
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string(waterPercentage, 1)
     systemLCD.lcd_display_string(relayStat, 2)
+
+
+# Function to handle exit screen
+def exitConsole():
+    systemLCD.lcd_clear()
+    systemLCD.lcd_display_string_pos("Program", 1, 3)
+    systemLCD.lcd_display_string_pos("Closed", 2, 3)
 
 
 # Function to send values to firebase

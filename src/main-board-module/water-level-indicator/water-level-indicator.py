@@ -87,8 +87,9 @@ def ledBootScreen():
     systemLCD.lcd_clear()
     systemLCD.lcd_display_string_pos("Sashwat K &", 1, 0)
     systemLCD.lcd_display_string_pos("Vijitha V Nair", 2, 0)
-    sleep(0.5)
+    sleep(1)
     systemLCD.lcd_clear()
+    systemLCD.lcd_display_string_pos("Loading...", 1, 5)
 
 
 # Function to get ultrasonic sensor
@@ -239,7 +240,6 @@ def main():
             print("\nClosing program..")
             sendValuesToFirebase(False, False,
                                  0, False, False, 0, False)
-
             exit()
             pass
 

@@ -95,7 +95,7 @@ def ledBootScreen():
         pass
 
 
-# Function to get ultrasonic sensor
+# Function to get ultrasonic sensor value
 def getUltrasonicValue():
     try:
         ultdis = i2cReceiveCommand(tankModuleAdress, 222)
@@ -112,7 +112,7 @@ def valveControlSig(valuev):
         pass
 
 
-# Function to send valve number
+# Function to get moisure sensor percentage
 def getMoisurePer(address):
     try:
         receiveBashCommand = 'i2cget -y 1 ' + str(address)
@@ -125,7 +125,7 @@ def getMoisurePer(address):
         pass
 
 
-# Function to show the main console
+# Function to show the main console in LCD
 def mainLCDConsole(waterLevel, relayS):
     try:
         waterPercentage = "Water Level: " + \
@@ -142,7 +142,7 @@ def mainLCDConsole(waterLevel, relayS):
         pass
 
 
-# Function to handle exit screen
+# Function to handle LCD exit screen
 def exitConsole():
     try:
         systemLCD.lcd_clear()
@@ -173,7 +173,7 @@ def main():
     print("###############################################")
     print("Water Level Indicator main code initialisation.")
     print("###############################################")
-    ledBootScreen()
+    ledBootScreen()  # bootscreen for LCD
     while True:
         try:
             # Initalisation of values from firebase
@@ -191,26 +191,29 @@ def main():
                 "sensor-values").child("farm-irrigation-time-on").get().val()
             timeForIrrigationOFF = databaseObject.child(
                 "sensor-values").child("farm-irrigation-time-off").get().val()
-            now = datetime.now()
-            current_time = str(now.strftime("%H:%M"))
+            now = datetime.now()  # get current time
+            current_time = str(now.strftime("%H:%M"))  # convert to hour:minute
+            # get touch pad count from tank module
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
-            tpCntPer = int(tpCnt * 100 / 4)
+            tpCntPer = int(tpCnt * 100 / 4)  # count to percentage
+            # get distance from tank module
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
+            # get moisure percentage from valve module
             moisPer = getMoisurePer(valveModuleAddress)
 
             # For water tank
             if tpCntPer == 0:
-                valveControlSig(1)
-                valveWorking = True
-                relayControl(1)
-                relayTrig = True
-                tank = True
+                valveControlSig(1)  # Open valve tank
+                valveWorking = True  # Valve engaged flag
+                relayControl(1)  # Turn ON pump
+                relayTrig = True  # Pump status flag
+                tank = True  # tank valve flag
             if tpCntPer == 100 and ultrasnc < 10:
-                valveControlSig(0)
-                valveWorking = False
-                relayControl(0)
-                relayTrig = False
-                tank = False
+                valveControlSig(0)  # Close valve tank
+                valveWorking = False  # Valve disengaged flag
+                relayControl(0)  # Turn OFF pump
+                relayTrig = False  # Pump status flag
+                tank = False  # tank valve flag
 
             # For sprinkler system
             if moisPer > 30:

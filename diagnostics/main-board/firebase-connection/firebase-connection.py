@@ -42,12 +42,4 @@ db.child("users").update(
 timeForIrrigation = db.child(
     "sensor-values").child("farm-irrigation-time").get().val()
 
-while True:
-    timeForIrrigation = db.child(
-        "sensor-values").child("farm-irrigation-time-on").get().val()
-    now = datetime.now()
-    current_time = str(now.strftime("%H:%M:%S"))
-    print(current_time)
-    # if current_time == timeForIrrigation:
-    #     print("Hello")
-    sleep(1)
+print(timeForIrrigation)  # print the values

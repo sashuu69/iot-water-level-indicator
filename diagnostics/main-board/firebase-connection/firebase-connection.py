@@ -38,8 +38,12 @@ db.child("users").update(
      "password": "password"}
 )
 
-# TO get values from table
-timeForIrrigation = db.child(
-    "sensor-values").child("farm-irrigation-time").get().val()
-
-print(timeForIrrigation)  # print the values
+while True:
+    # TO get values from table
+    timeForIrrigation = db.child(
+        "sensor-values").child("farm-irrigation-time-on").get().val()
+    now = datetime.now()
+    current_time = now.strftime("%H:%M")
+    timeFormat = timeForIrrigation.strftime("%H:%M")
+    print(timeFormat)
+    sleep(1)

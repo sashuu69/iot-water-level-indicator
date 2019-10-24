@@ -17,7 +17,8 @@ db.child("sensor-values").update(
      "garden-valve": "false",
      "tank-valve": "false",
      "any-valve-open": "false",
-     "farm-valve": "false"}
+     "farm-valve": "false",
+     "farm-irrigation-time": "11:00:00"}
 )
 
 # To create and update log table

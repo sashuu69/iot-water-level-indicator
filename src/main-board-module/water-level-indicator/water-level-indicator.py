@@ -176,7 +176,6 @@ def main():
     ledBootScreen()
     while True:
         try:
-            print("---------------------------------------")
             # Initalisation of values from firebase
             relayTrig = bool(databaseObject.child(
                 "sensor-values").child("pump-status").get().val())
@@ -256,6 +255,7 @@ def main():
             print("Any valve open? " + str(valveWorking))
             print("Farm ON Time: " + str(timeForIrrigationON))
             print("Farm OFF Time: " + str(timeForIrrigationOFF))
+            print("---------------------------------------")
             sleep(1)
         except (KeyboardInterrupt, SystemExit):
             print("\nClosing program..")

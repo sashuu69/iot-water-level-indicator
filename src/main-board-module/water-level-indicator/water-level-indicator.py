@@ -175,6 +175,7 @@ def main():
     print("###############################################")
     print("Project by Sashwat K and Vijitha V Nair")
     print("Initialising....")
+    print("-----------------------------------------------")
     ledBootScreen()  # bootscreen for LCD
     while True:
         try:
@@ -219,12 +220,14 @@ def main():
 
             # For sprinkler system
             if moisPer < 30:
-                valveControlSig(2)  # Open valve garden
-                valveWorking = True
-                relayControl(1)
-                relayTrig = True
-                garden = True
-            else:
+                # If all valves are closed. Then execute
+                if valveWorking == False:
+                    valveControlSig(2)  # Open valve garden
+                    valveWorking = True
+                    relayControl(1)
+                    relayTrig = True
+                    garden = True
+            elif moisPer > 85:
                 valveControlSig(0)  # Close valve garden
                 valveWorking = False
                 relayControl(0)

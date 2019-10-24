@@ -236,9 +236,10 @@ def main():
             print("Farm OFF Time: " + str(timeForIrrigationOFF))
             sleep(1)
         except (KeyboardInterrupt, SystemExit):
-            print("Closing program..")
-            # sendValuesToFirebase(valveWorking, garden,
-            #                      moisPer, relayTrig, tank, tpCntPer, farm)
+            print("\nClosing program..")
+            sendValuesToFirebase(False, False,
+                                 0, False, False, 0, False)
+
             exit()
             pass
 

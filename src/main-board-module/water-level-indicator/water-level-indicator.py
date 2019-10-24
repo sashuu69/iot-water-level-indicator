@@ -193,8 +193,9 @@ def main():
             print("Farm valve: " + str(farm))
             print("tank valve: " + str(tank))
             print("Any valve open? " + str(valveWorking))
-            sleep(2)
+            sleep(1)
         except (KeyboardInterrupt, SystemExit):
+            sys.exit()
             pass
 
 

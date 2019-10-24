@@ -166,10 +166,18 @@ def main():
                 "sensor-values").child("garden-valve").get().val())
             valveWorking = bool(databaseObject.child(
                 "sensor-values").child("any-valve-open").get().val())
+            timeForIrrigationON = databaseObject.child(
+                "sensor-values").child("farm-irrigation-time-on").get().val()
+            timeForIrrigationOFF = databaseObject.child(
+                "sensor-values").child("farm-irrigation-time-off").get().val()
+            now = datetime.now()
+            current_time = str(now.strftime("%H:%M:%S"))
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
             moisPer = getMoisurePer(valveModuleAddress)
+
+            # For water tank
             if tpCntPer == 0:
                 valveControlSig(1)
                 valveWorking = True
@@ -182,6 +190,21 @@ def main():
                 relayControl(0)
                 relayTrig = False
                 tank = False
+
+            # For farm
+            if current_time == timeForIrrigationON:
+                relayControl(1)
+                valveControlSig(3)
+                valveWorking = True
+                relayTrig = True
+                farm = True
+            elif current_time == timeForIrrigationOFF:
+                relayControl(0)
+                valveControlSig(0)
+                valveWorking = False
+                relayTrig = False
+                farm = False
+
             mainLCDConsole(tpCntPer, relayTrig)
             sendValuesToFirebase(valveWorking, garden,
                                  moisPer, relayTrig, tank, tpCntPer, farm)

@@ -12,16 +12,17 @@ firebase = pyrebase.initialize_app(config)  # firebase connection object
 db = firebase.database()  # firebase database initialisation
 
 # To create and update sensor-values table
-# db.child("sensor-values").update(
-#     {"water-tank-percentage": "70",
-#      "pump-status": "false",
-#      "moisure-percentage": "50",
-#      "garden-valve": "false",
-#      "tank-valve": "false",
-#      "any-valve-open": "false",
-#      "farm-valve": "false",
-#      "farm-irrigation-time": "11:00:00"}
-# )
+db.child("sensor-values").update(
+    {"water-tank-percentage": "70",
+     "pump-status": "false",
+     "moisure-percentage": "50",
+     "garden-valve": "false",
+     "tank-valve": "false",
+     "any-valve-open": "false",
+     "farm-valve": "false",
+     "farm-irrigation-time-on": "11:00:00",
+     "farm-irrigation-time-off": "11:15:00"}
+)
 
 # To create and update log table
 # db.child("log").child("2019/10/13").child("14:51:50").update(

@@ -20,8 +20,8 @@ db = firebase.database()  # firebase database initialisation
 #      "tank-valve": "false",
 #      "any-valve-open": "false",
 #      "farm-valve": "false",
-#      "farm-irrigation-time-on": "11:00:00",
-#      "farm-irrigation-time-off": "11:15:00"}
+#      "farm-irrigation-time-on": "11:00",
+#      "farm-irrigation-time-off": "11:15"}
 # )
 
 # To create and update log table
@@ -45,6 +45,5 @@ while True:
     now = datetime.now()
     current_time = now.strftime("%H:%M")
     timeFormat = datetime.strptime(timeForIrrigation, "%H:%M")
-    print(type(timeFormat))
-    print(timeFormat)
+    print(timeFormat.strftime("%H:%M"))
     sleep(1)

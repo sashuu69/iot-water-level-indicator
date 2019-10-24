@@ -208,7 +208,7 @@ def main():
                 relayControl(1)  # Turn ON pump
                 relayTrig = True  # Pump status flag
                 tank = True  # tank valve flag
-            if tpCntPer == 100 and ultrasnc < 10:
+            elif tpCntPer == 100 and ultrasnc < 10:
                 valveControlSig(0)  # Close valve tank
                 valveWorking = False  # Valve disengaged flag
                 relayControl(0)  # Turn OFF pump
@@ -216,7 +216,7 @@ def main():
                 tank = False  # tank valve flag
 
             # For sprinkler system
-            if moisPer > 30:
+            if moisPer < 30:
                 valveControlSig(2)
                 valveWorking = True
                 relayControl(1)

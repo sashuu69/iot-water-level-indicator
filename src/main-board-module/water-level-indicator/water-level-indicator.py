@@ -218,7 +218,9 @@ def main():
             print("Farm valve: " + str(farm))
             print("tank valve: " + str(tank))
             print("Any valve open? " + str(valveWorking))
-            sleep(0.5)
+            print("Farm ON Time: " + str(timeForIrrigationON))
+            print("Farm OFF Time: " + str(timeForIrrigationOFF))
+            sleep(1)
         except (KeyboardInterrupt, SystemExit):
             exit()
             pass

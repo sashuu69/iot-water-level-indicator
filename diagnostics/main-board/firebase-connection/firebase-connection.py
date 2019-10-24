@@ -1,5 +1,5 @@
 import pyrebase  # python library for firebase
-import time
+from datetime import datetime
 config = {  # configuration for connection
     "apiKey": "AIzaSyB7lLBSm2O9p0y4ZuH5umbr0OMikKDJ0bs",
     "authDomain": "miniproject-iot-water.firebaseapp.com",
@@ -37,6 +37,6 @@ db.child("users").update(
 timeForIrrigation = db.child(
     "sensor-values").child("farm-irrigation-time").get().val()
 
-seconds = time.time()
-
-print(seconds)
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+print(current_time)

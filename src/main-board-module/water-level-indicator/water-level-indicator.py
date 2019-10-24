@@ -191,6 +191,8 @@ def main():
                 relayTrig = False
                 tank = False
 
+            # For sprinkler system
+
             # For farm
             if current_time == timeForIrrigationON:
                 relayControl(1)

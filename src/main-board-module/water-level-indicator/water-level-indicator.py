@@ -177,8 +177,10 @@ def main():
     print("Initialising....")
     print("-----------------------------------------------")
     ledBootScreen()  # bootscreen for LCD
+    i = 0
     while True:
         try:
+            i = i + 1  # iteration purpose
             # Initalisation of values from firebase
             relayTrig = bool(databaseObject.child(
                 "sensor-values").child("pump-status").get().val())
@@ -253,6 +255,7 @@ def main():
             sendValuesToFirebase(valveWorking, garden,
                                  moisPer, relayTrig, tank, tpCntPer, farm)
 
+            print("Iteration number: " + str(i))
             print("Time: " + str(current_time))
             print("Water tank touch pad percentage: " + str(tpCntPer))
             print("Water ultrasonic sensor: " + str(ultrasnc))

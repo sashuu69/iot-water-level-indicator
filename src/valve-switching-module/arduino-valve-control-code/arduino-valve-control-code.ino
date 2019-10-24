@@ -103,7 +103,7 @@ void MosiureLevel::InitialiseMoisureSensor() {
 /*******************************************/
 int MosiureLevel::MoisturePercentage() {
   moisurePercentage = analogRead(moisureSensorPin);
-  moisurePercentage = map(moisurePercentage,550,0,0,100);
+  moisurePercentage = map(moisurePercentage,1023,0,0,100);
   return moisurePercentage;
 }
 

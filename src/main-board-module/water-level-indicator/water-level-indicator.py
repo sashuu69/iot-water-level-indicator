@@ -195,7 +195,6 @@ def main():
             print("Any valve open? " + str(valveWorking))
             sleep(1)
         except (KeyboardInterrupt, SystemExit):
-            sys.exit()
             pass
 
 

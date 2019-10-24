@@ -220,7 +220,7 @@ def main():
             print("Any valve open? " + str(valveWorking))
             print("Farm ON Time: " + str(timeForIrrigationON))
             print("Farm OFF Time: " + str(timeForIrrigationOFF))
-            sleep(1)
+            # sleep(1)
         except (KeyboardInterrupt, SystemExit):
             exit()
             pass

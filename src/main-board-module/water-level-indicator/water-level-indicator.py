@@ -286,7 +286,6 @@ def main():
             print("Farm ON Time: " + str(timeForIrrigationON))
             print("Farm OFF Time: " + str(timeForIrrigationOFF))
             print("---------------------------------------")
-            sleep(1)
         except (KeyboardInterrupt, SystemExit):
             print("\nClosing program..")
             valveControlSig(0)  # Set valve as OFF

@@ -178,6 +178,7 @@ def main():
     print("-----------------------------------------------")
     ledBootScreen()  # bootscreen for LCD
     i = 0
+    farmValveFlag = False
     while True:
         try:
             i = i + 1  # iteration purpose
@@ -239,27 +240,30 @@ def main():
 
             # For farm
             if current_time == timeForIrrigationON:
-                if valveWorking == False:
-                    valveControlSig(3)  # Open valve farm
-                    relayControl(1)
-                    valveWorking = True
-                    relayTrig = True
-                    farm = True
-                else:
-                    postponeStart = datetime.strptime(
-                        timeForIrrigationON, "%H:%M") + timedelta(minutes=10)
-                    postponeEnd = datetime.strptime(
-                        timeForIrrigationOFF, "%H:%M") + timedelta(minutes=10)
-                    databaseObject.child("sensor-values").update(
-                        {"farm-irrigation-time-on": postponeStart.strftime("%H:%M"),
-                         "farm-irrigation-time-off": postponeEnd.strftime("%H:%M")}
-                    )
+                if farmValveFlag == False:
+                    if valveWorking == False:
+                        valveControlSig(3)  # Open valve farm
+                        relayControl(1)
+                        valveWorking = True
+                        relayTrig = True
+                        farm = True
+                        farmValveFlag = True
+                    else:
+                        postponeStart = datetime.strptime(
+                            timeForIrrigationON, "%H:%M") + timedelta(minutes=10)
+                        postponeEnd = datetime.strptime(
+                            timeForIrrigationOFF, "%H:%M") + timedelta(minutes=10)
+                        databaseObject.child("sensor-values").update(
+                            {"farm-irrigation-time-on": postponeStart.strftime("%H:%M"),
+                             "farm-irrigation-time-off": postponeEnd.strftime("%H:%M")}
+                        )
             if current_time == timeForIrrigationOFF:
                 valveControlSig(0)  # Close valve farm
                 relayControl(0)
                 valveWorking = False
                 relayTrig = False
                 farm = False
+                farmValveFlag = True
                 databaseObject.child("sensor-values").update(
                     {"farm-irrigation-time-on": "11:00",
                      "farm-irrigation-time-off": "11:15"}

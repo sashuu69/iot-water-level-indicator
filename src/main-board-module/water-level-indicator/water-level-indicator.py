@@ -4,7 +4,7 @@
  * File name: water-level-indicator.py
  * Author : Sashwat K
  * Created on : 10 Oct 2019
- * Last updated : 20 Oct 2019
+ * Last updated : 25 Oct 2019
  * Microcontroller: Raspberry Pi Zero W
  * Purpose: The main controller
  * Pins used: Relay - 7
@@ -146,8 +146,8 @@ def mainLCDConsole(waterLevel, relayS):
 def exitConsole():
     try:
         systemLCD.lcd_clear()
-        systemLCD.lcd_display_string_pos("Program", 1, 4)
-        systemLCD.lcd_display_string_pos("Closed", 2, 4)
+        systemLCD.lcd_display_string_pos("Program closed", 1, 4)
+        systemLCD.lcd_display_string_pos("Error code 1", 2, 4)
     except:
         pass
 
@@ -179,7 +179,7 @@ def main():
     ledBootScreen()  # bootscreen for LCD
     i = 0
     farmValveFlag = False
-    while True:
+    while True:  # runs forever
         try:
             i = i + 1  # iteration purpose
             # Initalisation of values from firebase
@@ -208,14 +208,14 @@ def main():
             moisPer = getMoisurePer(valveModuleAddress)
 
             # For water tank
-            if tpCntPer == 0:
-                if valveWorking == False:
-                    valveControlSig(1)  # Open valve tank
+            if tpCntPer == 0:  # triggered at 0% water level
+                if valveWorking == False:  # check if any valve open
+                    valveControlSig(1)  # Open valve tank (valve 1)
                     valveWorking = True  # Valve engaged flag
                     relayControl(1)  # Turn ON pump
                     relayTrig = True  # Pump status flag
                     tank = True  # tank valve flag
-            elif tpCntPer == 100 and ultrasnc < 10:
+            elif tpCntPer == 100 and ultrasnc < 20:  # Triggered at 100% water level and distance less than 20
                 valveControlSig(0)  # Close valve tank
                 valveWorking = False  # Valve disengaged flag
                 relayControl(0)  # Turn OFF pump
@@ -223,56 +223,59 @@ def main():
                 tank = False  # tank valve flag
 
             # For sprinkler system
-            if moisPer < 30:
-                # If all valves are closed. Then execute
-                if valveWorking == False:
-                    valveControlSig(2)  # Open valve garden
+            if moisPer < 30:  # if mosiure less than 30%
+                if valveWorking == False:  # check if any valve open
+                    valveControlSig(2)  # Open valve garden (valve 2)
                     valveWorking = True
                     relayControl(1)
                     relayTrig = True
-                    garden = True
-            elif moisPer > 85:
+                    garden = True  # garden valve flag
+            elif moisPer > 85:  # if moisure more than 85
                 valveControlSig(0)  # Close valve garden
                 valveWorking = False
                 relayControl(0)
                 relayTrig = False
-                garden = False
+                garden = False  # garden valve flag
 
             # For farm
-            if current_time == timeForIrrigationON:
-                if farmValveFlag == False:
-                    if valveWorking == False:
-                        valveControlSig(3)  # Open valve farm
+            if current_time == timeForIrrigationON:  # check current time with farm trigger time
+                if farmValveFlag == False:  # flag to execute the following code once until farm valve is closed
+                    if valveWorking == False:  # check if any valve open
+                        valveControlSig(3)  # Open valve farm (valve 3)
                         relayControl(1)
                         valveWorking = True
                         relayTrig = True
-                        farm = True
-                        farmValveFlag = True
+                        farm = True  # farm valve flag
+                        farmValveFlag = True  # For one execution only
                     else:
+                        # Posepone time by 10 mins
                         postponeStart = datetime.strptime(
                             timeForIrrigationON, "%H:%M") + timedelta(minutes=10)
                         postponeEnd = datetime.strptime(
                             timeForIrrigationOFF, "%H:%M") + timedelta(minutes=10)
+                        # update in firebase
                         databaseObject.child("sensor-values").update(
                             {"farm-irrigation-time-on": postponeStart.strftime("%H:%M"),
                              "farm-irrigation-time-off": postponeEnd.strftime("%H:%M")}
                         )
-            if current_time == timeForIrrigationOFF:
-                valveControlSig(0)  # Close valve farm
+            if current_time == timeForIrrigationOFF:  # check if off time
+                valveControlSig(0)  # Close valve farm (valve-3)
                 relayControl(0)
                 valveWorking = False
                 relayTrig = False
-                farm = False
+                farm = False  # farm valve flag
                 farmValveFlag = True
+                # Update original time
                 databaseObject.child("sensor-values").update(
                     {"farm-irrigation-time-on": "11:00",
                      "farm-irrigation-time-off": "11:15"}
                 )
 
-            mainLCDConsole(tpCntPer, relayTrig)
+            mainLCDConsole(tpCntPer, relayTrig)  # Values to display on LCD
+            # Store relavent sensor data in firebase
             sendValuesToFirebase(valveWorking, garden,
                                  moisPer, relayTrig, tank, tpCntPer, farm)
-
+            # display necessary data
             print("Iteration number: " + str(i))
             print("Time: " + str(current_time))
             print("Water tank touch pad percentage: " + str(tpCntPer))
@@ -286,14 +289,14 @@ def main():
             print("Farm ON Time: " + str(timeForIrrigationON))
             print("Farm OFF Time: " + str(timeForIrrigationOFF))
             print("---------------------------------------")
-        except (KeyboardInterrupt, SystemExit):
+        except (KeyboardInterrupt, SystemExit):  # when control + c is encountered
             print("\nClosing program..")
             valveControlSig(0)  # Set valve as OFF
             relayControl(0)  # Turn off pump
-            exitConsole()
+            exitConsole()  # Display stuff on LCD
             sendValuesToFirebase(False, False,
-                                 0, False, False, 0, False)
-            exit()
+                                 0, False, False, 0, False)  # reset all values in firebase
+            exit()  # Exit program
 
 
 # 1st execution

@@ -254,7 +254,7 @@ def main():
                         {"farm-irrigation-time-on": postponeStart.strftime("%H:%M"),
                          "farm-irrigation-time-off": postponeEnd.strftime("%H:%M")}
                     )
-            elif current_time == timeForIrrigationOFF:
+            if current_time == timeForIrrigationOFF:
                 valveControlSig(0)  # Close valve farm
                 relayControl(0)
                 valveWorking = False

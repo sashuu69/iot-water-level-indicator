@@ -128,6 +128,13 @@ To make the python code run at boot as background. Follow the following steps:-
 3. Save the rc.local file.
 4. Reboot
 
+## To Do
+
+1. Include firebase to android app.
+2. Develop web app.
+3. store log in firebase.
+4. User authentication for app and webapp.
+
 ## Contributors
 
 1. [Sashwat K](https://www.sashwat.in/)

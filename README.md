@@ -6,7 +6,7 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 
 The following image is the prototype of the project.
 
-![Project protoype](./documentation/Diagrams/prototype.jpg)
+![Project protoype](./documentation/diagrams/prototype.jpg)
 
 ## Features
 
@@ -46,7 +46,7 @@ Notes:-
 
 ## Project Design
 
-![Project Design](./documentation/Diagrams/fritzing-project-design_bb.png)
+![Project Design](./documentation/diagrams/fritzing-project-design_bb.png)
 
 ## Libraries
 
@@ -71,7 +71,7 @@ Notes:-
 
 ## Firebase Database Design
 
-![Firebase Design](./documentation/Diagrams/firebase.png)
+![Firebase Design](./documentation/diagrams/firebase.png)
 
 ## Files and folders explained
 

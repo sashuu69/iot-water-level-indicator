@@ -1,0 +1,97 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.vijithasashwat.myapplication"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="15"
+8-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->[com.google.firebase:firebase-database:16.0.4] /home/sk/.gradle/caches/transforms-2/files-2.1/71114522017e6ca53e203e3c2929be4c/firebase-database-16.0.4/AndroidManifest.xml:22:5-79
+11-->[com.google.firebase:firebase-database:16.0.4] /home/sk/.gradle/caches/transforms-2/files-2.1/71114522017e6ca53e203e3c2929be4c/firebase-database-16.0.4/AndroidManifest.xml:22:22-76
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->[com.google.firebase:firebase-database:16.0.4] /home/sk/.gradle/caches/transforms-2/files-2.1/71114522017e6ca53e203e3c2929be4c/firebase-database-16.0.4/AndroidManifest.xml:23:5-67
+12-->[com.google.firebase:firebase-database:16.0.4] /home/sk/.gradle/caches/transforms-2/files-2.1/71114522017e6ca53e203e3c2929be4c/firebase-database-16.0.4/AndroidManifest.xml:23:22-64
+13
+14    <application
+14-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:5:5-25:19
+15        android:allowBackup="true"
+15-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:6:9-35
+16        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+16-->[com.android.support:support-compat:28.0.0] /home/sk/.gradle/caches/transforms-2/files-2.1/715fb26d9697ad9ad0fefd1ed668ea1f/support-compat-28.0.0/AndroidManifest.xml:22:18-91
+17        android:debuggable="true"
+18        android:icon="@mipmap/ic_launcher"
+18-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:7:9-43
+19        android:label="@string/app_name"
+19-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:8:9-41
+20        android:roundIcon="@mipmap/ic_launcher_round"
+20-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:9:9-54
+21        android:supportsRtl="true"
+21-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:10:9-35
+22        android:theme="@style/AppTheme" >
+22-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:11:9-40
+23        <activity
+23-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:12:9-14:68
+24            android:name="com.vijithasashwat.myapplication.home"
+24-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:13:13-33
+25            android:label="@string/title_activity_home" />
+25-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:14:13-56
+26        <activity android:name="com.vijithasashwat.myapplication.MainActivity" >
+26-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:15:9-21:20
+26-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:15:19-47
+27            <intent-filter>
+27-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:16:13-20:29
+28                <action android:name="android.intent.action.MAIN" />
+28-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:17:17-69
+28-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:17:25-66
+29
+30                <category android:name="android.intent.category.LAUNCHER" />
+30-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:19:17-77
+30-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:19:27-74
+31            </intent-filter>
+32        </activity>
+33        <activity android:name="com.vijithasashwat.myapplication.ActivityOne" />
+33-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:22:9-58
+33-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:22:19-46
+34        <activity android:name="com.vijithasashwat.myapplication.ActivityTwo" />
+34-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:23:9-58
+34-->/home/sk/Development/cet-mca-s5-miniproject-iot_based_water_level_indicator/src/android-app/MyApplication2/app/src/main/AndroidManifest.xml:23:19-46
+35        <activity
+35-->[com.google.android.gms:play-services-base:16.0.1] /home/sk/.gradle/caches/transforms-2/files-2.1/76edb33eb6505cb9a84dc29da2308a8c/play-services-base-16.0.1/AndroidManifest.xml:23:9-26:75
+36            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+36-->[com.google.android.gms:play-services-base:16.0.1] /home/sk/.gradle/caches/transforms-2/files-2.1/76edb33eb6505cb9a84dc29da2308a8c/play-services-base-16.0.1/AndroidManifest.xml:24:13-79
+37            android:exported="false"
+37-->[com.google.android.gms:play-services-base:16.0.1] /home/sk/.gradle/caches/transforms-2/files-2.1/76edb33eb6505cb9a84dc29da2308a8c/play-services-base-16.0.1/AndroidManifest.xml:25:13-37
+38            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+38-->[com.google.android.gms:play-services-base:16.0.1] /home/sk/.gradle/caches/transforms-2/files-2.1/76edb33eb6505cb9a84dc29da2308a8c/play-services-base-16.0.1/AndroidManifest.xml:26:13-72
+39
+40        <provider
+40-->[com.google.firebase:firebase-common:16.0.3] /home/sk/.gradle/caches/transforms-2/files-2.1/0bac933d43d950dffa7fc4c5f8973caa/firebase-common-16.0.3/AndroidManifest.xml:10:9-14:39
+41            android:name="com.google.firebase.provider.FirebaseInitProvider"
+41-->[com.google.firebase:firebase-common:16.0.3] /home/sk/.gradle/caches/transforms-2/files-2.1/0bac933d43d950dffa7fc4c5f8973caa/firebase-common-16.0.3/AndroidManifest.xml:11:13-77
+42            android:authorities="com.vijithasashwat.myapplication.firebaseinitprovider"
+42-->[com.google.firebase:firebase-common:16.0.3] /home/sk/.gradle/caches/transforms-2/files-2.1/0bac933d43d950dffa7fc4c5f8973caa/firebase-common-16.0.3/AndroidManifest.xml:12:13-72
+43            android:exported="false"
+43-->[com.google.firebase:firebase-common:16.0.3] /home/sk/.gradle/caches/transforms-2/files-2.1/0bac933d43d950dffa7fc4c5f8973caa/firebase-common-16.0.3/AndroidManifest.xml:13:13-37
+44            android:initOrder="100" />
+44-->[com.google.firebase:firebase-common:16.0.3] /home/sk/.gradle/caches/transforms-2/files-2.1/0bac933d43d950dffa7fc4c5f8973caa/firebase-common-16.0.3/AndroidManifest.xml:14:13-36
+45
+46        <meta-data
+46-->[com.google.android.gms:play-services-basement:16.0.1] /home/sk/.gradle/caches/transforms-2/files-2.1/44539c9a9582b5315749e0093ab5b075/play-services-basement-16.0.1/AndroidManifest.xml:23:9-25:69
+47            android:name="com.google.android.gms.version"
+47-->[com.google.android.gms:play-services-basement:16.0.1] /home/sk/.gradle/caches/transforms-2/files-2.1/44539c9a9582b5315749e0093ab5b075/play-services-basement-16.0.1/AndroidManifest.xml:24:13-58
+48            android:value="@integer/google_play_services_version" />
+48-->[com.google.android.gms:play-services-basement:16.0.1] /home/sk/.gradle/caches/transforms-2/files-2.1/44539c9a9582b5315749e0093ab5b075/play-services-basement-16.0.1/AndroidManifest.xml:25:13-66
+49        <meta-data
+49-->[com.android.support:support-v4:26.1.0] /home/sk/.gradle/caches/transforms-2/files-2.1/62c13e3464d07bb7dcee471b1fbb132c/support-v4-26.1.0/AndroidManifest.xml:26:9-28:38
+50            android:name="android.support.VERSION"
+50-->[com.android.support:support-v4:26.1.0] /home/sk/.gradle/caches/transforms-2/files-2.1/62c13e3464d07bb7dcee471b1fbb132c/support-v4-26.1.0/AndroidManifest.xml:27:13-51
+51            android:value="26.1.0" />
+51-->[com.android.support:support-v4:26.1.0] /home/sk/.gradle/caches/transforms-2/files-2.1/62c13e3464d07bb7dcee471b1fbb132c/support-v4-26.1.0/AndroidManifest.xml:28:13-35
+52    </application>
+53
+54</manifest>

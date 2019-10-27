@@ -147,14 +147,19 @@ public class home extends AppCompatActivity {
 
         swi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
+//            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//            DatabaseReference mRootReference = firebaseDatabase.getReference();
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(swi.isChecked())
+                if(swi.isChecked()) {
+                    rfirebasePumpStatus.setValue(true);
                     Toast.makeText(getApplicationContext(), "pump is ON", Toast.LENGTH_SHORT).show();
-                else
+                }
+                else {
+                    rfirebasePumpStatus.setValue(false);
                     Toast.makeText(getApplicationContext(), "pump is OFF", Toast.LENGTH_SHORT).show();
-
-
+                }
             }
         });
 

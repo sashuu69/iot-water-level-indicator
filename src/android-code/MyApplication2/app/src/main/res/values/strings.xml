@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Water Level Indicator</string>
+    <string name="title_activity_home">Dashboard</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="time">Choose duration</string>
+
+    <string-array name="duration_arrays">
+        <item>daily</item>
+        <item>weekly</item>
+        <item>monthly</item>
+    </string-array>
+
+</resources>

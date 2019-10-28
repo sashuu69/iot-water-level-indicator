@@ -230,7 +230,7 @@ def main():
                     relayControl(1)
                     relayTrig = True
                     garden = True  # garden valve flag
-            elif moisPer > 85:  # if moisure more than 85
+            elif moisPer > 60:  # if moisure more than 85
                 valveControlSig(0)  # Close valve garden
                 valveWorking = False
                 relayControl(0)

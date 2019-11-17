@@ -216,6 +216,7 @@ def main():
             current_time = str(now.strftime("%H:%M"))  # convert to hour:minute
             # convert to year/month/day
             current_date = str(now.strftime("%Y/%m/%d"))
+            timeForLog = str(now.strftime("%H:%M:%S"))
 
             # get touch pad count from tank module
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
@@ -234,7 +235,7 @@ def main():
                     relayTrig = True  # Pump status flag
                     tank = True  # tank valve flag
                     if tempFlagForLog == False:
-                        dataLog(current_date, current_time,
+                        dataLog(current_date, timeForLog,
                                 "Tank Pump Activated")
                         tempFlagForLog = True
             elif tpCntPer == 100 and ultrasnc < 20:  # Triggered at 100% water level and distance less than 20
@@ -244,7 +245,7 @@ def main():
                 relayTrig = False  # Pump status flag
                 tank = False  # tank valve flag
                 if tempFlagForLog == True:
-                    dataLog(current_date, current_time,
+                    dataLog(current_date, timeForLog,
                             "Tank Pump Deactivated")
                     tempFlagForLog = False
             # For sprinkler system
@@ -256,7 +257,7 @@ def main():
                     relayTrig = True
                     garden = True  # garden valve flag
                     if tempFlagForLog == False:
-                        dataLog(current_date, current_time,
+                        dataLog(current_date, timeForLog,
                                 "Garden Sprinkler Activated")
                         tempFlagForLog = True
             elif moisPer > 60:  # if moisure more than 85
@@ -266,7 +267,7 @@ def main():
                 relayTrig = False
                 garden = False  # garden valve flag
                 if tempFlagForLog == True:
-                    dataLog(current_date, current_time,
+                    dataLog(current_date, timeForLog,
                             "Garden Srinkler Deactivated")
                     tempFlagForLog = False
 
@@ -281,7 +282,7 @@ def main():
                         farm = True  # farm valve flag
                         farmValveFlag = True  # For one execution only
                         if tempFlagForLog == False:
-                            dataLog(current_date, current_time,
+                            dataLog(current_date, timeForLog,
                                     "Farm Sprinkler Activated")
                             tempFlagForLog = True
                     else:
@@ -308,7 +309,7 @@ def main():
                      "farm-irrigation-time-off": "11:15"}
                 )
                 if tempFlagForLog == True:
-                    dataLog(current_date, current_time,
+                    dataLog(current_date, timeForLog,
                             "Farm Sprinkler Deactivated")
                     tempFlagForLog = False
 

@@ -8,7 +8,7 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 2. valve locking system (One valve at a time).
 3. Use of moisure sensor for garden.
 4. Time based watering for farm.
-5. Display info using LCD, Android app and web app.
+5. Display info using LCD, Android app and Web app.
 
 The following image is the prototype of the project.
 
@@ -18,9 +18,10 @@ The following image is the prototype of the project.
 
 1. Realtime water level, pump status and value status.
 2. Web interface and android app.
-3. manual remote control pump control.
+3. Manual remote control pump control.
 4. Automatic sprinker system according to moisure content.
-5. OLED display for showing status.
+5. LCD display for showing status.
+6. Show system log on Android app and Web app.
 
 ## Hardware modules
 
@@ -32,18 +33,18 @@ The following image is the prototype of the project.
 
 1. Raspberry Pi Zero W
 2. Relay (220V - 5V)
-3. LEDs (Red & green)
+3. LEDs - 2 (Red & green)
 
 ### Water Tank Module Components
 
 1. Touch pads - 5
 2. Ultrasonic sensor - 1
-3. Atmega328p
+3. Atmega328p - 1
 
 ### Valve Switching Components
 
 1. Solenoid valve - 3
-2. Atmega328p
+2. Atmega328p - 1
 
 Notes:-
 
@@ -113,7 +114,14 @@ The diagnostics include:-
    2. Moisure sensor
    3. Solenoid valve
 
-## System process settings
+## Setup Development Environment
+
+### Install Raspberry Pi Requirements
+
+1. Install python3 requirements.
+   `sudo pip3 install requirements.txt`
+
+### System process settings
 
 To make the python code run at boot as background. Follow the following steps:-
 
@@ -132,8 +140,7 @@ To make the python code run at boot as background. Follow the following steps:-
 
 1. Include firebase to android app.
 2. Develop web app.
-3. store log in firebase.
-4. User authentication for app and webapp.
+3. User authentication for Webapp.
 
 ## Contributors
 

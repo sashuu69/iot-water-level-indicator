@@ -234,7 +234,7 @@ def main():
                     relayTrig = True  # Pump status flag
                     tank = True  # tank valve flag
                     if tempFlagForLog == False:
-                        dataLog(current_date, current_time, "Tank Pump ON")
+                        dataLog(current_date, current_time, "Filling Tank")
                         tempFlagForLog = True
             elif tpCntPer == 100 and ultrasnc < 20:  # Triggered at 100% water level and distance less than 20
                 valveControlSig(0)  # Close valve tank
@@ -243,7 +243,7 @@ def main():
                 relayTrig = False  # Pump status flag
                 tank = False  # tank valve flag
                 if tempFlagForLog == True:
-                    dataLog(current_date, current_time, "Tank Pump OFF")
+                    dataLog(current_date, current_time, "Filled Tank")
                     tempFlagForLog = False
             # For sprinkler system
             if moisPer < 30:  # if mosiure less than 30%
@@ -253,12 +253,19 @@ def main():
                     relayControl(1)
                     relayTrig = True
                     garden = True  # garden valve flag
+                    if tempFlagForLog == False:
+                        dataLog(current_date, current_time,
+                                "Sprinkling Garden")
+                        tempFlagForLog = True
             elif moisPer > 60:  # if moisure more than 85
                 valveControlSig(0)  # Close valve garden
                 valveWorking = False
                 relayControl(0)
                 relayTrig = False
                 garden = False  # garden valve flag
+                if tempFlagForLog == True:
+                    dataLog(current_date, current_time, "Sprinkled Garden")
+                    tempFlagForLog = False
 
             # For farm
             if current_time == timeForIrrigationON:  # check current time with farm trigger time
@@ -270,6 +277,10 @@ def main():
                         relayTrig = True
                         farm = True  # farm valve flag
                         farmValveFlag = True  # For one execution only
+                        if tempFlagForLog == False:
+                            dataLog(current_date, current_time,
+                                    "Sprinkling Farm")
+                            tempFlagForLog = True
                     else:
                         # Posepone time by 10 mins
                         postponeStart = datetime.strptime(
@@ -293,6 +304,9 @@ def main():
                     {"farm-irrigation-time-on": "11:00",
                      "farm-irrigation-time-off": "11:15"}
                 )
+                if tempFlagForLog == True:
+                    dataLog(current_date, current_time, "Sprinkled Farm")
+                    tempFlagForLog = False
 
             mainLCDConsole(tpCntPer, relayTrig)  # Values to display on LCD
             # Store relavent sensor data in firebase

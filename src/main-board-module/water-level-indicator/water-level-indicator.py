@@ -170,6 +170,16 @@ def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPe
         pass
 
 
+# Defition to enter log to firebase
+def dataLog(logDate, logTime, actionResult):
+    try:
+        databaseObject.child("log").child(logDate).child(logTime).set(
+            {"action": actionResult}
+        )
+    except:
+        pass
+
+
 # Main function
 def main():
     print("###############################################")
@@ -180,6 +190,7 @@ def main():
     print("-----------------------------------------------")
     ledBootScreen()  # bootscreen for LCD
     i = 0
+    tempFlagForLog = False
     farmValveFlag = False
     while True:  # runs forever
         try:
@@ -203,6 +214,9 @@ def main():
             print("Data retrived..")
             now = datetime.now()  # get current time
             current_time = str(now.strftime("%H:%M"))  # convert to hour:minute
+            # convert to year/month/day
+            current_date = str(now.strftime("%Y/%m/%d"))
+
             # get touch pad count from tank module
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)  # count to percentage
@@ -219,13 +233,18 @@ def main():
                     relayControl(1)  # Turn ON pump
                     relayTrig = True  # Pump status flag
                     tank = True  # tank valve flag
+                    if tempFlagForLog == False:
+                        dataLog(current_date, current_time, "Tank Pump ON")
+                        tempFlagForLog = True
             elif tpCntPer == 100 and ultrasnc < 20:  # Triggered at 100% water level and distance less than 20
                 valveControlSig(0)  # Close valve tank
                 valveWorking = False  # Valve disengaged flag
                 relayControl(0)  # Turn OFF pump
                 relayTrig = False  # Pump status flag
                 tank = False  # tank valve flag
-
+                if tempFlagForLog == True:
+                    dataLog(current_date, current_time, "Tank Pump OFF")
+                    tempFlagForLog = False
             # For sprinkler system
             if moisPer < 30:  # if mosiure less than 30%
                 if valveWorking == False:  # check if any valve open

@@ -1,0 +1,4 @@
+WaterLevelIndicator
+RPi.GPIO==0.7.0
+pyrebase==3.0.27
+python-dotenv==0.10.3

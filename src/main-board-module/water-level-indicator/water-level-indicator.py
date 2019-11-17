@@ -155,7 +155,7 @@ def exitConsole():
 
 
 # Function to send values to firebase
-def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPer, farm):
+def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPer, farm, manuFlag):
     try:
         databaseObject.child("sensor-values").update(
             {"water-tank-percentage": tpCntPer,
@@ -164,7 +164,8 @@ def sendValuesToFirebase(valveWorking, garden, moisPer, relayTrig, tank, tpCntPe
              "garden-valve": garden,
              "tank-valve": tank,
              "farm-valve": farm,
-             "any-valve-open": valveWorking}
+             "any-valve-open": valveWorking,
+             "manual-flag": manuFlag, }
         )
     except:
         pass
@@ -211,6 +212,8 @@ def main():
                 "sensor-values").child("farm-irrigation-time-on").get().val()
             timeForIrrigationOFF = databaseObject.child(
                 "sensor-values").child("farm-irrigation-time-off").get().val()
+            manualTrigger = databaseObject.child(
+                "sensor-values").child("manual-flag").get().val()
             print("Data retrived..")
             now = datetime.now()  # get current time
             current_time = str(now.strftime("%H:%M"))  # convert to hour:minute
@@ -225,6 +228,18 @@ def main():
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
             # get moisure percentage from valve module
             moisPer = getMoisurePer(valveModuleAddress)
+
+            # For manual control
+            if manualTrigger == True and valveWorking == False:  # check for manual operation
+                valveControlSig(1)  # Open valve tank (valve 1)
+                valveWorking = True  # Valve engaged flag
+                relayControl(1)  # Turn ON pump
+                relayTrig = True  # Pump status flag
+                tank = True  # tank valve flag
+                if tempFlagForLog == False:
+                    dataLog(current_date, timeForLog,
+                            "Manual Tank Pump Activated")
+                    tempFlagForLog = True
 
             # For water tank
             if tpCntPer == 0:  # triggered at 0% water level
@@ -244,6 +259,7 @@ def main():
                 relayControl(0)  # Turn OFF pump
                 relayTrig = False  # Pump status flag
                 tank = False  # tank valve flag
+                manualTrigger = False  # Set manual flag to OFF
                 if tempFlagForLog == True:
                     dataLog(current_date, timeForLog,
                             "Tank Pump Deactivated")
@@ -316,7 +332,7 @@ def main():
             mainLCDConsole(tpCntPer, relayTrig)  # Values to display on LCD
             # Store relavent sensor data in firebase
             sendValuesToFirebase(valveWorking, garden,
-                                 moisPer, relayTrig, tank, tpCntPer, farm)
+                                 moisPer, relayTrig, tank, tpCntPer, farm, manualTrigger)
             # display necessary data
             print("Iteration number: " + str(i))
             print("Time: " + str(current_time))

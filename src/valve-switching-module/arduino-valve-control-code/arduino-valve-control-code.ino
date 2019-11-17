@@ -110,7 +110,7 @@ int MosiureLevel::MoisturePercentage() {
 solenoidValue SV; // class SolenoidValve's object
 MosiureLevel ML; // class MosiureLevel's object
 
-int MPer;
+int MPer; // to  store moisture
 
 void setup() {
   // put your setup code here, to run once:

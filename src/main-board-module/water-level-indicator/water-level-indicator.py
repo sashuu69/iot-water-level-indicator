@@ -2,7 +2,7 @@
  * Projecr Name : IOT based water level indicator
  * Project repository link : https://github.com/sashuu6/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator
  * File name: water-level-indicator.py
- * Author : Sashwat K
+ * Author : Sashwat K & Vijitha V Nair
  * Created on : 10 Oct 2019
  * Last updated : 25 Oct 2019
  * Microcontroller: Raspberry Pi Zero W
@@ -17,6 +17,7 @@ import subprocess  # For returning bash commands
 from time import sleep  # for getting realtime
 from datetime import datetime, timedelta  # for date and time
 import pyrebase  # python library for firebase
+from dotenv import load_dotenv  # for accessing environment (.env) file
 
 systemLCD = RPi_I2C_driver.lcd()  # initialse LCD driver
 GPIO.setwarnings(False)  # Ignore warning for now
@@ -24,12 +25,13 @@ GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW)  # Relay pin initialisation
 tankModuleAdress = 0x05  # Arduino tank module address
 valveModuleAddress = 0x04  # Arduino valve cmodule address
+load_dotenv()  # load environment (.env) file
 # configuration for connection
 configurationForFirebase = {
-    "apiKey": "AIzaSyB7lLBSm2O9p0y4ZuH5umbr0OMikKDJ0bs",
-    "authDomain": "miniproject-iot-water.firebaseapp.com",
-    "databaseURL": "https://miniproject-iot-water.firebaseio.com",
-    "storageBucket": "miniproject-iot-water.appspot.com",
+    "apiKey": os.getenv("apiKey"),
+    "authDomain": os.getenv("authDomain"),
+    "databaseURL": os.getenv("databaseURL"),
+    "storageBucket": os.getenv("storageBucket"),
 }
 firebaseObject = pyrebase.initialize_app(
     configurationForFirebase)  # firebase connection object
@@ -146,8 +148,8 @@ def mainLCDConsole(waterLevel, relayS):
 def exitConsole():
     try:
         systemLCD.lcd_clear()
-        systemLCD.lcd_display_string_pos("Program closed", 1, 4)
-        systemLCD.lcd_display_string_pos("Error code 1", 2, 4)
+        systemLCD.lcd_display_string_pos("Program closed", 1, 2)
+        systemLCD.lcd_display_string_pos("Error code 1", 2, 2)
     except:
         pass
 

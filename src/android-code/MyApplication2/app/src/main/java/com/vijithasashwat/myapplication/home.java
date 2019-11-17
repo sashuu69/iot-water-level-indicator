@@ -73,7 +73,6 @@ public class home extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         final Switch swi = (Switch) findViewById(R.id.pump_switch);
-        swi.setChecked(false);
 //        CompoundButton switchCompat;
 
         rfirebaseWaterLevelPercentage.addValueEventListener(new ValueEventListener() {
@@ -114,12 +113,26 @@ public class home extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Manual pumping activated", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        else {
-                            rfirebaseManualFlag.setValue(false);
-                            Toast.makeText(getApplicationContext(), "Manual pumping deactivated", Toast.LENGTH_SHORT).show();
-                        }
                     }
                 });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        rfirebaseManualFlag.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean value = dataSnapshot.getValue(Boolean.class);
+                if(value == Boolean.TRUE) {
+                    swi.setChecked(true);
+                }
+                else {
+                    swi.setChecked(false);
+                }
             }
 
             @Override

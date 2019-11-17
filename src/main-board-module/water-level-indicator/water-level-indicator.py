@@ -353,7 +353,7 @@ def main():
             relayControl(0)  # Turn off pump
             exitConsole()  # Display stuff on LCD
             sendValuesToFirebase(False, False,
-                                 0, False, False, 0, False)  # reset all values in firebase
+                                 0, False, False, 0, False, False)  # reset all values in firebase
             exit()  # Exit program
 
 

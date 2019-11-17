@@ -1,11 +1,27 @@
+"""
+ * Projecr Name : IOT based water level indicator
+ * Project repository link : https://github.com/sashuu6/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator
+ * File name : firebase-connection.py
+ * Author : Sashwat K
+ * Created on : 17 Oct 2019
+ * Last updated : 17 Nov 2019
+ * Single Board Computer : Raspberry Pi Zero W
+ * Purpose : Checking Firebase Connection
+"""
+
 import pyrebase  # python library for firebase
+import os  # OS python library for running level commands
 from datetime import datetime, timedelta
 from time import sleep  # Import the sleep function from the time module
+from dotenv import load_dotenv  # for accessing environment (.env) file
+
+load_dotenv()  # load environment (.env) file
+
 config = {  # configuration for connection
-    "apiKey": "AIzaSyB7lLBSm2O9p0y4ZuH5umbr0OMikKDJ0bs",
-    "authDomain": "miniproject-iot-water.firebaseapp.com",
-    "databaseURL": "https://miniproject-iot-water.firebaseio.com",
-    "storageBucket": "miniproject-iot-water.appspot.com",
+    "apiKey": os.getenv("apiKey"),
+    "authDomain": os.getenv("authDomain"),
+    "databaseURL": os.getenv("databaseURL"),
+    "storageBucket": os.getenv("storageBucket"),
 }
 
 firebase = pyrebase.initialize_app(config)  # firebase connection object

@@ -4,8 +4,8 @@
  * File name: relayTest.py
  * Author : Sashwat K
  * Created on : 17 Oct 2019
- * Last updated : 17 Oct 2019
- * Microcontroller: Raspberry Pi Zero W
+ * Last updated : 17 Nov 2019
+ * Single Board Computer: Raspberry Pi Zero W
  * Purpose: Checking pump relays
 """
 

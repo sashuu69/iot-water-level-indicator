@@ -1,13 +1,13 @@
 /*
  * Projecr Name : IOT based water level indicator
  * Project repository link : https://github.com/sashuu6/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator
- * File name: touchPads.ino
+ * File name : touchPads.ino
  * Author : Sashwat K
  * Created on : 17 Oct 2019
- * Last updated : 17 Oct 2019
- * Microcontroller: Atmega 328p
- * Pins used: Touch pads(5 nos):  A0,A1,A2,A3,A4
- * Purpose: Diagnose touch pads
+ * Last updated : 17 Nov 2019
+ * Microcontroller : Atmega 328p
+ * Pins used : Touch pads(5 nos) - A0,A1,A2,A3,A4
+ * Purpose : Diagnose touch pads
  */
 
 int touchPad1 = A0; // analog pin 0

@@ -1,13 +1,13 @@
 """
  * Projecr Name : IOT based water level indicator
  * Project repository link : https://github.com/sashuu6/CET-MCA-S5-MiniProject-IOT_based_Water_Level_Indicator
- * File name: water-level-indicator.py
+ * File name : water-level-indicator.py
  * Author : Sashwat K & Vijitha V Nair
  * Created on : 10 Oct 2019
- * Last updated : 25 Oct 2019
- * Microcontroller: Raspberry Pi Zero W
- * Purpose: The main controller
- * Pins used: Relay - 7
+ * Last updated : 17 Nov 2019
+ * Single Board Computer : Raspberry Pi Zero W
+ * Purpose : The main controller
+ * Pins used : Relay - 7
 """
 
 import RPi_I2C_driver  # LCD driver

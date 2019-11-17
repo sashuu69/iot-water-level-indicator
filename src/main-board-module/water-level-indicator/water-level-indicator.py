@@ -185,6 +185,7 @@ def main():
         try:
             i = i + 1  # iteration purpose
             # Initalisation of values from firebase
+            print("Retriving data from firebase....")
             relayTrig = bool(databaseObject.child(
                 "sensor-values").child("pump-status").get().val())
             tank = bool(databaseObject.child(
@@ -199,6 +200,7 @@ def main():
                 "sensor-values").child("farm-irrigation-time-on").get().val()
             timeForIrrigationOFF = databaseObject.child(
                 "sensor-values").child("farm-irrigation-time-off").get().val()
+            print("Data retrived..")
             now = datetime.now()  # get current time
             current_time = str(now.strftime("%H:%M"))  # convert to hour:minute
             # get touch pad count from tank module

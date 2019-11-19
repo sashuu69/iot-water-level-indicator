@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/simpleTableLayout"
+        android:id="@+id/logTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stretchColumns="1"
@@ -14,325 +14,38 @@
         tools:layout_editor_absoluteY="132dp"> <!-- stretch the second column of the layout-->
 
         <!-- first row of the table layout-->
-        <TableRow
+<!--        <TableRow-->
+
+<!--            android:id="@+id/Row1"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:paddingTop="20dp"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            &lt;!&ndash; first element of the row&ndash;&gt;-->
+<!--            <TextView-->
+
+<!--                android:id="@+id/tv11"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="#D5D2D2"-->
+<!--                android:padding="18dip"-->
+<!--                android:text="date_and_time"-->
+<!--                android:textColor="#000"-->
+<!--                android:textSize="12dp" />-->
+
+<!--            <TextView-->
+
+<!--                android:id="@+id/tv12"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="#b0b0b0"-->
+<!--                android:padding="18dip"-->
+<!--                android:text="description"-->
+<!--                android:textColor="#000"-->
+<!--                android:textSize="14dp" />-->
+
+<!--        </TableRow>-->
 
-            android:id="@+id/Row1"
-            android:layout_width="fill_parent"
-            android:paddingTop="20dp"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row2"
-            android:layout_width="fill_parent"
-            android:paddingTop="5dp"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row3"
-            android:paddingTop="5dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv31"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv32"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row4"
-            android:paddingTop="5dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv41"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv42"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row5"
-            android:paddingTop="5dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv51"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv52"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row6"
-            android:paddingTop="5dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv61"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv62"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row7"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv71"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv72"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row8"
-            android:paddingTop="5dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv81"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv82"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row9"
-            android:paddingTop="5dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv91"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv92"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
-
-        <TableRow
-
-            android:id="@+id/Row0"
-            android:paddingTop="5dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <!-- first element of the row-->
-            <TextView
-
-                android:id="@+id/tv01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#D5D2D2"
-                android:padding="18dip"
-                android:text="date_and_time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/tv02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#b0b0b0"
-                android:padding="18dip"
-                android:text="description"
-                android:textColor="#000"
-                android:textSize="14dp" />
-
-        </TableRow>
     </TableLayout>
 
 

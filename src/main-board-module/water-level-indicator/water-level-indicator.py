@@ -219,8 +219,8 @@ def main():
             current_time = str(now.strftime("%H:%M"))  # convert to hour:minute
             # convert to year/month/day
             current_date = str(now.strftime("%Y/%m/%d"))
+            # convert time to hour:minute:seconds for log
             timeForLog = str(now.strftime("%H:%M:%S"))
-
             # get touch pad count from tank module
             tpCnt = i2cReceiveCommand(tankModuleAdress, 111)
             tpCntPer = int(tpCnt * 100 / 4)  # count to percentage
@@ -229,14 +229,16 @@ def main():
             # get moisure percentage from valve module
             moisPer = getMoisurePer(valveModuleAddress)
 
-            # For manual control
-            if manualTrigger == True and valveWorking == False:  # check for manual operation
+            # For manual control from app
+            # check for manual operation and if any valve not working
+            if manualTrigger == True and valveWorking == False:
                 valveControlSig(1)  # Open valve tank (valve 1)
                 valveWorking = True  # Valve engaged flag
                 relayControl(1)  # Turn ON pump
                 relayTrig = True  # Pump status flag
                 tank = True  # tank valve flag
-                if tempFlagForLog == False:
+                # Logging to firebase
+                if tempFlagForLog == False:  # For displaying once
                     dataLog(current_date, timeForLog,
                             "Manual Tank Pump Activated")
                     tempFlagForLog = True
@@ -249,7 +251,8 @@ def main():
                     relayControl(1)  # Turn ON pump
                     relayTrig = True  # Pump status flag
                     tank = True  # tank valve flag
-                    if tempFlagForLog == False:
+                    # Logging into firebase
+                    if tempFlagForLog == False:  # For displaying once
                         dataLog(current_date, timeForLog,
                                 "Tank Pump Activated")
                         tempFlagForLog = True
@@ -260,6 +263,7 @@ def main():
                 relayTrig = False  # Pump status flag
                 tank = False  # tank valve flag
                 manualTrigger = False  # Set manual flag to OFF
+                # Logging into firebase
                 if tempFlagForLog == True:
                     dataLog(current_date, timeForLog,
                             "Tank Pump Deactivated")
@@ -268,9 +272,9 @@ def main():
             if moisPer < 30:  # if mosiure less than 30%
                 if valveWorking == False:  # check if any valve open
                     valveControlSig(2)  # Open valve garden (valve 2)
-                    valveWorking = True
-                    relayControl(1)
-                    relayTrig = True
+                    valveWorking = True  # Valve working flag
+                    relayControl(1)  # pump ON
+                    relayTrig = True  # Valve flag
                     garden = True  # garden valve flag
                     if tempFlagForLog == False:
                         dataLog(current_date, timeForLog,
@@ -292,7 +296,7 @@ def main():
                 if farmValveFlag == False:  # flag to execute the following code once until farm valve is closed
                     if valveWorking == False:  # check if any valve open
                         valveControlSig(3)  # Open valve farm (valve 3)
-                        relayControl(1)
+                        relayControl(1)  # Pump ON
                         valveWorking = True
                         relayTrig = True
                         farm = True  # farm valve flag
@@ -314,7 +318,7 @@ def main():
                         )
             if current_time == timeForIrrigationOFF:  # check if off time
                 valveControlSig(0)  # Close valve farm (valve-3)
-                relayControl(0)
+                relayControl(0)  # pump OFF
                 valveWorking = False
                 relayTrig = False
                 farm = False  # farm valve flag
@@ -324,6 +328,7 @@ def main():
                     {"farm-irrigation-time-on": "11:00",
                      "farm-irrigation-time-off": "11:15"}
                 )
+                # Logging to firebase
                 if tempFlagForLog == True:
                     dataLog(current_date, timeForLog,
                             "Farm Sprinkler Deactivated")
@@ -346,6 +351,7 @@ def main():
             print("Any valve open? " + str(valveWorking))
             print("Farm ON Time: " + str(timeForIrrigationON))
             print("Farm OFF Time: " + str(timeForIrrigationOFF))
+            print("Manual control: " + str(manualTrigger))
             print("---------------------------------------")
         except (KeyboardInterrupt, SystemExit):  # when control + c is encountered
             print("\nClosing program..")
@@ -353,7 +359,7 @@ def main():
             relayControl(0)  # Turn off pump
             exitConsole()  # Display stuff on LCD
             sendValuesToFirebase(False, False,
-                                 0, False, False, 0, False, False)  # reset all values in firebase
+                                 0, False, False, 0, False, False)  # reset all values in firebase for consistency
             exit()  # Exit program
 
 

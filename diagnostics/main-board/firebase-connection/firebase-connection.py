@@ -28,17 +28,12 @@ firebase = pyrebase.initialize_app(config)  # firebase connection object
 db = firebase.database()  # firebase database initialisation
 
 # To create and update sensor-values table
-# db.child("sensor-values").update(
-#     {"water-tank-percentage": "70",
-#      "pump-status": "false",
-#      "moisure-percentage": "50",
-#      "garden-valve": "false",
-#      "tank-valve": "false",
-#      "any-valve-open": "false",
-#      "farm-valve": "false",
-#      "farm-irrigation-time-on": "11:00",
-#      "farm-irrigation-time-off": "11:15"}
-# )
+db.child("daily-usage").update(
+    {"farm": "0",
+     "garden": "0",
+     "pump": "0",
+     "tank": "0", }
+)
 
 # To create and update log table
 # db.child("log").child("2019/10/13").child("10:15").update(
@@ -54,16 +49,16 @@ db = firebase.database()  # firebase database initialisation
 #      "password": "password"}
 # )
 
-while True:
-    # TO get values from table
-    timeForIrrigation = db.child(
-        "sensor-values").child("farm-irrigation-time-on").get().val()
-    now = datetime.now()
-    current_time = now.strftime("%H:%M")
-    timeFormat = datetime.strptime(timeForIrrigation, "%H:%M")
-    timeFormat1 = timeFormat + timedelta(minutes=10)
-    print("old time:-")
-    print(timeFormat.strftime("%H:%M"))
-    print("New time:-")
-    print(timeFormat1.strftime("%H:%M"))
-    sleep(1)
+# while True:
+#     # TO get values from table
+#     timeForIrrigation = db.child(
+#         "sensor-values").child("farm-irrigation-time-on").get().val()
+#     now = datetime.now()
+#     current_time = now.strftime("%H:%M")
+#     timeFormat = datetime.strptime(timeForIrrigation, "%H:%M")
+#     timeFormat1 = timeFormat + timedelta(minutes=10)
+#     print("old time:-")
+#     print(timeFormat.strftime("%H:%M"))
+#     print("New time:-")
+#     print(timeFormat1.strftime("%H:%M"))
+#     sleep(1)

@@ -107,11 +107,15 @@ public class home extends AppCompatActivity {
                         if(swi.isChecked()) {
                             if(value == Boolean.TRUE) {
                                 Toast.makeText(getApplicationContext(), "Pump Already engaged", Toast.LENGTH_SHORT).show();
+                                rfirebaseManualFlag.setValue(false);
                             }
                             else {
                                 rfirebaseManualFlag.setValue(true);
                                 Toast.makeText(getApplicationContext(), "Manual pumping activated", Toast.LENGTH_SHORT).show();
                             }
+                        }
+                        else {
+                            rfirebaseManualFlag.setValue(false);
                         }
                     }
                 });

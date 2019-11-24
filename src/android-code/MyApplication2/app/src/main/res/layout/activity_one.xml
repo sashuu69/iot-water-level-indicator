@@ -5,50 +5,92 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/logTable"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="1"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="132dp"> <!-- stretch the second column of the layout-->
+        android:orientation="vertical">
 
-        <!-- first row of the table layout-->
-<!--        <TableRow-->
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Year"
+            android:textSize="24sp" />
 
-<!--            android:id="@+id/Row1"-->
-<!--            android:layout_width="fill_parent"-->
-<!--            android:paddingTop="20dp"-->
-<!--            android:layout_height="wrap_content">-->
+        <Spinner
+            android:id="@+id/spinnerYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<!--            &lt;!&ndash; first element of the row&ndash;&gt;-->
-<!--            <TextView-->
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Month"
+            android:textSize="24sp" />
 
-<!--                android:id="@+id/tv11"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="#D5D2D2"-->
-<!--                android:padding="18dip"-->
-<!--                android:text="date_and_time"-->
-<!--                android:textColor="#000"-->
-<!--                android:textSize="12dp" />-->
+        <Spinner
+            android:id="@+id/spinnerMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<!--            <TextView-->
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Day"
+            android:textSize="24sp" />
 
-<!--                android:id="@+id/tv12"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="#b0b0b0"-->
-<!--                android:padding="18dip"-->
-<!--                android:text="description"-->
-<!--                android:textColor="#000"-->
-<!--                android:textSize="14dp" />-->
+        <Spinner
+            android:id="@+id/spinnerDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<!--        </TableRow>-->
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log"
+            android:textSize="24sp" />
 
-    </TableLayout>
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
 
+            android:background="#f7f7f7"
+            android:fillViewport="true"
+            android:orientation="vertical"
+            android:padding="25dp">
 
+            <TableLayout
+                android:id="@+id/logTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:id="@+id/logTableRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/logTableColTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TimeStamp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/logTableColAction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:textSize="18sp" />
+                </TableRow>
+
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

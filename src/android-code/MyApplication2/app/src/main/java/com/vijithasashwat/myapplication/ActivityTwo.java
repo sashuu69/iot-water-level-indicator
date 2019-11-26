@@ -36,8 +36,8 @@ public class ActivityTwo extends AppCompatActivity {
         rfirebaseDailyUsageFarm.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String farmCount = dataSnapshot.getValue(String.class);
-                dailyFarm.setText(farmCount);
+                Long farmCount = dataSnapshot.getValue(Long.class);
+                dailyFarm.setText(farmCount.toString());
             }
 
             @Override
@@ -49,8 +49,8 @@ public class ActivityTwo extends AppCompatActivity {
         rfirebaseDailyUsageGarden.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String gardenCount = dataSnapshot.getValue(String.class);
-                dailyGarden.setText(gardenCount);
+                Long gardenCount = dataSnapshot.getValue(Long.class);
+                dailyGarden.setText(gardenCount.toString());
             }
 
             @Override
@@ -62,8 +62,8 @@ public class ActivityTwo extends AppCompatActivity {
         rfirebaseDailyUsagePump.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String pumpUsage = dataSnapshot.getValue(String.class);
-                dailyPump.setText(pumpUsage);
+                Long pumpUsage = dataSnapshot.getValue(Long.class);
+                dailyPump.setText(pumpUsage.toString());
             }
 
             @Override
@@ -75,8 +75,8 @@ public class ActivityTwo extends AppCompatActivity {
         rfirebaseDailyUsageTank.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String tankUsage = dataSnapshot.getValue(String.class);
-                dailyTank.setText(tankUsage);
+                Long tankUsage = dataSnapshot.getValue(Long.class);
+                dailyTank.setText(tankUsage.toString());
             }
 
             @Override

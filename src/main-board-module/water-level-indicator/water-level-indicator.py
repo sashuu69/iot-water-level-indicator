@@ -181,7 +181,17 @@ def dataLog(logDate, logTime, actionResult):
         pass
 
 
+def dailyLogCount(action, valueE):
+    try:
+        databaseObject.child("daily-usage").set(
+            {action: valueE}
+        )
+    except:
+        pass
+
 # Main function
+
+
 def main():
     print("###############################################")
     print("#-----Water Level Indicator main code---------#")
@@ -214,6 +224,14 @@ def main():
                 "sensor-values").child("farm-irrigation-time-off").get().val()
             manualTrigger = databaseObject.child(
                 "sensor-values").child("manual-flag").get().val()
+            dailyFarm = int(databaseObject.child(
+                "daily-usage").child("farm").get().val())
+            dailyGarden = int(databaseObject.child(
+                "daily-usage").child("garden").get().val())
+            dailyPump = int(databaseObject.child(
+                "daily-usage").child("pump").get().val())
+            dailyTank = int(databaseObject.child(
+                "daily-usage").child("tank").get().val())
             print("Data retrived..")
             now = datetime.now()  # get current time
             current_time = str(now.strftime("%H:%M"))  # convert to hour:minute
@@ -239,6 +257,10 @@ def main():
                 tank = True  # tank valve flag
                 # Logging to firebase
                 if tempFlagForLog == False:  # For displaying once
+                    dailyPump += 1
+                    dailyLogCount("pump", dailyPump)
+                    dailyTank += 1
+                    dailyLogCount("tank", dailyTank)
                     dataLog(current_date, timeForLog,
                             "Manual Tank Pump Activated")
                     tempFlagForLog = True
@@ -253,6 +275,10 @@ def main():
                     tank = True  # tank valve flag
                     # Logging into firebase
                     if tempFlagForLog == False:  # For displaying once
+                        dailyPump += 1
+                        dailyLogCount("pump", dailyPump)
+                        dailyTank += 1
+                        dailyLogCount("tank", dailyTank)
                         dataLog(current_date, timeForLog,
                                 "Tank Pump Activated")
                         tempFlagForLog = True
@@ -277,6 +303,10 @@ def main():
                     relayTrig = True  # Valve flag
                     garden = True  # garden valve flag
                     if tempFlagForLog == False:
+                        dailyPump += 1
+                        dailyLogCount("pump", dailyPump)
+                        dailyGarden += 1
+                        dailyLogCount("garden", dailyGarden)
                         dataLog(current_date, timeForLog,
                                 "Garden Sprinkler Activated")
                         tempFlagForLog = True
@@ -302,6 +332,10 @@ def main():
                         farm = True  # farm valve flag
                         farmValveFlag = True  # For one execution only
                         if tempFlagForLog == False:
+                            dailyPump += 1
+                            dailyLogCount("pump", dailyPump)
+                            dailyFarm += 1
+                            dailyLogCount("farm", dailyFarm)
                             dataLog(current_date, timeForLog,
                                     "Farm Sprinkler Activated")
                             tempFlagForLog = True

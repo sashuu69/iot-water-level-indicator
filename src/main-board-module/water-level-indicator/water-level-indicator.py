@@ -295,7 +295,7 @@ def main():
                             "Tank Pump Deactivated")
                     tempFlagForLog = False
             # For sprinkler system
-            if moisPer < 30:  # if mosiure less than 30%
+            if moisPer < 10:  # if mosiure less than 30%
                 if valveWorking == False:  # check if any valve open
                     valveControlSig(2)  # Open valve garden (valve 2)
                     valveWorking = True  # Valve working flag
@@ -310,7 +310,7 @@ def main():
                         dataLog(current_date, timeForLog,
                                 "Garden Sprinkler Activated")
                         tempFlagForLog = True
-            elif moisPer > 60:  # if moisure more than 85
+            elif moisPer > 50:  # if moisure more than 60
                 valveControlSig(0)  # Close valve garden
                 valveWorking = False
                 relayControl(0)

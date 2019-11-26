@@ -183,7 +183,7 @@ def dataLog(logDate, logTime, actionResult):
 
 def dailyLogCount(action, valueE):
     try:
-        databaseObject.child("daily-usage").set(
+        databaseObject.child("daily-usage").update(
             {action: valueE}
         )
     except:

@@ -6,9 +6,9 @@ The IOT based Water Level Indicator is the mini project under MCA course. The us
 
 1. one pump for all action; tank, sprinkler for farm and garden.
 2. valve locking system (One valve at a time).
-3. Use of moisure sensor for garden.
+3. Use of moisture sensor for garden.
 4. Time based watering for farm.
-5. Need info on display, Android app and Web app.
+5. Need info on display, Android app.
 
 The following image is the prototype of the project.
 
@@ -17,9 +17,9 @@ The following image is the prototype of the project.
 ## Features
 
 1. Realtime water level, pump status and value status.
-2. Web interface and android app.
+2. Android app.
 3. Manual remote control pump control.
-4. Automatic sprinker system according to moisure content.
+4. Automatic sprinker system according to moisture content.
 5. LCD display for showing status.
 6. Show system log on Android app and Web app.
 
@@ -88,12 +88,13 @@ Notes:-
 2. documentation/Diagrams: contains important figures drawn using draw.io, fritzing designs and exports and firebase design.
 3. project-reviews/Zeroth-review-presentation: contains presentation done for zeroth review.
 4. project-reviews/first-review: contains user stories submitted in first review.
-5. src - Contains the source code.
+5. project-reviews/final-review: contains user stories submitted in final review.
+6. src - Contains the source code.
    1. android-app: contains the code for android app.
    2. main-board-module: contains code for Raspberry Pi Zero W.
    3. tank-module: contains embedded C code for Atmega328p. This micro-controller will be placed at water Tank.
    4. valve-switching-module: conatins embedded C code for ATmega328p. This micro-controller will be placed at the main pipeline junction.
-6. diagnostics: code to test each sensors used in the project.
+7. diagnostics: code to test each sensors used in the project.
 
 ### Diagnostics
 
@@ -135,12 +136,6 @@ To make the python code run at boot as background. Follow the following steps:-
 
 3. Save the rc.local file.
 4. Reboot
-
-## To Do
-
-1. Include firebase to android app.
-2. Develop web app.
-3. User authentication for Webapp.
 
 ## Contributors
 

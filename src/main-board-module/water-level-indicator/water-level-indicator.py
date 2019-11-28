@@ -189,6 +189,18 @@ def dailyLogCount(action, valueE):
     except:
         pass
 
+
+def resetDaily():
+    try:
+        databaseObject.child("daily-usage").update(
+            {"farm": 0,
+             "garden": 0,
+             "pump": 0,
+             "tank": 0, }
+        )
+    except:
+        pass
+
 # Main function
 
 
@@ -246,6 +258,10 @@ def main():
             ultrasnc = i2cReceiveCommand(tankModuleAdress, 222)
             # get moisure percentage from valve module
             moisPer = getMoisurePer(valveModuleAddress)
+
+            # For reseting daily
+            if current_time == "00:00":
+                resetDaily()
 
             # For manual control from app
             # check for manual operation and if any valve not working

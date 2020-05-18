@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The IOT based Water Level Indicator is the mini project under MCA course. The user can get water level through mobile app and web interface. The project is well suited for the following scenario:-
+The IOT based Water Level Indicator is the mini project under MCA course. The user can get water level through mobile app. The project is well suited for the following scenario:-
 
 1. one pump for all action; tank, sprinkler for farm and garden.
 2. valve locking system (One valve at a time).
